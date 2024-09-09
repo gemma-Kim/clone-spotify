@@ -2,7 +2,8 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import AppLayout from './layout/AppLayout';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import Homepage from './pages/Homepage/Homepage';
+import Homepage from './pages/HomePage/HomePage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
