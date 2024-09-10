@@ -1,0 +1,49 @@
+:root {
+  --color-primary: var(--color-black);
+  --color-accent: var(--color-green);
+  --color-text: var(--color-white);
+  --color-text-vibrant: var(--color-gray);
+
+  --color-white: #ffffff;
+  --color-black: #050a13;
+  --color-green: #74d36f;
+  --color-gray: #bdbdbd;
+}
+
+body {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+}
+
+.user-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-gray);
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.header-container h1 {
+  font-size: 24px;
+}
+
+.header-info span {
+  margin-left: 20px;
+  color: var(--color-text-vibrant);
+}
+
+.tags {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
