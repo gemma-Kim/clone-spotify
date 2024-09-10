@@ -5,6 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
 
+
 function App() {
   return (
     <Routes>
