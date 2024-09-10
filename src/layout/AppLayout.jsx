@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom'; // Link 사용
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -55,18 +55,7 @@ const AppLayout = () => {
           </div>
 
           <Navbar.Collapse id="navbarScroll" className="navbar-collapse-custom">
-            <Form className="d-flex mx-auto d-lg-none">
-              <Nav className="nav-links">
-                <Nav.Link href="#home" className="text-light">Home</Nav.Link>
-                <Nav.Link href="#search" className="text-light">Search</Nav.Link>
-                {isLoggedIn ? (
-                  <Nav.Link href="#logout" className="text-light" onClick={handleLogout}>Logout</Nav.Link>
-                ) : (
-                  <Nav.Link href="#login" className="text-light" onClick={handleShowLoginModal}>Login</Nav.Link>
-                )}
-              </Nav>
-            </Form>
-
+            {/* 웹 버전의 네브바 검색 */}
             <Nav className="ms-auto d-none d-lg-flex">
               <Form className="d-flex mx-2">
                 <Form.Control
@@ -83,9 +72,10 @@ const AppLayout = () => {
             </Nav>
 
             <Nav className="ms-auto d-none d-lg-flex">
-              <Nav.Link href="#home" className="text-light">
+              {/* Home 버튼에 Link 적용 */}
+              <Link to="/" className="nav-link text-light">
                 <FaHome />
-              </Nav.Link>
+              </Link>
               {isLoggedIn ? (
                 <Button
                   variant="outline-light"
@@ -106,10 +96,23 @@ const AppLayout = () => {
                 </Button>
               )}
             </Nav>
+
+            {/* 모바일 메뉴 */}
+            <Nav className="d-lg-none d-flex flex-column">
+              {/* 모바일 Home 버튼에 Link 적용 */}
+              <Link to="/" className="nav-link text-light">Home</Link>
+              <Link to="/search" className="nav-link text-light">Search</Link>
+              {isLoggedIn ? (
+                <Nav.Link as="div" className="text-light" onClick={handleLogout}>Logout</Nav.Link>
+              ) : (
+                <Nav.Link as="div" className="text-light" onClick={handleShowLoginModal}>Login</Nav.Link>
+              )}
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
+      {/* 로그인 모달 */}
       <Modal show={showLoginModal} onHide={handleCloseLoginModal} contentClassName="bg-dark text-light">
         <Modal.Header closeButton closeVariant="white">
         </Modal.Header>
