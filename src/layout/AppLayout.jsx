@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { FaEye, FaEyeSlash, FaHome, FaUser } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaHome, FaUser, FaSearch } from 'react-icons/fa';
 import './AppLayout.style.css';
 
 const AppLayout = () => {
@@ -45,7 +45,9 @@ const AppLayout = () => {
     <div>
       <Navbar expand="lg" style={{ backgroundColor: '#000000' }} variant="dark" className="navbar-custom">
         <Container fluid>
-          <Navbar.Brand href="#" className="text-light">Logo</Navbar.Brand>
+          <Navbar.Brand href="#" className="text-light">
+             <img width={50} src='https://postfiles.pstatic.net/MjAyNDA5MTFfMTky/MDAxNzI1OTk1NjYxNjky.UJp5MT2LcR8VBXsss3yoM3vMJE_Bc9RqG8hBTtz2MQAg.LVisv2WONna-GSnM_gEms38xKPEHEq70CGr0t8am7OQg.JPEG/IMG_8438.JPG?type=w966' />
+          </Navbar.Brand>
 
           <div className="d-lg-none d-flex align-items-center">
             <FaUser className="text-light me-2" />
@@ -74,11 +76,8 @@ const AppLayout = () => {
                   aria-label="Search"
                   style={{ borderRadius: '50px', width: '400px' }}
                 />
-                <Button
-                  variant="outline-light"
-                  style={{ borderRadius: '50px' }}
-                >
-                  Search
+                <Button variant="outline-light" style={{ borderRadius: '50px' }}>
+                  <FaSearch />
                 </Button>
               </Form>
             </Nav>
@@ -113,10 +112,10 @@ const AppLayout = () => {
 
       <Modal show={showLoginModal} onHide={handleCloseLoginModal} contentClassName="bg-dark text-light">
         <Modal.Header closeButton closeVariant="white">
-          <Modal.Title>Login</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleLoginSubmit}>
+        <Modal.Body className="d-flex flex-column align-items-center">
+          <h1 className="text-center">Apptify 에 로그인하기</h1>
+          <Form onSubmit={handleLoginSubmit} className="w-75">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -148,7 +147,7 @@ const AppLayout = () => {
             </Form.Group>
 
             <Button
-              style={{ backgroundColor: '#77DD77', borderColor: '#77DD77', borderRadius: '50px' }}
+              style={{ backgroundColor: '#1ED760', borderColor: '#1ED760', borderRadius: '50px' }}
               type="submit"
               className="w-100"
             >
