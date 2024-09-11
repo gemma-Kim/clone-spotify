@@ -4,6 +4,7 @@ import AppLayout from "./layout/AppLayout";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
+import AlbumDetailPage from './pages/AlbumDetailPage/AlbumDetailPage';
 
 
 function App() {
@@ -13,7 +14,9 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="auth-redirect" element={<AuthRedirectPage />} />
       </Route>
-
+      <Route path='albums'>
+            <Route path=':id' element={<AlbumDetailPage/>}/>
+      </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

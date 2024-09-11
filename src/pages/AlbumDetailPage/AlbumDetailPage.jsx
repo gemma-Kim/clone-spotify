@@ -6,30 +6,29 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import './AlbumDetailPage.style.css';
+import { useMusicAlbumQuery } from '../../hooks/useMusicAlbumQuery';
+import { useMusicArtistQuery } from '../../hooks/useMusicArtistQuery';
 
 const AlbumDetailPage = ({ type }) => {
 
-  const albumData = {
-    name : "Espresso", //type.name
-    image: "https://upload.wikimedia.org/wikipedia/en/thumb/7/71/Espresso_-_Sabrina_Carpenter.png/220px-Espresso_-_Sabrina_Carpenter.png",//type.images
-    date: " 2024",//type.release_date
-    artist: "Sabrina Carpenter",//type.artists.name
-    genre: "Funk, Disco, Synth-pop, Pop", //type.genres
-    backgroundImg: "https://georgetownvoice.com/wp-content/uploads/2024/04/Screenshot-2024-04-23-at-11.41.20%E2%80%AFAM.png"
-  }
-
+  const {id} = useParams();
+  const {data: albumData} = useMusicAlbumQuery({id}); 
+  
   return (
     <div className='albumDetailPage'>
-      <div className='albumDetail-section'>
-        <img src={albumData.backgroundImg} alt="background-img" className='albumDetail-background-img' />
+      <div className='albumDetail-section'   style={{
+        backgroundImage: `url(${albumData?.images[0].url})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}>
         <div className='albumDetail-container'>
-          <img src={albumData.image} alt="album-img" />
+          <img src={albumData?.images[1].url} alt="album-img" />
           <div className='albumDetail-info'>
               <h3>{type === 'playlist' ? 'Play List' : 'Artist'}</h3>
-              <h1>{albumData.name}</h1>
+              <h1>{albumData?.artists[0].name}</h1>
               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum iste!</p>
               <div>
-              {albumData.date} {albumData.genre}
+              {albumData?.release_date} {albumData?.genre} / {albumData?.tracks.items.length} tracks
               </div>
           </div>
         </div>
