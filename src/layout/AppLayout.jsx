@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom'; 
+import { Outlet, Link, useNavigate } from 'react-router-dom'; 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -16,6 +16,8 @@ const AppLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [navSearchQuery, setNavSearchQuery] = useState(''); 
+  const navigate = useNavigate(); 
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -41,6 +43,13 @@ const AppLayout = () => {
     setIsLoggedIn(false);
   };
 
+  const handleNavSearchSubmit = (e) => {
+    e.preventDefault();
+    if (navSearchQuery) {
+      navigate(`/search?query=${navSearchQuery}`); 
+    }
+  };
+
   return (
     <div>
       <Navbar expand="lg" style={{ backgroundColor: '#000000' }} variant="dark" className="navbar-custom">
@@ -56,15 +65,17 @@ const AppLayout = () => {
 
           <Navbar.Collapse id="navbarScroll" className="navbar-collapse-custom">
             <Nav className="ms-auto d-none d-lg-flex">
-              <Form className="d-flex mx-2">
+              <Form className="d-flex mx-2" onSubmit={handleNavSearchSubmit}>
                 <Form.Control
                   type="search"
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
                   style={{ borderRadius: '50px', width: '400px' }}
+                  value={navSearchQuery}
+                  onChange={(e) => setNavSearchQuery(e.target.value)}
                 />
-                <Button variant="outline-light" style={{ borderRadius: '50px' }}>
+                <Button variant="outline-light" style={{ borderRadius: '50px' }} type="submit">
                   <FaSearch />
                 </Button>
               </Form>
