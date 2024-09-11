@@ -4,9 +4,7 @@ import NewReleases from '../../common/MusicCard/NewReleases/NewReleases.jsx';
 
 
 const HomePage = () => {
-  const {data} = useSearchQuery ({q:"name", type: "album"})
-  console.log ("data is ", data)
-
+ 
 
   return (
     <div>
