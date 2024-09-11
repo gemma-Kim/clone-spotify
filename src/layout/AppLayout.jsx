@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom'; // Link 사용
+import { Outlet, Link } from 'react-router-dom'; 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -55,7 +55,6 @@ const AppLayout = () => {
           </div>
 
           <Navbar.Collapse id="navbarScroll" className="navbar-collapse-custom">
-            {/* 웹 버전의 네브바 검색 */}
             <Nav className="ms-auto d-none d-lg-flex">
               <Form className="d-flex mx-2">
                 <Form.Control
@@ -72,7 +71,6 @@ const AppLayout = () => {
             </Nav>
 
             <Nav className="ms-auto d-none d-lg-flex">
-              {/* Home 버튼에 Link 적용 */}
               <Link to="/" className="nav-link text-light">
                 <FaHome />
               </Link>
@@ -97,9 +95,7 @@ const AppLayout = () => {
               )}
             </Nav>
 
-            {/* 모바일 메뉴 */}
             <Nav className="d-lg-none d-flex flex-column">
-              {/* 모바일 Home 버튼에 Link 적용 */}
               <Link to="/" className="nav-link text-light">Home</Link>
               <Link to="/search" className="nav-link text-light">Search</Link>
               {isLoggedIn ? (
@@ -112,7 +108,6 @@ const AppLayout = () => {
         </Container>
       </Navbar>
 
-      {/* 로그인 모달 */}
       <Modal show={showLoginModal} onHide={handleCloseLoginModal} contentClassName="bg-dark text-light">
         <Modal.Header closeButton closeVariant="white">
         </Modal.Header>
