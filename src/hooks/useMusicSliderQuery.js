@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../utils/api/api";
 
-const fetchNewReleases = () => {
+const fetchMusicSlider = () => {
   return api().get(`v1/browse/new-releases`);
 };
 
-export const useNewReleasesQuery = () => {
+export const useMusicSliderQuery = () => {
   return useQuery({
-    queryKey: ["new-releases"],
-    queryFn: () => fetchNewReleases(),
+    queryKey: ["music-slider"],
+    queryFn: () => fetchMusicSlider(),
     select: (res) => res.data.albums.items,
   });
 };
