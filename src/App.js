@@ -5,7 +5,6 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
 
-
 function App() {
   return (
     <Routes>
@@ -13,6 +12,8 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="auth-redirect" element={<AuthRedirectPage />} />
       </Route>
+
+  
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
