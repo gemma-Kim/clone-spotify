@@ -1,14 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
-import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query'; 
 import './SearchPage.style.css';
+import axios from 'axios';
+
+const fetchSpotifyAccessToken = async () => {
+  const client_id = process.env.REACT_APP_CLIENT_ID;
+  const client_secret = process.env.REACT_APP_CLIENT_SECRET;
+
+  const response = await axios.post('https://accounts.spotify.com/api/token',
+    new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: client_id,
+      client_secret: client_secret
+    }), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+  );
+  return response.data.access_token;
+};
+
+const useSearchQuery = (searchQuery) => {
+  return useQuery({
+    queryKey: ['searchResults', searchQuery], 
+    queryFn: async () => {
+      const accessToken = await fetchSpotifyAccessToken();
+      const response = await axios.get('https://api.spotify.com/v1/search', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        },
+        params: {
+          q: searchQuery,
+          type: 'track,artist',
+          limit: 10
+        }
+      });
+      return response.data.tracks.items;
+    },
+    enabled: !!searchQuery 
+  });
+};
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [selectedTrack, setSelectedTrack] = useState(null); 
+  const [selectedTrack, setSelectedTrack] = useState(null);
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
 
@@ -16,9 +55,7 @@ const SearchPage = () => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 992);
     };
-
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -29,53 +66,18 @@ const SearchPage = () => {
     const query = params.get('query');
     if (query) {
       setSearchQuery(query);
-      handleSearch(query);
     }
   }, [location]);
 
-  const getSpotifyAccessToken = async () => {
-    const client_id = 'd657a50906a84e7b86cf0425717caa5b';
-    const client_secret = '4e156cb8f6974579bbf399d81137c81a';
-
-    const tokenResponse = await axios.post('https://accounts.spotify.com/api/token',
-      new URLSearchParams({
-        grant_type: 'client_credentials',
-        client_id: client_id,
-        client_secret: client_secret
-      }), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }
-    );
-
-    return tokenResponse.data.access_token;
-  };
-
-  const handleSearch = async (query) => {
-    const accessToken = await getSpotifyAccessToken();
-
-    const response = await axios.get(`https://api.spotify.com/v1/search`, {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      },
-      params: {
-        q: query || searchQuery,
-        type: 'track,artist',
-        limit: 10
-      }
-    });
-
-    setSearchResults(response.data.tracks.items);
-  };
+  const { data: searchResults, refetch } = useSearchQuery(searchQuery);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleSearch(searchQuery);
+    refetch(); 
   };
 
   const handleTrackClick = (track) => {
-    setSelectedTrack(track); 
+    setSelectedTrack(track);
   };
 
   return (
@@ -113,7 +115,7 @@ const SearchPage = () => {
         )}
 
         <div className="mt-4 w-100">
-          {searchResults.length > 0 ? (
+          {searchResults && searchResults.length > 0 ? (
             <ul>
               {searchResults.map((track) => (
                 <li
