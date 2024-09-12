@@ -23,6 +23,14 @@
   justify-content: space-between;
 }
 
+.track-player-track-album-name {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+}
+
 .track-player-top-navbar-chevron-down {
   width: 20px;
   height: 20px;
@@ -53,12 +61,18 @@
   width: 100%;
 }
 
-.track-player-track-title-container {
-  font-size: 28px;
+.track-player-track-name-container {
+  font-size: 18px;
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis;
 }
 
 .track-player-track-artist-container {
-  font-size: 20px;
+  font-size: 15px;
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis;
 }
 
 .track-player-cotroller-container {
@@ -97,6 +111,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: "20px";
+  height: "20px";
 }
 
 @media screen and (max-width: 550px) {
