@@ -52,7 +52,7 @@ const AppLayout = () => {
 
   return (
     <div>
-      <Navbar expand="lg" style={{ backgroundColor: '#000000' }} variant="dark" className="navbar-custom">
+      <Navbar as={Link} to="/" expand="lg" style={{ backgroundColor: '#000000' }} variant="dark" className="navbar-custom">
         <Container fluid>
           <Navbar.Brand href="#" className="text-light">
              <img width={50} src='https://postfiles.pstatic.net/MjAyNDA5MTFfMTky/MDAxNzI1OTk1NjYxNjky.UJp5MT2LcR8VBXsss3yoM3vMJE_Bc9RqG8hBTtz2MQAg.LVisv2WONna-GSnM_gEms38xKPEHEq70CGr0t8am7OQg.JPEG/IMG_8438.JPG?type=w966' />
