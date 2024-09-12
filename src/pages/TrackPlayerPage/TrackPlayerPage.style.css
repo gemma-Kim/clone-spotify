@@ -1,0 +1,116 @@
+.track-player-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 420px;
+  color: var(--color-white);
+  margin: auto;
+  justify-content: space-around;
+  background-color: var(--color-black);
+}
+
+.track-player-container > * {
+  width: 350px;
+}
+
+.track-player-top-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  justify-content: space-between;
+}
+
+.track-player-top-navbar-chevron-down {
+  width: 20px;
+  height: 20px;
+}
+
+.track-player-top-navbar-ellipsis {
+  width: 20px;
+  height: 20px;
+}
+
+.track-player-album-img {
+  width: 350px;
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.track-player-track-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-weight: bold;
+}
+
+.track-player-track-info-container > div {
+  width: 100%;
+}
+
+.track-player-track-title-container {
+  font-size: 28px;
+}
+
+.track-player-track-artist-container {
+  font-size: 20px;
+}
+
+.track-player-cotroller-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.track-player-cotroller-container > * {
+  width: 20px;
+  height: 20px;
+}
+
+.track-player-cotroller-container > *:hover {
+  width: 25px;
+  height: 25px;
+  transition: 0.3s;
+}
+
+.track-player-cotroller-previous-play {
+  transform: scaleX(-1);
+}
+
+.track-player-cotroller-pause {
+  width: 40px;
+  height: 40px;
+}
+
+.track-player-cotroller-pause:hover {
+  width: 45px;
+  height: 45px;
+}
+
+.track-player-bottom-navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media screen and (max-width: 550px) {
+  .track-player-container {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .track-player-container > * {
+    width: 80vw;
+  }
+
+  .track-player-album-img {
+    width: 80vw;
+    height: 80vw;
+  }
+}

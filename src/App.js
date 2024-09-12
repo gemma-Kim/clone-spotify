@@ -6,7 +6,6 @@ import HomePage from "./pages/HomePage/HomePage";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
 import UserPage from './pages/UserPage/UserPage';
 
-
 function App() {
   return (
     <Routes>
@@ -15,6 +14,8 @@ function App() {
         <Route path="auth-redirect" element={<AuthRedirectPage />} />
         <Route path="/user" element={<UserPage />} />
       </Route>
+
+  
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
