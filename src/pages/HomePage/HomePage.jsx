@@ -2,6 +2,7 @@ import React from "react";
 
 import MusicReleases from "../../common/MusicCard/MusicReleases";
 import MusicArtists from "../../common/MusicCard/MusicArtists";
+import NewReleaseSlides from './components/NewReleaseSlides/NewReleaseSlides';
 
 const HomePage = () => {
  
@@ -11,14 +12,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Homepage</h1>
-
-      <MusicReleases />
-
-{/* 사이 빈칸  */}
-    <div style={{ margin: '50px 0' }}></div>
-        
-    <MusicArtists title="Top Artists" artistIds={artistIds} />
+      <NewReleaseSlides/>
     </div>
   ) 
   

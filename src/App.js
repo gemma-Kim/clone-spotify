@@ -17,9 +17,9 @@ function App() {
         <Route path="search" element={<SearchPage />} />
         <Route path="auth-redirect" element={<AuthRedirectPage />} />
         <Route path="/user" element={<UserPage />} />
-      </Route>
-      <Route path='albums'>
+        <Route path='albums'>
             <Route path=':id' element={<AlbumDetailPage/>}/>
+        </Route>
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
