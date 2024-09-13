@@ -1,0 +1,37 @@
+.music-slider-container h3 {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    margin: 0; 
+    font-weight: 800;
+    color: var(--color-green);
+    padding-top: 30px; 
+}
+
+.music-slider-container h3::before {
+    content: '';
+    position: absolute; 
+    top: 0; 
+    left: 20; 
+    transform: translateX(-50%); 
+    width: 50px; 
+    height: 10px; 
+    opacity: 0.6;
+    background-color: var(--color-green);
+    margin-left: 25px;
+}
+
+.music-slider {
+    margin: 0 30px;
+}
+
+.carousel-item-padding-10-px {
+    width: 250px; 
+    height: 350px;
+    margin: 0 10px;
+}
+
+.carousel-container {
+    height: 420px;
+    padding: 0;
+}

@@ -14,10 +14,3 @@
 }
 
 /* 사용 예시 ---> color: var(--color-text); */
-
-html, body {
-  background-color: var(--color-primary);
-  color: var(--color-text);
-  margin: 0;
-  padding: 0;
-}
