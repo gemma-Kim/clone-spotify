@@ -5,12 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from '@fortawesome/free-regular-svg-icons';
 import "./AlbumDetailPage.style.css";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
+import MusicTab from '../../common/MusicTab/MusicTab';
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
   const { data: albumData } = useMusicAlbumQuery({ id });
+  console.log("albumData", albumData?.tracks?.items);
 
   return (
     <div className="albumDetailPage">
@@ -23,7 +26,7 @@ const AlbumDetailPage = () => {
         }}
       >
         <div className="albumDetail-container">
-          <img src={albumData?.images[1].url} alt="album-img" />
+          <img src={albumData?.images[1].url} />
           <div className="albumDetail-info">
             <h3>Album Play List</h3>
             <h1>{albumData?.artists[0].name}</h1>
@@ -49,6 +52,25 @@ const AlbumDetailPage = () => {
         <button className="albumDetail-btnBar-ellipsis">
           <FontAwesomeIcon icon={faEllipsis} />
         </button>
+      </div>
+      <div className="trackTabs-container">
+        <div className="track-header">
+          <span className="sharp">#</span>
+          <div className="track-header-info">
+            <span>제목</span>
+            <FontAwesomeIcon icon={faClock} className="time-icon"/>
+          </div>
+        </div>
+        {albumData?.tracks?.items.length > 0 ? (
+          albumData?.tracks?.items.map((track, index) => (
+            <div className="track-row" key={track.id}>
+              <span>{index + 1}</span>
+              <MusicTab data={track} />
+          </div>
+        ))
+        ): (
+            <p>이 앨범에 트랙이 없습니다</p>
+        )}
       </div>
     </div>
   );
