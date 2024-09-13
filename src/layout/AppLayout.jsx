@@ -63,7 +63,9 @@ const AppLayout = () => {
           </Navbar.Brand>
 
           <div className="d-lg-none d-flex align-items-center">
-            <FaUser className="text-light me-2" />
+            <Link to="/user" className="text-light me-2">
+              <FaUser />
+            </Link>
             <Navbar.Toggle aria-controls="navbarScroll" />
           </div>
 
@@ -85,7 +87,11 @@ const AppLayout = () => {
               </Form>
             </Nav>
 
-            <Nav className="ms-auto d-none d-lg-flex">
+
+            <Nav className="ms-auto d-none d-lg-flex align-items-center">
+              <Link to="/user" className="nav-link text-light">
+                <FaUser />
+              </Link>
               <Link to="/" className="nav-link text-light">
                 <FaHome />
               </Link>
@@ -110,9 +116,11 @@ const AppLayout = () => {
               )}
             </Nav>
 
+
             <Nav className="d-lg-none d-flex flex-column">
               <Link to="/" className="nav-link text-light">Home</Link>
               <Link to="/search" className="nav-link text-light">Search</Link>
+
               {isLoggedIn ? (
                 <Nav.Link as="div" className="text-light" onClick={handleLogout}>Logout</Nav.Link>
               ) : (
