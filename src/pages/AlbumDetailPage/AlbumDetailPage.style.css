@@ -52,9 +52,17 @@
   margin: 0;
 }
 
-.albumDetail-info div {
-  font-size: 15px;
+.albumDetail-info-detail {
+  display: flex;
+  font-size: 18px;
   font-weight: 600;
+}
+
+.albumDetail-tracks{
+  background-color: var(--color-green);
+  margin: 0 10px;
+  padding: 3px 8px;
+  border-radius: 10px;
 }
 
 .albumDetail-btnBar {
@@ -72,7 +80,7 @@
 }
 
 .albumDetail-btnBar-play {
-  background-color: rgb(108, 216, 108);
+  background-color: var(--color-green);
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -82,13 +90,22 @@
   color: black;
 }
 
+.albumDetail-btnBar-play:hover{
+  color: var(--color-white);
+}
+
 .albumDetail-btnBar-heart {
   background-color: transparent;
-  border: 2px solid gray;
-  border-radius: 10px;
+  border: none;
   color: white;
+  font-size: 30px;
   padding: 0px 30px;
   margin: 0px 10px;
+  cursor: pointer;
+}
+
+.albumDetail-btnBar-heart:hover{
+  color: var(--color-green);
 }
 
 .albumDetail-btnBar-ellipsis {

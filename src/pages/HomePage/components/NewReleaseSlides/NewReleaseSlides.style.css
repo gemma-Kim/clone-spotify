@@ -1,0 +1,12 @@
+.newRelease-music-container{
+    margin: 50px 20px;
+}
+
+.newRelease-music-containerr h3 {
+    background-color: transparent;
+}
+
+.carousel-container{
+    overflow: hidden;
+    height: 450px;
+}

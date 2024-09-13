@@ -8,7 +8,7 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import "./AlbumDetailPage.style.css";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 
-const AlbumDetailPage = ({ type }) => {
+const AlbumDetailPage = () => {
   const { id } = useParams();
   const { data: albumData } = useMusicAlbumQuery({ id });
 
@@ -25,15 +25,16 @@ const AlbumDetailPage = ({ type }) => {
         <div className="albumDetail-container">
           <img src={albumData?.images[1].url} alt="album-img" />
           <div className="albumDetail-info">
-            <h3>{type === "playlist" ? "Play List" : "Artist"}</h3>
+            <h3>Album Play List</h3>
             <h1>{albumData?.artists[0].name}</h1>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum
               iste!
             </p>
-            <div>
-              {albumData?.release_date} {albumData?.genre} /{" "}
-              {albumData?.tracks.items.length} tracks
+            <div className='albumDetail-info-detail'>
+              <div>{albumData?.release_date}</div>
+              <div>{albumData?.genre}</div>
+              <div className='albumDetail-tracks'>{albumData?.tracks.items.length} tracks</div>
             </div>
           </div>
         </div>
@@ -43,7 +44,7 @@ const AlbumDetailPage = ({ type }) => {
           <FontAwesomeIcon icon={faPlay} />
         </button>
         <button className="albumDetail-btnBar-heart">
-          {type === "playlist" ? <FontAwesomeIcon icon={faHeart} /> : "Follow"}
+          <FontAwesomeIcon icon={faHeart} />
         </button>
         <button className="albumDetail-btnBar-ellipsis">
           <FontAwesomeIcon icon={faEllipsis} />
