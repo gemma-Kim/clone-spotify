@@ -11,6 +11,7 @@ import UserPage from "./pages/UserPage/UserPage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loadSpotifyPlayer } from "./utils/player/loadSpotifyPlayer";
+import { TrackPlayerProvider } from "./common/Player/TrackPlayerProvider/TrackPlayerProvider";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,18 +23,20 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Routes>
-      <Route path="/" element={<AppLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="search" element={<SearchPage />} />
-        <Route path="auth-redirect" element={<AuthRedirectPage />} />
-        <Route path="/user" element={<UserPage />} />
-        <Route path='albums'>
-            <Route path=':id' element={<AlbumDetailPage/>}/>
+    <TrackPlayerProvider>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="auth-redirect" element={<AuthRedirectPage />} />
+          <Route path="/user" element={<UserPage />} />
+          <Route path="albums">
+            <Route path=":id" element={<AlbumDetailPage />} />
+          </Route>
         </Route>
-      </Route>
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </TrackPlayerProvider>
   );
 }
 
