@@ -4,7 +4,7 @@ export const refreshAccessToken = () => {
   const state = "82djfhgdjfhgjdhf"; //generateRandomString(16);
   // localStorage.setItem(stateKey, state);
   const scope =
-    "user-read-private user-read-email user-library-modify user-read-playback-state user-modify-playback-state streaming";
+    "user-read-private user-read-email user-library-modify user-read-playback-state user-modify-playback-state streaming user-library-read user-follow-read";
 
   localStorage.setItem("previous_url", window.location.href);
 
