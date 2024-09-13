@@ -6,31 +6,26 @@ import { useUserFollowedArtistsQuery } from '../../hooks/user/useUserFollwedArti
 
 const UserPage = () => {
   const { data: albumData } = useUserSavedAlbums();
-  console.log("albumdata", albumData);
-
   const { data: artistsData } = useUserFollowedArtistsQuery();
-  console.log("artistdata", artistsData);
   const [myLibrary, setMyLibrary] = useState([]);
-
-  console.log("mylibrary", myLibrary);
-
   const [tab, setTab] = useState("all");
-  console.log("tab", tab);
 
   useEffect(() => {
-    if (albumData || artistsData) {
-      const formattedAlbums = albumData?.map(({ album, added_at }) => ({
-        ...album,
-        added_at,
-      }));
+    const formattedAlbums = Array.isArray(albumData)
+      ? albumData.map(({ album, added_at }) => ({
+          ...album,
+          added_at,
+        }))
+      : [];
 
-      if (tab === "all") {
-        setMyLibrary([...formattedAlbums, ...artistsData]);
-      } else if (tab === "album") {
-        setMyLibrary(formattedAlbums);
-      } else if (tab === "artist") {
-        setMyLibrary(artistsData);
-      }
+    const formattedArtists = Array.isArray(artistsData) ? artistsData : [];
+
+    if (tab === 'all') {
+      setMyLibrary([...formattedAlbums, ...formattedArtists]);
+    } else if (tab === 'album') {
+      setMyLibrary(formattedAlbums);
+    } else if (tab === 'artist') {
+      setMyLibrary(formattedArtists);
     }
   }, [albumData, artistsData, tab]);
 
