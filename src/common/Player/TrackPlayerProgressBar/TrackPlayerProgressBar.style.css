@@ -1,0 +1,61 @@
+.track-player-progress-bar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+}
+
+.track-player-bottom-cotroller-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.track-player-progress-bar-time-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 150%;
+  font-size: 12px;
+}
+
+.track-player-progress-bar-time {
+  padding: 4px 6px;
+}
+
+.track-player-bottom-cotroller-shuffle {
+  width: 25px;
+  height: 25px;
+}
+
+.track-player-bottom-cotroller-previous-play {
+  width: 25px;
+  height: 25px;
+}
+
+.track-player-bottom-cotroller-next-play {
+  width: 25px;
+  height: 25px;
+}
+
+.track-player-bottom-cotroller-rotate {
+  width: 25px;
+  height: 25px;
+}
+
+.track-player-bottom-cotroller-main {
+  width: 40px;
+  height: 40px;
+}
+
+.track-player-bottom-cotroller-previous-play {
+  transform: scaleX(-1);
+}
+
+.track-player-progress-bar {
+  width: 90%;
+}
