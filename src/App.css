@@ -8,9 +8,16 @@
 
   /* Colour */
   --color-white: #ffffff;
-  --color-black: #050a13;
+  --color-black: #000000;
   --color-green: #74d36f;
   --color-gray: #bdbdbd;
 }
 
 /* 사용 예시 ---> color: var(--color-text); */
+
+html, body {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+}
