@@ -11,6 +11,13 @@ import Alert from "react-bootstrap/Alert";
 const AlbumDetailPage = () => {
   const { id } = useParams();
   const { data: albumData } = useMusicAlbumQuery({ id });
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const options = { year: 'numeric', month: 'long' };
+    const monthYear = date.toLocaleDateString('en-US', options);
+    return `${day} ${monthYear}`;
+  };
 
   return (
     <div className="albumDetailPage">
@@ -28,7 +35,7 @@ const AlbumDetailPage = () => {
             <h3>Album Play List</h3>
             <h1>{albumData?.artists[0].name}</h1>
             <div className='albumDetail-info-detail'>
-              <div>{albumData?.release_date}</div>
+              <div>{formatDate(albumData?.release_date)}</div>
               <div>{albumData?.genre}</div>
               <div className='albumDetail-tracks'>{albumData?.tracks.items.length} tracks</div>
             </div>
