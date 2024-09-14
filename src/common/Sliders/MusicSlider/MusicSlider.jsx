@@ -1,6 +1,6 @@
 import React from 'react'
 import './MusicSlider.style.css';
-import MusicAlbumCard from '../MusicAlbumCard/MusicAlbumCard';
+import MusicAlbumCard from '../../SliderCards/MusicAlbumCard/MusicAlbumCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -20,7 +20,7 @@ const MusicSlider = ({title, albums, responsive }) => {
         >
             {albums.map((album, key)=> <MusicAlbumCard album={album} key={key}/>)}
         </Carousel>
-    </div>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,77 @@
+.musicArtistCard-container {
+    position: relative;
+    width: 250px; 
+    height: 350px;
+    padding: 10px; 
+    border-radius: 10px; 
+    background-color: transparent; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
+    transition: all .2s ease-in-out;
+}
+
+.musicArtistCard-container:hover{
+    background: rgb(31,93,55);
+    background: linear-gradient(146deg, rgba(31,93,55,1) 0%, rgba(47,47,47,1) 47%);
+}
+
+.musicArtistCard-container::after {
+    content: '';
+    position: absolute;
+    bottom: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 4px;
+    background-color: var(--color-green);
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+
+.musicArtistCard-container:hover::after {
+    opacity: 1; 
+}
+
+.musicArtistCard-container:hover .musicArtistCard-btn {
+    color: var(--color-white);
+    background-color: var(--color-green);
+}
+
+.musicArtistCard-img {
+    width: 200px; 
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 50%; 
+    display: block; 
+    margin: 0 auto; 
+    box-shadow: -10px -10px 30px 4px rgba(0,0,0,0.1), 10px 10px 30px 4px rgba(45, 255, 146, 0.15);
+}
+
+.musicArtistCard-info {
+    margin-top: 25px;
+}
+
+.musicArtistCard-albumName {
+    color: var(--color-white);
+    font-size: 1.1em; 
+    font-weight: 700;
+    margin: 0;
+}
+
+.musicArtistCard-artist {
+    font-size: 0.8em; 
+    color: var(--color-white);
+    margin: 3px 0 0;
+}
+
+.musicArtistCard-btn{
+    border: 1px solid var(--color-green);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--color-green);
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 0px 30px;
+    margin-top: 10px;
+}
+
