@@ -59,8 +59,9 @@
 }
 
 .track-duration {
+  width: 10%;
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: 20px;
   font-size: 14px;
   color: #888;
 }
