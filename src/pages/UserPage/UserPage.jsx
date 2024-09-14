@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import MusicTab from '../../common/MusicTab/MusicTab'
-import "./UserPage.style.css"
-import { useUserSavedAlbums } from '../../hooks/user/useUserSavedAlbums'
-import { useUserFollowedArtistsQuery } from '../../hooks/user/useUserFollwedArtists'
-import { useUserSavedTracksQuery } from '../../hooks/user/useUserSavedTracks'
+import React, { useEffect, useState } from "react";
+import MusicTab from "../../common/MusicTab/MusicTab";
+import "./UserPage.style.css";
+import { useUserSavedAlbums } from "../../hooks/user/useUserSavedAlbums";
+import { useUserFollowedArtistsQuery } from "../../hooks/user/useUserFollwedArtists";
+import { useUserSavedTracksQuery } from "../../hooks/user/useUserSavedTracks";
+import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 
 const UserPage = () => {
   const { data: albumData } = useUserSavedAlbums();
   const { data: artistsData } = useUserFollowedArtistsQuery();
   const { data: trackData } = useUserSavedTracksQuery();
-  console.log("tra", trackData)
+  console.log("tra", trackData);
   const [myLibrary, setMyLibrary] = useState([]);
   const [tab, setTab] = useState("all");
+
+  const {
+    trackPlayerIsVisible,
+    setTrackPlayerIsVisible,
+    setTrack: setPlayerTrack,
+  } = useTrackPlayer();
 
   useEffect(() => {
     const formattedAlbums = Array.isArray(albumData)
@@ -25,21 +32,32 @@ const UserPage = () => {
 
     const formattedTracks = Array.isArray(trackData)
       ? trackData.map(({ track, added_at }) => ({
-        ...track,
-        added_at,
-      }))
+          ...track,
+          added_at,
+        }))
       : [];
 
-    if (tab === 'all') {
-      setMyLibrary([...formattedAlbums, ...formattedArtists, ...formattedTracks]);
-    } else if (tab === 'album') {
+    if (tab === "all") {
+      setMyLibrary([
+        ...formattedAlbums,
+        ...formattedArtists,
+        ...formattedTracks,
+      ]);
+    } else if (tab === "album") {
       setMyLibrary(formattedAlbums);
-    } else if (tab === 'artist') {
+    } else if (tab === "artist") {
       setMyLibrary(formattedArtists);
     } else if (tab === "track") {
       setMyLibrary(formattedTracks);
     }
-  }, [albumData, artistsData, trackData,tab]);
+  }, [albumData, artistsData, trackData, tab]);
+
+  const handleSelectedTrack = (selectedTrack) => {
+    if (tab === "track") {
+      if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
+      setPlayerTrack(selectedTrack);
+    }
+  };
 
   return (
     <div className="user-page">
@@ -49,43 +67,44 @@ const UserPage = () => {
 
       <div className="music-libary">
         <div className="tabs-container">
-        <button
-          className={`tab-button ${tab === 'all' ? 'active' : ''}`}
-          onClick={() => setTab("all")}
-        >
-          전체
-        </button>
-        <button
-          className={`tab-button ${tab === 'album' ? 'active' : ''}`}
-          onClick={() => setTab("album")}
-        >
-          앨범
-        </button>
-        <button
-          className={`tab-button ${tab === 'artist' ? 'active' : ''}`}
-          onClick={() => setTab("artist")}
-        >
-          아티스트
-        </button>
-        <button
-          className={`tab-button ${tab === 'track' ? 'active' : ''}`}
-          onClick={() => setTab("track")}
-        >
-          트랙
-        </button>
-      </div>
+          <button
+            className={`tab-button ${tab === "all" ? "active" : ""}`}
+            onClick={() => setTab("all")}
+          >
+            전체
+          </button>
+          <button
+            className={`tab-button ${tab === "album" ? "active" : ""}`}
+            onClick={() => setTab("album")}
+          >
+            앨범
+          </button>
+          <button
+            className={`tab-button ${tab === "artist" ? "active" : ""}`}
+            onClick={() => setTab("artist")}
+          >
+            아티스트
+          </button>
+          <button
+            className={`tab-button ${tab === "track" ? "active" : ""}`}
+            onClick={() => setTab("track")}
+          >
+            트랙
+          </button>
+        </div>
 
         <div className="music-list">
           {myLibrary && myLibrary.length > 0
             ? myLibrary.map((data, index) => (
-              <MusicTab data={data} key={index} />
-            ))
+                <div onClick={() => handleSelectedTrack(data)}>
+                  <MusicTab data={data} key={index} />
+                </div>
+              ))
             : "아직 추가한 앨범이 없습니다"}
-          
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserPage
+export default UserPage;
