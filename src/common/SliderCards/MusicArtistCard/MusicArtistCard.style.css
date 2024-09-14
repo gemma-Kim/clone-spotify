@@ -51,17 +51,11 @@
     margin-top: 25px;
 }
 
-.musicArtistCard-albumName {
+.musicArtistCard-artist {
     color: var(--color-white);
     font-size: 1.1em; 
     font-weight: 700;
     margin: 0;
-}
-
-.musicArtistCard-artist {
-    font-size: 0.8em; 
-    color: var(--color-white);
-    margin: 3px 0 0;
 }
 
 .musicArtistCard-btn{
@@ -75,3 +69,37 @@
     margin-top: 10px;
 }
 
+@media (max-width: 768px){
+    .musicArtistCard-container {
+        width: 150px; 
+        height: 250px;
+        padding: 10px; 
+        border-radius: 10px; 
+        background-color: transparent; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        text-align: center; 
+        transition: all .2s ease-in-out;
+    }
+
+    .musicArtistCard-container::after {
+        height: 2px;
+    }
+
+    .musicArtistCard-img {
+        width: 130px; 
+        height: 130px; 
+    }
+
+    .musicArtistCard-artist {
+        font-size: 0.9em; 
+        color: var(--color-white);
+        margin: 3px 0 0;
+    }
+
+    .musicArtistCard-btn{
+        border: .5px solid var(--color-green);
+        border-radius: 3px;
+        font-size: 0.7em;
+    }
+
+}

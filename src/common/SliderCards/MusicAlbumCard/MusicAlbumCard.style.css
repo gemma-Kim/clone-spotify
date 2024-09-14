@@ -79,3 +79,45 @@
 }
 
 
+@media (max-width: 768px){
+    .musicCard-container {
+        width: 150px; 
+        height: 250px;
+        padding: 10px; 
+        border-radius: 10px; 
+        background-color: transparent; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        text-align: center; 
+        transition: all .2s ease-in-out;
+    }
+
+    .musicCard-container::after {
+        height: 2px;
+    }
+
+    .musicCard-img {
+        width: 130px; 
+        height: 130px; 
+        border-radius: 5px; 
+    }
+    
+    .musicCard-info {
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+    
+    .musicCard-albumName {
+        font-size: .9em; 
+        font-weight: 600;
+    }
+    
+    .musicCard-artist {
+        font-size: 0.7em; 
+    }
+    
+    .musicCard-releaseDate {
+        bottom: 25px; 
+        font-size: .7em;
+        font-weight: 500; 
+    }
+}

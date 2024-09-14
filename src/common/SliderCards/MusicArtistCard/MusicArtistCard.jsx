@@ -16,7 +16,7 @@ const MusicArtistCard = ({track}) => {
     <div className='musicArtistCard-container'>
     <img  src={artistImage} alt={artistName} className='musicArtistCard-img'/>
     <div className='musicArtistCard-info'>
-        <h2 className='musicArtistCard-albumName'>{artistName}</h2>
+        <h2 className='musicArtistCard-artist'>{artistName}</h2>
         <button className='musicArtistCard-btn'>Tracks</button>
     </div>
     </div>  

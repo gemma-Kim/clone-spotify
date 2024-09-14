@@ -38,14 +38,6 @@
     padding: 0;
 }
 
-.react-multiple-carousel__arrow--right {
-    right: calc(1% + 1px);
-}
-
-.react-multiple-carousel__arrow--left {
-    left: calc(1% + 1px);
-}
-
 .react-multiple-carousel__arrow {
     position: absolute;
     outline: 0;
@@ -61,5 +53,48 @@
 }
 
 .react-multiple-carousel__arrow:hover {
-    background: rgba(116, 211, 111, 0.5);
+    background: rgba(116, 211, 111, 0.5) !important;
+}
+
+.react-multiple-carousel__arrow--right {
+    right: calc(1% + 1px);
+}
+
+.react-multiple-carousel__arrow--left {
+    left: calc(1% + 1px);
+}
+
+
+@media (max-width: 768px){
+    .music-slider-container h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding-top: 10px; 
+    }
+    
+    .music-slider-container h3::before {
+        width: 40px; 
+        height: 6px; 
+        margin-left: 20px;
+    }
+    
+    .carousel-container {
+        margin-top: 15px;
+    }
+
+    .music-slider {
+        margin: 0 10px;
+    }
+    
+    .carousel-item-padding-10-px {
+        width: 150px; 
+        height: 250px;
+        margin: 0 10px;
+    }
+    
+    .carousel-container {
+        height: 250px;
+        padding: 0;
+    }
 }
