@@ -1,19 +1,38 @@
 import React from "react";
+import "./AlbumDetailPage.style.css";
 import { useParams } from "react-router-dom";
-import Alert from "react-bootstrap/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import { faClock } from '@fortawesome/free-regular-svg-icons';
-import "./AlbumDetailPage.style.css";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
+import Alert from "react-bootstrap/Alert";
+import { faClock } from '@fortawesome/free-regular-svg-icons';
 import MusicTab from '../../common/MusicTab/MusicTab';
+import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
+
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
-  const { data: albumData } = useMusicAlbumQuery({ id });
+  const { data: albumData, isLoading, isError, error } = useMusicAlbumQuery({ id });
   console.log("albumData", albumData?.tracks?.items);
+
+  if(isLoading){
+    return <LoadingSpinner/>
+  }
+  if(isError){
+      return <Alert variant='danger'>(error.message)</Alert>
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const options = { year: 'numeric', month: 'long' };
+    const monthYear = date.toLocaleDateString('en-US', options);
+    return `${day} ${monthYear}`;
+  };
+
+
 
   return (
     <div className="albumDetailPage">
@@ -30,12 +49,8 @@ const AlbumDetailPage = () => {
           <div className="albumDetail-info">
             <h3>Album Play List</h3>
             <h1>{albumData?.artists[0].name}</h1>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum
-              iste!
-            </p>
             <div className='albumDetail-info-detail'>
-              <div>{albumData?.release_date}</div>
+              <div>{formatDate(albumData?.release_date)}</div>
               <div>{albumData?.genre}</div>
               <div className='albumDetail-tracks'>{albumData?.tracks.items.length} tracks</div>
             </div>
@@ -56,15 +71,16 @@ const AlbumDetailPage = () => {
       <div className="trackTabs-container">
         <div className="track-header">
           <span className="sharp">#</span>
-          <div className="track-header-info">
+          {/* <div className="track-header-info">
             <span>제목</span>
             <FontAwesomeIcon icon={faClock} className="time-icon"/>
-          </div>
+          </div> */}
         </div>
         {albumData?.tracks?.items.length > 0 ? (
           albumData?.tracks?.items.map((track, index) => (
             <div className="track-row" key={track.id}>
-              <span>{index + 1}</span>
+                <span>{index + 1}</span>
+                <img src={albumData?.images[1].url} />
               <MusicTab data={track} />
           </div>
         ))

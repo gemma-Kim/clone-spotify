@@ -2,11 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 20%;
+  height: 13%;
   width: 100%;
   margin: auto;
   border: 1px solid;
   padding: 20px;
+  background-color: var(--color-black);
+  cursor: "pointer";
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 
 .track-player-bottom-info-container {
