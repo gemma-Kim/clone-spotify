@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./TrackPlayerProgressBar.style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,18 +14,20 @@ import {
 } from "../../../utils/player/timeCalculator";
 
 import { useSelector } from "react-redux";
-import { usePlayTrackMutation } from "../../../hooks/player/usePlayTrackMutation";
-import { usePauseMutation } from "../../../hooks/player/usePauseMutation";
 import { ProgressBar } from "react-bootstrap";
+import { useTrackPlayer } from "../TrackPlayerProvider/TrackPlayerProvider";
 
 // styleType 이 fit 인 경우 >> 재생 버튼만 노출
 const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
+  const {
+    isPlaying,
+    setIsPlaying,
+    playTrack,
+    pauseTrack,
+    positionMs,
+    setPositionMs,
+  } = useTrackPlayer();
   const durationMs = track?.duration_ms || 0;
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [positionMs, setPositionMs] = useState(0);
-
-  const { mutate: playTrack } = usePlayTrackMutation();
-  const { mutate: pausePlay } = usePauseMutation();
   const deviceId = useSelector((state) => state.player.deviceId);
 
   useEffect(() => {
@@ -46,20 +48,6 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
     }
     return () => clearInterval(interval); // 컴포넌트가 언마운트되거나 재생이 멈추면 clearInterval
   }, [isPlaying, deviceId, track?.duration_ms, positionMs]);
-
-  const handlePlayTrack = () => {
-    if (deviceId) {
-      playTrack({ deviceId, positionMs, trackId: track.id });
-      setIsPlaying(true);
-    }
-  };
-
-  const handlePauseTrack = () => {
-    if (deviceId) {
-      pausePlay({ deviceId });
-      setIsPlaying(false);
-    }
-  };
 
   return (
     <div
@@ -83,7 +71,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-main"
           icon={isPlaying ? faPause : faPlay}
-          onClick={isPlaying ? handlePauseTrack : handlePlayTrack}
+          onClick={isPlaying ? pauseTrack : playTrack}
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-next-play"
