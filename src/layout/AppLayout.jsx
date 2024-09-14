@@ -160,7 +160,6 @@ const AppLayout = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
       <Modal
         show={showLoginModal}
         onHide={handleCloseLoginModal}
@@ -215,7 +214,6 @@ const AppLayout = () => {
         </Modal.Body>
       </Modal>
       {trackPlayerIsVisible && <TrackPlayerBottom track={null} />}
-
       <Outlet />
     </div>
   );
