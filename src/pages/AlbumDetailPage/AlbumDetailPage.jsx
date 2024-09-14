@@ -1,12 +1,12 @@
 import React from "react";
+import "./AlbumDetailPage.style.css";
 import { useParams } from "react-router-dom";
-import Alert from "react-bootstrap/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import "./AlbumDetailPage.style.css";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
+import Alert from "react-bootstrap/Alert";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -27,10 +27,6 @@ const AlbumDetailPage = () => {
           <div className="albumDetail-info">
             <h3>Album Play List</h3>
             <h1>{albumData?.artists[0].name}</h1>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum
-              iste!
-            </p>
             <div className='albumDetail-info-detail'>
               <div>{albumData?.release_date}</div>
               <div>{albumData?.genre}</div>

@@ -1,8 +1,7 @@
 import React from 'react'
-import './TopAlbumSlider.style.css';
+import TopAlbumCard from '../../SliderCards/TopAlbumCard/TopAlbumCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import TopAlbumCard from '../../SliderCards/TopAlbumCard/TopAlbumCard';
 
 const TopAlbumSlider = ({title, albums, responsive }) => {
 
@@ -22,7 +21,7 @@ const TopAlbumSlider = ({title, albums, responsive }) => {
                 itemClass="carousel-item-padding-10-px"
                 containerClass="carousel-container"
                 >
-                {albums.map((album, key)=> <TopAlbumCard album={album} key={key}/>)}
+                  {albums.map((album, key)=> <TopAlbumCard album={album} key={key}/>)}
                 </Carousel>
         </div>
     </div>

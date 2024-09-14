@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import './TopAlbumCard.style.css';
 
 const TopAlbumCard = ({album}) => {
 

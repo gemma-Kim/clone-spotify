@@ -1,11 +1,9 @@
 import React from 'react'
 import Alert from 'react-bootstrap/Alert';
-import './ArtistSlides.style.css';
 import { useMusicPlaylistQuery } from '../../../../hooks/useMusicPlaylistQuery';
 import {musicSliderResponsive} from '../../../../constants/musicSliderResponsive'
 import { useMusicTrackQuery } from '../../../../hooks/useMusicTrackQuery';
 import ArtistSlider from '../../../../common/Sliders/ArtistSlider/ArtistSlider';
-
 
 const ArtistSlides = () => {
 
