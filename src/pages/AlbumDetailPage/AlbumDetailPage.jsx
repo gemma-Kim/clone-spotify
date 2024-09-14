@@ -96,8 +96,8 @@ const AlbumDetailPage = () => {
           <span className="sharp">#</span>
           <FontAwesomeIcon icon={faClock} className="time-icon"/>
         </div>
-        {trackData.length > 0 ? (
-          trackData.map((track, index) => (
+        {trackData?.length > 0 ? (
+          trackData?.map((track, index) => (
             <div
               className="track-row"
               key={index}
