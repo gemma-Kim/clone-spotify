@@ -24,7 +24,6 @@
   width: 100%;
   justify-content: space-between;
   padding: 0 10px;
-  margin: 0 10px;
 }
 
 .track-tab > .track-image {
@@ -72,4 +71,24 @@
   text-align: right;
   font-size: 14px;
   color: #888;
+}
+
+/* 새로운 스타일 추가 */
+.track-number-or-icon {
+  width: 40px; /* 아이콘과 트랙 넘버 크기 고정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.play-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.default-text {
+  color: var(--color-black);
+  font-size: 24px;
+  text-align: center;
 }
