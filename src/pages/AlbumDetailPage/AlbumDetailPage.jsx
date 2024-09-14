@@ -12,7 +12,7 @@ import {
 // import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
-// import { faClock } from "@fortawesome/free-regular-svg-icons";
+// import { faClock } from '@fortawesome/free-regular-svg-icons';
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 
@@ -33,8 +33,6 @@ const AlbumDetailPage = () => {
     return <Alert variant="danger">(error.message)</Alert>;
   }
 
-  // const { data: albumData } = useMusicAlbumQuery({ id });
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -42,8 +40,6 @@ const AlbumDetailPage = () => {
     const monthYear = date.toLocaleDateString("en-US", options);
     return `${day} ${monthYear}`;
   };
-
-  console.log("albumData", albumData?.tracks?.items);
 
   return (
     <div className="albumDetailPage">
@@ -84,15 +80,16 @@ const AlbumDetailPage = () => {
       <div className="trackTabs-container">
         <div className="track-header">
           <span className="sharp">#</span>
-          <div className="track-header-info">
-            <span>Title</span> {/* 수정 */}
-            <FontAwesomeIcon icon={faClock} className="time-icon" />
-          </div>
+          {/* <div className="track-header-info">
+            <span>제목</span>
+            <FontAwesomeIcon icon={faClock} className="time-icon"/>
+          </div> */}
         </div>
         {albumData?.tracks?.items.length > 0 ? (
           albumData?.tracks?.items.map((track, index) => (
             <div className="track-row" key={track.id}>
               <span>{index + 1}</span>
+              <img src={albumData?.images[1].url} />
               <MusicTab data={track} />
             </div>
           ))
