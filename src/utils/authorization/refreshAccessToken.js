@@ -1,6 +1,6 @@
 export const refreshAccessToken = () => {
   const client_id = process.env.REACT_APP_CLIENT_ID;
-  const redirect_uri = "https://advanced-community.netlify.app/auth-redirect";
+  const redirect_uri = "https://apptify.netlify.app/auth-redirect";
   const state = "82djfhgdjfhgjdhf"; //generateRandomString(16);
   // localStorage.setItem(stateKey, state);
   const scope =
