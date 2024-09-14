@@ -6,11 +6,17 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loadSpotifyPlayer } from "./utils/player/loadSpotifyPlayer";
+import { TrackPlayerProvider } from "./common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import AlbumDetailPage from './pages/AlbumDetailPage/AlbumDetailPage';
 import UserPage from './pages/UserPage/UserPage';
 
+
 function App() {
   return (
+   <TrackPlayerProvider>
     <Routes>
       <Route path="/" element={<AppLayout />}>
         <Route index element={<HomePage />} />
@@ -23,6 +29,7 @@ function App() {
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+   </TrackPlayerProvider>
   );
 }
 

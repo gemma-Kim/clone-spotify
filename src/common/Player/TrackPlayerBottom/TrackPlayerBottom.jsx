@@ -1,8 +1,11 @@
 import React from "react";
 import "./TrackPlayerBottom.style.css";
 import TrackPlayerProgressBar from "../TrackPlayerProgressBar/TrackPlayerProgressBar";
+import { useTrackPlayer } from "../TrackPlayerProvider/TrackPlayerProvider";
 
-const TrackPlayerBottom = ({ track }) => {
+const TrackPlayerBottom = () => {
+  const { track } = useTrackPlayer();
+
   return (
     <div className="track-player-bottom-container">
       <div className="track-player-bottom-info-container">
