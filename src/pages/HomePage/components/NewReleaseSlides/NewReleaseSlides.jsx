@@ -1,8 +1,8 @@
 import React from 'react'
 import './NewReleaseSlides.style.css';
 import Alert from 'react-bootstrap/Alert';
-import MusicSlider from '../../../../common/MusicSlider/MusicSlider';
-import {musicSliderResponsive} from '../../../../constants/musicSliderResponsive'
+import MusicSlider from '../../../../common/Sliders/MusicSlider/MusicSlider';
+import { musicSliderResponsive } from '../../../../constants/musicSliderResponsive'
 import { useNewReleasesQuery } from '../../../../hooks/useNewReleasesQuery';
 
 const NewReleaseSlides = () => {
