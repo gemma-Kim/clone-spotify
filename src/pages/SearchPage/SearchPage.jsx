@@ -7,6 +7,7 @@ import { api } from "../../utils/api/api";
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MusicList from "../../common/MusicList/MusicList";
 import MusicTab from "../../common/MusicTab/MusicTab";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const useSearchQuery = (searchQuery) => {
   return useQuery({
@@ -119,7 +120,9 @@ const SearchPage = () => {
               )}
             </>
           ) : (
-            <p>No results found</p>
+            <div className="loading-spinner">
+              <ClipLoader color="green" size={50} />
+            </div>
           )}
         </div>
       </Container>

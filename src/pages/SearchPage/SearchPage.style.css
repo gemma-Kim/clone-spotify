@@ -87,12 +87,11 @@ audio {
 
 @media (min-width: 992px) {
   .search-form {
-  
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      padding: 0 15px;
-      margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 20px;
   }
 }
 
@@ -124,3 +123,8 @@ audio {
   font-size: 18px;
 }
 
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
