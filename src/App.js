@@ -10,26 +10,26 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loadSpotifyPlayer } from "./utils/player/loadSpotifyPlayer";
 import { TrackPlayerProvider } from "./common/Player/TrackPlayerProvider/TrackPlayerProvider";
-import AlbumDetailPage from './pages/AlbumDetailPage/AlbumDetailPage';
-import UserPage from './pages/UserPage/UserPage';
-
+import AlbumDetailPage from "./pages/AlbumDetailPage/AlbumDetailPage";
+import UserPage from "./pages/UserPage/UserPage";
 
 function App() {
   return (
-   <TrackPlayerProvider>
-    <Routes>
-      <Route path="/" element={<AppLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="search" element={<SearchPage />} />
-        <Route path="auth-redirect" element={<AuthRedirectPage />} />
-        <Route path="/user" element={<UserPage />} />
-      </Route>
-      <Route path='albums'>
-            <Route path=':id' element={<AlbumDetailPage/>}/>
-      </Route>
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-   </TrackPlayerProvider>
+    <TrackPlayerProvider>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="auth-redirect" element={<AuthRedirectPage />} />
+          <Route path="/user" element={<UserPage />} />
+          <Route path="albums">
+            <Route path=":id" element={<AlbumDetailPage />} />
+          </Route>
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </TrackPlayerProvider>
   );
 }
 
