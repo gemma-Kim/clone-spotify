@@ -73,6 +73,10 @@ const SearchPage = () => {
     }
   };
 
+  const handleAlbumClick = (album) => {
+    navigate(`/album/${album.id}`);
+  };
+
   return (
     <>
       <Container className="search-page">
@@ -81,25 +85,49 @@ const SearchPage = () => {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             handleFormSubmit={handleFormSubmit}
+/*
+      {selectedTrack && (
+        <div className="player-bar" onClick={handlePlayerBarClick} style={{ cursor: 'pointer' }}>
+          <div className="player-info">
+            <img src={selectedTrack.album.images[0]?.url} alt={selectedTrack.album.name} width="50" />
+            <div>
+              <p>{selectedTrack.name}</p>
+              <p>{selectedTrack.artists.map(artist => artist.name).join(', ')}</p>
+            </div>
+          </div>
+          <audio controls src={selectedTrack.preview_url}>
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      )}
+
+      <Container className="search-page">
+        {isMobile && (
+          <SearchForm 
+            searchQuery={searchQuery} 
+            setSearchQuery={setSearchQuery} 
+            handleFormSubmit={handleFormSubmit} 
+            placeholderText="Search" 
+*/
           />
         )}
 
         <div className="header-container">
-          <h1>Search Results</h1>
 
-          {/* 트랙/앨범 버튼 */}
+          <h1>Results</h1>
+
           <div className="tabs-container">
             <button
               className={`tab-button ${tab === "tracks" ? "active" : ""}`}
               onClick={() => setTab("tracks")}
             >
-              track
+              Tracks
             </button>
             <button
               className={`tab-button ${tab === "albums" ? "active" : ""}`}
               onClick={() => setTab("albums")}
             >
-              album
+              Albums
             </button>
           </div>
         </div>
@@ -122,17 +150,17 @@ const SearchPage = () => {
 
               {tab === "albums" && searchResults.albums?.items.length > 0 && (
                 <>
-                  <h2>Album</h2>
-                  <MusicList
-                    items={searchResults.albums.items}
-                    type="album"
-                    handleTrackClick={handleTrackClick}
+                  <h2>Albums</h2>
+                  <MusicList 
+                    items={searchResults.albums.items} 
+                    type="album" 
+                    handleAlbumClick={handleAlbumClick}  
                   />
                 </>
               )}
             </>
           ) : (
-            <p>No Search Result</p>
+            <p>No results found</p>
           )}
         </div>
       </Container>

@@ -1,6 +1,6 @@
 import React from 'react';
 import "./MusicTab.style.css";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const formatDuration = (durationMs) => {
   const minutes = Math.floor(durationMs / 60000);
@@ -10,6 +10,7 @@ const formatDuration = (durationMs) => {
 
 const MusicTab = ({ data }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   return (
     <div className="music-tab">
       {data.type === 'album' ? (
@@ -29,18 +30,19 @@ const MusicTab = ({ data }) => {
           </div>
         </div>
       ) : data.type === 'track' ? (
-        <div className="track-tab">
+          <div className="track-tab">
+            {!location.pathname.includes("albums") && (
+              <img className="album-image" src={data?.album?.images[0].url} alt={data?.name} />                      
+            )}
           <div className="track-info">
             <h3>{data?.name}</h3>
             <p>{data?.artists[0].name}</p>
           </div>
           <div className="track-duration">
-              <p>{formatDuration(data?.duration_ms)}</p>
+            {!location.pathname.includes("search") && (                  
+              <span>{formatDuration(data?.duration_ms)}</span>
+            )}    
           </div>
-          {/* 아래 부분에서 track-duration 관련 코드를 주석 처리하여, 재생 시간이 표시되지 않도록 했습니다. */}
-           {/*<div className="track-duration"> 
-            <p>{formatDuration(data?.duration_ms)}</p>
-          </div>*/}
         </div>
       ) : null}
     </div>

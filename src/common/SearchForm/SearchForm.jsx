@@ -8,7 +8,7 @@ const SearchForm = ({ searchQuery, setSearchQuery, handleFormSubmit }) => (
       <FaSearch className="search-icon" />
       <Form.Control
         type="search"
-        placeholder="노래, 아티스트, 앨범 검색"
+        placeholder="Search"
         className="search-input"
         aria-label="Search"
         value={searchQuery}

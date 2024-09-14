@@ -29,6 +29,9 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
           <Route path="search" element={<SearchPage />} />
+
+          <Route path="/album/:id" element={<AlbumDetailPage />} />  {/* 검색페이지에서 앨범상세페이지 이동문제로 수정 */}
+
           <Route path="auth-redirect" element={<AuthRedirectPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="albums">
