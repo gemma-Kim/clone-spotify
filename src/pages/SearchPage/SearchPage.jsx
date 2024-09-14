@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';  
-import { FaSearch } from 'react-icons/fa';
+import { Container } from 'react-bootstrap';  
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import './SearchPage.style.css';
@@ -69,6 +68,10 @@ const SearchPage = () => {
     }
   };
 
+  const handleAlbumClick = (album) => {
+    navigate(`/album/${album.id}`);
+  };
+
   return (
     <>
       {selectedTrack && (
@@ -86,31 +89,31 @@ const SearchPage = () => {
         </div>
       )}
 
-<Container className="search-page">
+      <Container className="search-page">
         {isMobile && (
           <SearchForm 
             searchQuery={searchQuery} 
             setSearchQuery={setSearchQuery} 
             handleFormSubmit={handleFormSubmit} 
+            placeholderText="Search" 
           />
         )}
 
         <div className="header-container">
-          <h1>검색 결과</h1>
+          <h1>Results</h1>
 
-          {/* 트랙/앨범 버튼 */}
           <div className="tabs-container">
             <button
               className={`tab-button ${tab === 'tracks' ? 'active' : ''}`}
               onClick={() => setTab('tracks')}
             >
-              곡
+              Tracks
             </button>
             <button
               className={`tab-button ${tab === 'albums' ? 'active' : ''}`}
               onClick={() => setTab('albums')}
             >
-              앨범
+              Albums
             </button>
           </div>
         </div>
@@ -119,7 +122,7 @@ const SearchPage = () => {
             <>
               {tab === 'tracks' && searchResults.tracks?.items.length > 0 && (
                 <>
-                  <h2>곡</h2>
+                  <h2>Tracks</h2>
                   <MusicList 
                     items={searchResults.tracks.items} 
                     type="track" 
@@ -130,17 +133,17 @@ const SearchPage = () => {
 
               {tab === 'albums' && searchResults.albums?.items.length > 0 && (
                 <>
-                  <h2>앨범</h2>
+                  <h2>Albums</h2>
                   <MusicList 
                     items={searchResults.albums.items} 
                     type="album" 
-                    handleTrackClick={handleTrackClick} 
+                    handleAlbumClick={handleAlbumClick}  
                   />
                 </>
               )}
             </>
           ) : (
-            <p>결과가 없습니다</p>
+            <p>No results found</p>
           )}
         </div>
       </Container>

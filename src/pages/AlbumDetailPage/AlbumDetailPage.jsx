@@ -85,7 +85,7 @@ const AlbumDetailPage = () => {
         <div className="track-header">
           <span className="sharp">#</span>
           <div className="track-header-info">
-            <span>제목</span>
+            <span>Title</span> {/* 수정 */}
             <FontAwesomeIcon icon={faClock} className="time-icon" />
           </div>
         </div>
@@ -97,7 +97,7 @@ const AlbumDetailPage = () => {
             </div>
           ))
         ) : (
-          <p>이 앨범에 트랙이 없습니다</p>
+          <p>There are no tracks in this album.{/* 수정 */}</p> 
         )}
       </div>
     </div>

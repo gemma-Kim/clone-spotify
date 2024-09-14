@@ -44,7 +44,7 @@ const UserPage = () => {
   return (
     <div className="user-page">
       <div className="header-container">
-        <h1>내 라이브러리</h1>
+        <h1>My Library</h1> {/* 수정 */}
       </div>
 
       <div className="music-libary">
@@ -53,25 +53,25 @@ const UserPage = () => {
           className={`tab-button ${tab === 'all' ? 'active' : ''}`}
           onClick={() => setTab("all")}
         >
-          전체
+          All {/* 수정 */}
         </button>
         <button
           className={`tab-button ${tab === 'album' ? 'active' : ''}`}
           onClick={() => setTab("album")}
-        >
-          앨범
+        >    
+          Albums {/* 수정 */}
         </button>
         <button
           className={`tab-button ${tab === 'artist' ? 'active' : ''}`}
           onClick={() => setTab("artist")}
         >
-          아티스트
+          Artists {/* 수정 */}
         </button>
         <button
           className={`tab-button ${tab === 'track' ? 'active' : ''}`}
           onClick={() => setTab("track")}
         >
-          트랙
+          Tracks {/* 수정 */}
         </button>
       </div>
 
@@ -80,7 +80,7 @@ const UserPage = () => {
             ? myLibrary.map((data, index) => (
               <MusicTab data={data} key={index} />
             ))
-            : "아직 추가한 앨범이 없습니다"}
+            : "You haven't added any albums yet."} {/* 수정 */}
           
         </div>
       </div>
