@@ -3,6 +3,12 @@
   align-items: center;
   cursor: pointer;
   margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #fff;
+}
+
+.music-tab:last-child {
+  border-bottom: none;
 }
 
 .album-tab,
@@ -13,8 +19,13 @@
   cursor: pointer;
 }
 
+.track-tab {
+  justify-content: space-between;
+  width: 100%;
+}
+
 .album-image,
-.artist-image, track-album-image {
+.artist-image {
   width: 50px;
   height: 50px;
   object-fit: cover;
@@ -49,6 +60,7 @@
 
 .track-duration {
   margin-left: auto;
+  margin-right: 10px;
   font-size: 14px;
   color: #888;
 }
