@@ -1,67 +1,35 @@
-.search-form {
-  max-width: 500px !important; 
-}
-
-@media (min-width: 992px) {
-  .search-form {
-    display: none; 
-  }
-}
-
-.search-input {
-  border-radius: 50px !important; 
-  padding: 10px 20px !important; 
-  border-color: #ced4da !important; 
-  box-shadow: none !important;     
-  outline: none !important;        
-}
-
-.search-button {
-  border-radius: 50px !important;   
-  padding: 10px 20px !important;   
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background-color: black !important; 
-  border: none !important;          
-}
-
-.search-icon {
-  color: white !important;
-}
-
-.audio-player {
+.tabs-container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
-.play-button {
-  border-radius: 50px !important;
-  padding: 10px 20px !important;
-  background-color: black !important;
-  border: none !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.tab-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 20px;
 }
 
-.play-icon {
-  color: white !important;
+.tab-button.active {
+  background-color: var(--color-green);
+  color: white;
 }
 
-.progress-bar {
-  height: 10px !important;
-  border-radius: 50px !important;
-  background-color: #ced4da !important;
+.tab-button:hover {
+  background-color: #ddd;
 }
 
 .player-bar {
   position: fixed;
-  bottom: 0; 
+  bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.9); 
+  background-color: rgba(0, 0, 0, 0.9);
   padding: 10px;
   display: flex;
   align-items: center;
@@ -84,5 +52,110 @@
 }
 
 audio {
-  width: 300px; 
+  width: 300px;
+}
+
+.music-list .music-tab {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-gray);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.music-tab img {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+.music-tab p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.track-number {
+  font-size: 14px;
+  margin-right: 15px;
+}
+
+.search-form {
+  max-width: 500px !important;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 992px) {
+  .search-form {
+    display: none;
+  }
+}
+
+.search-input {
+  border-radius: 50px !important;
+  padding: 10px 20px !important;
+  border-color: #ced4da !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.search-button {
+  border-radius: 50px !important;
+  padding: 10px 20px !important;
+  background-color: black !important;
+  border: none !important;
+}
+
+.search-icon-container {
+  border-radius: 50px 0 0 50px !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: white;
+  border: none;
+}
+
+.search-icon {
+  color: black !important;
+  font-size: 18px;
+}
+
+@media (max-width: 991px) {
+  .search-form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 20px;
+  }
+
+  .search-input-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 5px; 
+    transform: translateY(-50%);
+    color: black;
+    pointer-events: none;
+    font-size: 15px; 
+  }
+
+  .search-input {
+    width: 100%;
+    padding-left: 55px; 
+    border-radius: 50px !important;
+    border: 1px solid #ced4da !important;
+    padding: 12px 20px !important;
+    background-color: white;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .search-button {
+    display: none; 
+  }
 }

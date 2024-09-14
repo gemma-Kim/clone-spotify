@@ -34,9 +34,10 @@ const MusicTab = ({ data }) => {
             <h3>{data?.name}</h3>
             <p>{data?.artists[0].name}</p>
           </div>
-          <div className="track-duration">
+          {/* 아래 부분에서 track-duration 관련 코드를 주석 처리하여, 재생 시간이 표시되지 않도록 했습니다. */}
+           {/*<div className="track-duration"> 
             <p>{formatDuration(data?.duration_ms)}</p>
-          </div>
+          </div>*/}
         </div>
       ) : null}
     </div>
