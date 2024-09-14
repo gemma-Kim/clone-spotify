@@ -35,7 +35,7 @@ const MusicTab = ({ data }) => {
             <p>{data?.artists[0].name}</p>
           </div>
           <div className="track-duration">
-            <p>{formatDuration(data?.duration_ms)}</p>
+              <p>{formatDuration(data?.duration_ms)}</p>
           </div>
         </div>
       ) : null}

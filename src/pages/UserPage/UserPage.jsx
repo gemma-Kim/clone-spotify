@@ -3,10 +3,13 @@ import MusicTab from '../../common/MusicTab/MusicTab'
 import "./UserPage.style.css"
 import { useUserSavedAlbums } from '../../hooks/user/useUserSavedAlbums'
 import { useUserFollowedArtistsQuery } from '../../hooks/user/useUserFollwedArtists'
+import { useUserSavedTracksQuery } from '../../hooks/user/useUserSavedTracks'
 
 const UserPage = () => {
   const { data: albumData } = useUserSavedAlbums();
   const { data: artistsData } = useUserFollowedArtistsQuery();
+  const { data: trackData } = useUserSavedTracksQuery();
+  console.log("tra", trackData)
   const [myLibrary, setMyLibrary] = useState([]);
   const [tab, setTab] = useState("all");
 
@@ -20,14 +23,23 @@ const UserPage = () => {
 
     const formattedArtists = Array.isArray(artistsData) ? artistsData : [];
 
+    const formattedTracks = Array.isArray(trackData)
+      ? trackData.map(({ track, added_at }) => ({
+        ...track,
+        added_at,
+      }))
+      : [];
+
     if (tab === 'all') {
-      setMyLibrary([...formattedAlbums, ...formattedArtists]);
+      setMyLibrary([...formattedAlbums, ...formattedArtists, ...formattedTracks]);
     } else if (tab === 'album') {
       setMyLibrary(formattedAlbums);
     } else if (tab === 'artist') {
       setMyLibrary(formattedArtists);
+    } else if (tab === "track") {
+      setMyLibrary(formattedTracks);
     }
-  }, [albumData, artistsData, tab]);
+  }, [albumData, artistsData, trackData,tab]);
 
   return (
     <div className="user-page">
@@ -54,6 +66,12 @@ const UserPage = () => {
           onClick={() => setTab("artist")}
         >
           아티스트
+        </button>
+        <button
+          className={`tab-button ${tab === 'track' ? 'active' : ''}`}
+          onClick={() => setTab("track")}
+        >
+          트랙
         </button>
       </div>
 
