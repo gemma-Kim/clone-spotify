@@ -1,5 +1,6 @@
 .newRelease-music-container{
-    margin: 50px 20px 10px 20px;
+    margin: 50px 20px 10px 20px; 
+    margin-bottom: 1px; /* 슬라이드 간의 간격을 더 줄임 */
 }
 
 .newRelease-music-containerr h3 {

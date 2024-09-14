@@ -94,7 +94,7 @@ const AlbumDetailPage = () => {
             </div>
           ))
         ) : (
-          <p>이 앨범에 트랙이 없습니다</p>
+          <p>There are no tracks in this album.{/* 수정 */}</p> 
         )}
       </div>
     </div>
