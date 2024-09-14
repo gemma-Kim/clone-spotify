@@ -1,5 +1,6 @@
 .music-tab {
   display: flex;
+  width: 100%;
   align-items: center;
   cursor: pointer;
   margin: 10px 0;
@@ -20,12 +21,19 @@
 }
 
 .track-tab {
-  justify-content: space-between;
   width: 100%;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin: 0 10px;
+}
+
+.track-tab > .track-image {
+  margin-left: 10px;
 }
 
 .album-image,
-.artist-image {
+.artist-image,
+.track-image {
   width: 50px;
   height: 50px;
   object-fit: cover;
@@ -61,7 +69,7 @@
 .track-duration {
   width: 10%;
   margin-left: auto;
-  margin-right: 20px;
+  text-align: right;
   font-size: 14px;
   color: #888;
 }

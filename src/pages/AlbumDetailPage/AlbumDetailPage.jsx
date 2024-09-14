@@ -6,13 +6,14 @@ import {
   faPlay,
   faEllipsis,
   faHeart,
-  faClock,
 } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
+import { useGetSeveralTracksQuery } from '../../hooks/useGetSeveralTracks';
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -29,8 +30,11 @@ const AlbumDetailPage = () => {
     setTrack: setPlayerTrack,
   } = useTrackPlayer();
 
-  console.log("albumData", albumData?.tracks?.items);
-
+  const trackIds = albumData?.tracks?.items?.map((track) => track.id) || [];
+  const trackIdsString = [...trackIds].join(',');
+  const { data: trackData } = useGetSeveralTracksQuery({ ids: trackIdsString });
+  console.log("trackData", trackData);
+  
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -90,20 +94,15 @@ const AlbumDetailPage = () => {
       <div className="trackTabs-container">
         <div className="track-header">
           <span className="sharp">#</span>
-          {/* <div className="track-header-info">
-            <span>제목</span>
-            <FontAwesomeIcon icon={faClock} className="time-icon"/>
-          </div> */}
+          <FontAwesomeIcon icon={faClock} className="time-icon"/>
         </div>
-        {albumData?.tracks?.items.length > 0 ? (
-          albumData?.tracks?.items.map((track, index) => (
+        {trackData?.length > 0 ? (
+          trackData?.map((track, index) => (
             <div
               className="track-row"
               key={index}
               onClick={() => handleSelectedTrack(track)}
             >
-              <span>{index + 1}</span>
-              <img src={albumData?.images[1].url} />
               <MusicTab data={track} />
             </div>
           ))
