@@ -77,7 +77,7 @@ const MusicTab = ({ data }) => {
             ) : location.pathname.includes("album") ? (
               <span>{data.track_number}</span>
             ) : (
-              <div className="default-text">...</div>
+              <div className="default-text"></div>
             )}
           </div>
 
@@ -88,7 +88,7 @@ const MusicTab = ({ data }) => {
           />
           <div className="track-info">
             <h3>{data.name}</h3>
-            <p>{data.artists[0].name}</p>
+            <p>{data.artists.map((artist) => artist.name).join(",")}</p>
           </div>
           <div className="track-duration">
             {!location.pathname.includes("search") && (

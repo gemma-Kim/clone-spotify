@@ -5,7 +5,21 @@
   cursor: pointer;
   margin: 10px 0;
   padding: 10px 0;
-  border-bottom: 1px solid #fff;
+  border-bottom: 0.5px solid #fff;
+  border-radius: 10px;
+  background-color: transparent;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.music-tab:hover {
+  background: rgb(31, 93, 55);
+  background: linear-gradient(
+    146deg,
+    rgba(31, 93, 55, 1) 0%,
+    rgba(47, 47, 47, 1) 47%
+  );
 }
 
 .music-tab:last-child {
@@ -48,6 +62,9 @@
 .track-info {
   display: flex;
   flex-direction: column;
+  flex-direction: column; /* 세로 정렬 */
+  justify-content: center; /* 중앙 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 */
 }
 
 .album-info h3,
@@ -55,14 +72,24 @@
 .track-info h3 {
   font-size: 16px;
   margin: 0;
-  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .album-info p,
 .artist-info p,
 .track-info p {
-  font-size: 14px;
-  color: #999999;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .track-duration {
@@ -75,7 +102,7 @@
 
 /* 새로운 스타일 추가 */
 .track-number-or-icon {
-  width: 40px; /* 아이콘과 트랙 넘버 크기 고정 */
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,4 +118,13 @@
   color: var(--color-black);
   font-size: 24px;
   text-align: center;
+}
+
+.default-text:hover {
+  background: rgb(31, 93, 55);
+  background: linear-gradient(
+    146deg,
+    rgba(31, 93, 55, 1) 0%,
+    rgba(47, 47, 47, 1) 47%
+  );
 }
