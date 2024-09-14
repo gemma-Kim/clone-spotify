@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import "./SearchPage.style.css";
 import { api } from "../../utils/api/api";
@@ -33,6 +33,7 @@ const SearchPage = () => {
   const [tab, setTab] = useState("tracks");
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  const navigate = useNavigate();
 
   const {
     trackPlayerIsVisible,
@@ -74,7 +75,7 @@ const SearchPage = () => {
   };
 
   const handleAlbumClick = (album) => {
-    navigate(`/album/${album.id}`);
+    navigate(`/albums/${album.id}`);
   };
 
   return (
@@ -85,35 +86,10 @@ const SearchPage = () => {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             handleFormSubmit={handleFormSubmit}
-/*
-      {selectedTrack && (
-        <div className="player-bar" onClick={handlePlayerBarClick} style={{ cursor: 'pointer' }}>
-          <div className="player-info">
-            <img src={selectedTrack.album.images[0]?.url} alt={selectedTrack.album.name} width="50" />
-            <div>
-              <p>{selectedTrack.name}</p>
-              <p>{selectedTrack.artists.map(artist => artist.name).join(', ')}</p>
-            </div>
-          </div>
-          <audio controls src={selectedTrack.preview_url}>
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-      )}
-
-      <Container className="search-page">
-        {isMobile && (
-          <SearchForm 
-            searchQuery={searchQuery} 
-            setSearchQuery={setSearchQuery} 
-            handleFormSubmit={handleFormSubmit} 
-            placeholderText="Search" 
-*/
           />
         )}
 
         <div className="header-container">
-
           <h1>Results</h1>
 
           <div className="tabs-container">
@@ -151,10 +127,10 @@ const SearchPage = () => {
               {tab === "albums" && searchResults.albums?.items.length > 0 && (
                 <>
                   <h2>Albums</h2>
-                  <MusicList 
-                    items={searchResults.albums.items} 
-                    type="album" 
-                    handleAlbumClick={handleAlbumClick}  
+                  <MusicList
+                    items={searchResults.albums.items}
+                    type="album"
+                    handleAlbumClick={handleAlbumClick}
                   />
                 </>
               )}
