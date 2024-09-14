@@ -65,5 +65,24 @@ body {
 }
 
 .tab-button:hover {
-  background-color: #ddd;
+  background-color: #559952;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .tabs-container {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .tab-button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    font-size: 14px;
+  }
+
+  .tab-button:hover {
+    background-color: var(--color-green);
+    color: white;
+  }
 }
