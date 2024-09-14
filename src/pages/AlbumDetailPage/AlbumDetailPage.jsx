@@ -10,10 +10,21 @@ import Alert from "react-bootstrap/Alert";
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 import MusicTab from '../../common/MusicTab/MusicTab';
+import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
 
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
+  const { data: albumData, isLoading, isError, error } = useMusicAlbumQuery({ id });
+  console.log("albumData", albumData?.tracks?.items);
+
+  if(isLoading){
+    return <LoadingSpinner/>
+  }
+  if(isError){
+      return <Alert variant='danger'>(error.message)</Alert>
+  }
+
   const { data: albumData } = useMusicAlbumQuery({ id });
 
   const formatDate = (dateString) => {
@@ -25,6 +36,7 @@ const AlbumDetailPage = () => {
   };
 
   console.log("albumData", albumData?.tracks?.items);
+
 
 
   return (
