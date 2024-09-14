@@ -1,51 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';  
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import './SearchPage.style.css';
-import { api } from '../../utils/api/api';
-import SearchForm from '../../common/SearchForm/SearchForm';  
-import MusicList from '../../common/MusicList/MusicList';    
+import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import "./SearchPage.style.css";
+import { api } from "../../utils/api/api";
+import SearchForm from "../../common/SearchForm/SearchForm";
+import MusicList from "../../common/MusicList/MusicList";
+import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
+import MusicTab from "../../common/MusicTab/MusicTab";
 
 const useSearchQuery = (searchQuery) => {
   return useQuery({
-    queryKey: ['searchResults', searchQuery],
+    queryKey: ["searchResults", searchQuery],
     queryFn: async () => {
       const spotifyApi = api();
-      const response = await spotifyApi.get('/v1/search', {
+      const response = await spotifyApi.get("/v1/search", {
         params: {
           q: searchQuery,
-          type: 'track,artist,album',
-          limit: 10
-        }
+          type: "track,artist,album",
+          limit: 10,
+        },
       });
       return response.data;
     },
-    enabled: !!searchQuery
+    enabled: !!searchQuery,
   });
 };
 
 const SearchPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedTrack, setSelectedTrack] = useState(null);
-  const [tab, setTab] = useState('tracks'); 
+  const [tab, setTab] = useState("tracks");
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-  const navigate = useNavigate();
+
+  const {
+    trackPlayerIsVisible,
+    setTrackPlayerIsVisible,
+    setTrack: setPlayerTrack,
+  } = useTrackPlayer();
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 992);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const query = params.get('query');
+    const query = params.get("query");
     if (query) {
       setSearchQuery(query);
     }
@@ -58,13 +65,11 @@ const SearchPage = () => {
     refetch();
   };
 
-  const handleTrackClick = (track) => {
-    setSelectedTrack(track);
-  };
-
-  const handlePlayerBarClick = () => {
+  const handleTrackClick = (selectedTrack) => {
+    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
     if (selectedTrack) {
-      navigate(`/track/${selectedTrack.id}`);
+      setSelectedTrack(selectedTrack);
+      setPlayerTrack(selectedTrack);
     }
   };
 
@@ -74,6 +79,13 @@ const SearchPage = () => {
 
   return (
     <>
+      <Container className="search-page">
+        {isMobile && (
+          <SearchForm
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            handleFormSubmit={handleFormSubmit}
+/*
       {selectedTrack && (
         <div className="player-bar" onClick={handlePlayerBarClick} style={{ cursor: 'pointer' }}>
           <div className="player-info">
@@ -96,42 +108,47 @@ const SearchPage = () => {
             setSearchQuery={setSearchQuery} 
             handleFormSubmit={handleFormSubmit} 
             placeholderText="Search" 
+*/
           />
         )}
 
         <div className="header-container">
+
           <h1>Results</h1>
 
           <div className="tabs-container">
             <button
-              className={`tab-button ${tab === 'tracks' ? 'active' : ''}`}
-              onClick={() => setTab('tracks')}
+              className={`tab-button ${tab === "tracks" ? "active" : ""}`}
+              onClick={() => setTab("tracks")}
             >
               Tracks
             </button>
             <button
-              className={`tab-button ${tab === 'albums' ? 'active' : ''}`}
-              onClick={() => setTab('albums')}
+              className={`tab-button ${tab === "albums" ? "active" : ""}`}
+              onClick={() => setTab("albums")}
             >
               Albums
             </button>
           </div>
         </div>
-        <div className="music-library" style={{ paddingBottom: selectedTrack ? '100px' : '0' }}>
+        <div
+          className="music-library"
+          style={{ paddingBottom: selectedTrack ? "100px" : "0" }}
+        >
           {searchResults ? (
             <>
-              {tab === 'tracks' && searchResults.tracks?.items.length > 0 && (
+              {tab === "tracks" && searchResults.tracks?.items.length > 0 && (
                 <>
-                  <h2>Tracks</h2>
-                  <MusicList 
-                    items={searchResults.tracks.items} 
-                    type="track" 
-                    handleTrackClick={handleTrackClick} 
-                  />
+                  <h2>Track</h2>
+                  {searchResults.tracks?.items.map((item, idx) => (
+                    <div key={idx} onClick={() => handleTrackClick(item)}>
+                      <MusicTab data={item} />
+                    </div>
+                  ))}
                 </>
               )}
 
-              {tab === 'albums' && searchResults.albums?.items.length > 0 && (
+              {tab === "albums" && searchResults.albums?.items.length > 0 && (
                 <>
                   <h2>Albums</h2>
                   <MusicList 

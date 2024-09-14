@@ -8,13 +8,11 @@ import {
   faHeart,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-// import { faHeart } from "@fortawesome/free-solid-svg-icons";
-// import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
-// import { faClock } from '@fortawesome/free-regular-svg-icons';
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
+import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -24,6 +22,13 @@ const AlbumDetailPage = () => {
     isError,
     error,
   } = useMusicAlbumQuery({ id });
+
+  const {
+    trackPlayerIsVisible,
+    setTrackPlayerIsVisible,
+    setTrack: setPlayerTrack,
+  } = useTrackPlayer();
+
   console.log("albumData", albumData?.tracks?.items);
 
   if (isLoading) {
@@ -39,6 +44,11 @@ const AlbumDetailPage = () => {
     const options = { year: "numeric", month: "long" };
     const monthYear = date.toLocaleDateString("en-US", options);
     return `${day} ${monthYear}`;
+  };
+
+  const handleSelectedTrack = (selectedTrack) => {
+    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
+    setPlayerTrack(selectedTrack);
   };
 
   return (
@@ -87,7 +97,11 @@ const AlbumDetailPage = () => {
         </div>
         {albumData?.tracks?.items.length > 0 ? (
           albumData?.tracks?.items.map((track, index) => (
-            <div className="track-row" key={track.id}>
+            <div
+              className="track-row"
+              key={index}
+              onClick={() => handleSelectedTrack(track)}
+            >
               <span>{index + 1}</span>
               <img src={albumData?.images[1].url} />
               <MusicTab data={track} />

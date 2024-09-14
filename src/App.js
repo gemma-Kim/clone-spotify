@@ -14,6 +14,15 @@ import AlbumDetailPage from "./pages/AlbumDetailPage/AlbumDetailPage";
 import UserPage from "./pages/UserPage/UserPage";
 
 function App() {
+  /* global player loading */
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      await loadSpotifyPlayer(dispatch);
+    };
+    fetchData();
+  }, [dispatch]);
+
   return (
     <TrackPlayerProvider>
       <Routes>

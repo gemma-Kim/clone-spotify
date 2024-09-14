@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import MusicTab from '../../common/MusicTab/MusicTab'
-import "./UserPage.style.css"
-import { useUserSavedAlbums } from '../../hooks/user/useUserSavedAlbums'
-import { useUserFollowedArtistsQuery } from '../../hooks/user/useUserFollwedArtists'
-import { useUserSavedTracksQuery } from '../../hooks/user/useUserSavedTracks'
+import React, { useEffect, useState } from "react";
+import MusicTab from "../../common/MusicTab/MusicTab";
+import "./UserPage.style.css";
+import { useUserSavedAlbums } from "../../hooks/user/useUserSavedAlbums";
+import { useUserFollowedArtistsQuery } from "../../hooks/user/useUserFollwedArtists";
+import { useUserSavedTracksQuery } from "../../hooks/user/useUserSavedTracks";
+import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 
 const UserPage = () => {
   const { data: albumData } = useUserSavedAlbums();
   const { data: artistsData } = useUserFollowedArtistsQuery();
   const { data: trackData } = useUserSavedTracksQuery();
-  console.log("tra", trackData)
+  console.log("tra", trackData);
   const [myLibrary, setMyLibrary] = useState([]);
   const [tab, setTab] = useState("all");
+
+  const {
+    trackPlayerIsVisible,
+    setTrackPlayerIsVisible,
+    setTrack: setPlayerTrack,
+  } = useTrackPlayer();
 
   useEffect(() => {
     const formattedAlbums = Array.isArray(albumData)
@@ -25,21 +32,32 @@ const UserPage = () => {
 
     const formattedTracks = Array.isArray(trackData)
       ? trackData.map(({ track, added_at }) => ({
-        ...track,
-        added_at,
-      }))
+          ...track,
+          added_at,
+        }))
       : [];
 
-    if (tab === 'all') {
-      setMyLibrary([...formattedAlbums, ...formattedArtists, ...formattedTracks]);
-    } else if (tab === 'album') {
+    if (tab === "all") {
+      setMyLibrary([
+        ...formattedAlbums,
+        ...formattedArtists,
+        ...formattedTracks,
+      ]);
+    } else if (tab === "album") {
       setMyLibrary(formattedAlbums);
-    } else if (tab === 'artist') {
+    } else if (tab === "artist") {
       setMyLibrary(formattedArtists);
     } else if (tab === "track") {
       setMyLibrary(formattedTracks);
     }
-  }, [albumData, artistsData, trackData,tab]);
+  }, [albumData, artistsData, trackData, tab]);
+
+  const handleSelectedTrack = (selectedTrack) => {
+    if (tab === "track") {
+      if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
+      setPlayerTrack(selectedTrack);
+    }
+  };
 
   return (
     <div className="user-page">
@@ -78,14 +96,15 @@ const UserPage = () => {
         <div className="music-list">
           {myLibrary && myLibrary.length > 0
             ? myLibrary.map((data, index) => (
-              <MusicTab data={data} key={index} />
-            ))
-            : "You haven't added any albums yet."} {/* 수정 */}
-          
+                <div onClick={() => handleSelectedTrack(data)}>
+                  <MusicTab data={data} key={index} />
+                </div>
+              ))
+            : "You haven't added any albums yet."}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserPage
+export default UserPage;
