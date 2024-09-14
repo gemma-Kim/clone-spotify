@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from "@tanstack/react-query";
 import { api } from "../utils/api/api";
 
 // Fetch playlist tracks
 const fetchPlaylistTracks = ({ playlistId }) => {
   return api().get(`/v1/playlists/${playlistId}/tracks`, {
     params: {
-      limit: 15, 
+      limit: 20,
     },
   });
 };
@@ -18,4 +18,4 @@ export const useMusicTrackQuery = (playlistId) => {
     select: (res) => res.data.items, // Select only the items from the response
     enabled: !!playlistId, // Only run query if playlistId is defined
   });
-}
+};
