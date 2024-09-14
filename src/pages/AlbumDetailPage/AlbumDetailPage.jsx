@@ -12,9 +12,9 @@ import {
 // import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
-import { faClock } from '@fortawesome/free-regular-svg-icons';
-import MusicTab from '../../common/MusicTab/MusicTab';
-import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner';
+// import { faClock } from '@fortawesome/free-regular-svg-icons';
+import MusicTab from "../../common/MusicTab/MusicTab";
+import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -88,8 +88,8 @@ const AlbumDetailPage = () => {
         {albumData?.tracks?.items.length > 0 ? (
           albumData?.tracks?.items.map((track, index) => (
             <div className="track-row" key={track.id}>
-                <span>{index + 1}</span>
-                <img src={albumData?.images[1].url} />
+              <span>{index + 1}</span>
+              <img src={albumData?.images[1].url} />
               <MusicTab data={track} />
             </div>
           ))
