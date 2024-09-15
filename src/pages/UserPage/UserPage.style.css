@@ -1,0 +1,90 @@
+:root {
+  --color-primary: var(--color-black);
+  --color-accent: var(--color-green);
+  --color-text: var(--color-white);
+  --color-text-vibrant: var(--color-gray);
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-green: #74d36f;
+  --color-gray: #bdbdbd;
+}
+
+body {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+}
+
+.user-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-x: hidden;
+  overscroll-behavior: contain; 
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-gray);
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.header-container h1 {
+  font-size: 24px;
+}
+
+.header-info span {
+  margin-left: 20px;
+  color: var(--color-text-vibrant);
+}
+
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.tab-button.active {
+  background-color: var(--color-green);
+  color: white;
+}
+
+.tab-button:hover {
+  background-color: #559952;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .tabs-container {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .tab-button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    font-size: 14px;
+  }
+
+  .tab-button:hover {
+    background-color: var(--color-green);
+    color: white;
+  }
+}

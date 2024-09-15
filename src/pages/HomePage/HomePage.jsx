@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import NewReleaseSlides from './components/NewReleaseSlides/NewReleaseSlides';
+import ArtistSlides from './components/ArtistSlides/ArtistSlides';
+import TopAlbumSlides from './components/TopAlbumSlides/TopAlbumSlides'
+import Footer from './components/Footer/Footer';
 
-const Homepage = () => {
+const HomePage = () => {
   return (
     <div>
-      HomePage
+      <NewReleaseSlides/>
+      <ArtistSlides/>
+      <TopAlbumSlides/>
+      <Footer/>
     </div>
-  )
-}
+  ) 
+};
 
-export default Homepage
+export default HomePage;

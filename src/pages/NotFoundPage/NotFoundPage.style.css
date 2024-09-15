@@ -1,0 +1,112 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
+.not-found-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
+.not-found-description {
+  font-size: 25px;
+  color: #999;
+  margin-bottom: 3rem;
+}
+
+.home-button {
+  background-color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 3rem;
+}
+
+.home-button:hover {
+  background-color: #ddd;
+}
+
+.help-text {
+  font-size: 16px;
+  color: #999;
+}
+
+/* Responsive Styles - Adjusting for smaller screens */
+@media (max-width: 768px) {
+  .not-found-title {
+      font-size: 28px; /* Smaller title font */
+  }
+  
+  .not-found-description {
+      font-size: 16px; /* Smaller description font */
+  }
+
+  .home-button {
+      padding: 8px 20px; /* Adjust button padding */
+      font-size: 16px; /* Smaller button font */
+  }
+
+  .help-text {
+      font-size: 14px; /* Smaller help text */
+  }
+
+}
+
+@media (max-width: 480px) {
+  .not-found-title {
+      font-size: 24px; /* Further reduced title font */
+  }
+
+  .not-found-description {
+      font-size: 14px; /* Further reduced description font */
+  }
+
+  .home-button {
+      padding: 6px 15px; /* Further reduced button padding */
+      font-size: 14px; /* Further reduced button font */
+  }
+
+}
+
+
+
+  .turntable {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: conic-gradient(from 0deg, #000 10% 20%, #000 30% 40%, #fff  100%);
+    border-radius: 50%;
+    animation: spin 3s linear infinite;
+}
+
+.turntable::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px #fff;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

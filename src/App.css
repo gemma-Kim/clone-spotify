@@ -1,38 +1,16 @@
-.App {
-  text-align: center;
+/* Global */
+:root {
+  /* Application Colour */
+  --color-primary: var(--color-black);
+  --color-accent: var(--color-green);
+  --color-text: var(--color-white);
+  --color-text-variant: var(--color-gray);
+
+  /* Colour */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-green: #74d36f;
+  --color-gray: #bdbdbd;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* 사용 예시 ---> color: var(--color-text); */

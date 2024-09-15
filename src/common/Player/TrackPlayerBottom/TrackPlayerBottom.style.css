@@ -1,0 +1,124 @@
+.track-player-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 11%;
+  width: 100%;
+  margin: auto;
+  background: rgb(12, 44, 23);
+  background: linear-gradient(0deg, rgb(12, 44, 23) 0%, rgb(21, 21, 21) 50%);
+  cursor: pointer;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 10000000;
+}
+
+.track-player-bottom-info-container {
+  display: flex;
+  width: 30%;
+  height: 100%;
+  padding: 0;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.track-player-bottom-track-info-container {
+  display: flex;
+  flex-direction: column; /* 트랙 이름과 아티스트 수직 배치 */
+  justify-content: center;
+  /* justify-content: space-around; */
+  /* align-items: flex-start; */
+  padding-left: 5%;
+  font-weight: bold;
+  /* width: 40%; */
+}
+
+.track-player-bottom-track-name-container {
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-player-bottom-track-artist-container {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-player-bottom-album-img {
+  width: 60px;
+  height: 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.track-player-progress-bar {
+  transition: width 0.5s ease;
+  border-radius: 10px;
+  height: 5px;
+  width: 100%;
+}
+
+.track-player-progress-bar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.track-player-bottom-controller {
+  width: 33%;
+}
+
+.track-player-bottom-empty {
+  width: 30%;
+  height: 100%;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .track-player-bottom-container {
+    height: 10%;
+  }
+
+  .track-player-bottom-info-container {
+    width: 40%;
+  }
+
+  .track-player-bottom-album-img {
+    width: 40px;
+    height: 40px;
+    background-size: cover; /* 모바일에서도 정사각형으로 설정 */
+  }
+
+  .track-player-bottom-track-info-container {
+    /* width: 100%; */
+    align-items: center;
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .track-player-bottom-track-name-container {
+    font-size: 12px;
+  }
+
+  .track-player-bottom-track-artist-container {
+    font-size: 9px;
+  }
+
+  .track-player-bottom-controller {
+    width: 50%;
+  }
+
+  .track-player-bottom-empty {
+    width: 5%;
+  }
+}

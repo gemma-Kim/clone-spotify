@@ -1,0 +1,176 @@
+.footer {
+  background-color: #000000;
+  color: #fff;
+  padding: 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 80px 0;
+  margin-bottom: 100px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.team-info,
+.branch-info {
+  max-width: 45%;
+  margin-bottom: 20px;
+}
+
+.branch-info {
+  margin-left: 50px;
+}
+
+.team-info p,
+.branch-info p {
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--color-green);
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team-member .branch-office {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.member-name,
+.office-location {
+  width: 80%;
+  margin-right: 40px;
+  text-align: left;
+}
+
+.member-role .office-phone {
+  width: 10%;
+  font-size: 15px;
+  color: #ccc;
+  text-align: left;
+  min-width: 50px;
+}
+
+.footer-note {
+  text-align: right;
+  margin-left: auto;
+}
+
+.footer-note p {
+  font-size: 15px;
+  color: #9b9b9b;
+}
+
+.social-media-icons {
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.social-media-icons a {
+  margin: 0 5px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  opacity: 0.7;
+}
+
+.github-addresss {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  .footer-content {
+    justify-content: center;
+  }
+
+  .team-info,
+  .branch-info {
+    max-width: 100%;
+  }
+
+  .branch-info {
+    margin-left: 0;
+  }
+
+  .team-info p,
+  .branch-info p {
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 0;
+  }
+
+  .footer-content ul {
+    padding: 0;
+  }
+
+  .team-member,
+  .branch-office {
+    margin: 3px 0;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .member-name,
+  .office-location {
+    margin-right: 40px;
+  }
+
+  .member-role,
+  .office-phone {
+    font-size: 15px;
+    color: #ccc;
+    text-align: right;
+    min-width: 50px;
+  }
+
+  .footer-note {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .footer-note p {
+    font-size: 13px;
+  }
+
+  .social-media-icons {
+    display: flex;
+    margin: 0 5px;
+  }
+
+  .social-icon {
+    width: 25px;
+    height: 25px;
+    opacity: 0.7;
+  }
+}
