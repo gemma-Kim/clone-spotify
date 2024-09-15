@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom"; // BrowserRouter 삭제
 import AppLayout from "./layout/AppLayout";
 import SearchPage from "./pages/SearchPage/SearchPage";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage"
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
 import "bootstrap/dist/css/bootstrap.min.css";
