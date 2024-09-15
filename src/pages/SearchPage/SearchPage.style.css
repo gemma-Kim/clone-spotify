@@ -1,3 +1,8 @@
+.search-page{
+  overflow-x: hidden;
+  overscroll-behavior: contain; 
+}
+
 .tabs-container {
   display: flex;
   justify-content: center;
@@ -59,7 +64,7 @@ audio {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid var(--color-gray);
+  border-bottom: 2px solid #404040;
   background-color: transparent;
   cursor: pointer;
 }

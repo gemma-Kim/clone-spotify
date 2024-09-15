@@ -6,6 +6,8 @@ import {
   faPause,
   faShuffle,
   faRotateRight,
+  faBackwardStep,
+  faForwardStep,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   convertMsToSeconds,
@@ -26,6 +28,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
     pauseTrack,
     positionMs,
     setPositionMs,
+    setTrackPlayerIsVisible,
   } = useTrackPlayer();
   const durationMs = track?.duration_ms || 0;
   const deviceId = useSelector((state) => state.player.deviceId);
@@ -49,6 +52,10 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
     return () => clearInterval(interval); // 컴포넌트가 언마운트되거나 재생이 멈추면 clearInterval
   }, [isPlaying, deviceId, track?.duration_ms, positionMs]);
 
+  const handleShowing = () => {
+    setTrackPlayerIsVisible(false);
+  };
+
   return (
     <div
       className="track-player-progress-bar-container"
@@ -66,7 +73,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-previous-play"
           style={{ display: `${styleType === "fit" ? "none" : "block"}` }}
-          icon={faPlay}
+          icon={faBackwardStep}
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-main"
@@ -76,11 +83,12 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-next-play"
           style={{ display: `${styleType === "fit" ? "none" : "block"}` }}
-          icon={faPlay}
+          icon={faForwardStep}
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-rotate"
           style={{ display: `${styleType === "fit" ? "none" : "block"}` }}
+          onClick={() => handleShowing()}
           icon={faRotateRight}
         />
       </div>
@@ -97,7 +105,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <ProgressBar
           className="track-player-progress-bar"
           style={{
-            height: "1.5px",
+            height: "2px",
             display: `${styleType === "fit" ? "none" : "block"}`,
           }}
           variant="secondary" // 색상 추가

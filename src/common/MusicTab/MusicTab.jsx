@@ -15,6 +15,7 @@ const formatDuration = (durationMs) => {
 const MusicTab = ({ data }) => {
   const [isHovered, setIsHovered] = useState(false); // hover 상태 관리
   const {
+    setTrack,
     trackPlayerIsVisible,
     setTrackPlayerIsVisible,
     playNewTrack, // 트랙 플레이 함수
@@ -28,6 +29,13 @@ const MusicTab = ({ data }) => {
     if (selectedTrack) {
       if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
       playNewTrack(selectedTrack); // 트랙 재생
+    }
+  };
+
+  const handleShowingPlayer = () => {
+    if (!trackPlayerIsVisible) {
+      setTrackPlayerIsVisible(true);
+      setTrack(data);
     }
   };
 
@@ -58,12 +66,13 @@ const MusicTab = ({ data }) => {
           />
           <div className="artist-info">
             <h3>{data.name}</h3>
-            <p>아티스트</p>
+            <p>Artist</p>
           </div>
         </div>
       ) : data.type === "track" ? (
         <div
           className="track-tab"
+          onClick={() => handleShowingPlayer()}
           onMouseEnter={() => setIsHovered(true)} // hover 시작
           onMouseLeave={() => setIsHovered(false)} // hover 종료
         >
