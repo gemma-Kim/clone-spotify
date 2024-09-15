@@ -2,18 +2,13 @@ import React from "react";
 import "./AlbumDetailPage.style.css";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlay,
-  faEllipsis,
-  faHeart,
-} from "@fortawesome/free-solid-svg-icons";
-import { faClock } from '@fortawesome/free-regular-svg-icons';
+import { faPlay, faEllipsis, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
-import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
-import { useGetSeveralTracksQuery } from '../../hooks/useGetSeveralTracks';
+import { useGetSeveralTracksQuery } from "../../hooks/useGetSeveralTracks";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -24,17 +19,11 @@ const AlbumDetailPage = () => {
     error,
   } = useMusicAlbumQuery({ id });
 
-  const {
-    trackPlayerIsVisible,
-    setTrackPlayerIsVisible,
-    setTrack: setPlayerTrack,
-  } = useTrackPlayer();
-
   const trackIds = albumData?.tracks?.items?.map((track) => track.id) || [];
-  const trackIdsString = [...trackIds].join(',');
+  const trackIdsString = [...trackIds].join(",");
   const { data: trackData } = useGetSeveralTracksQuery({ ids: trackIdsString });
   console.log("trackData", trackData);
-  
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -48,11 +37,6 @@ const AlbumDetailPage = () => {
     const options = { year: "numeric", month: "long" };
     const monthYear = date.toLocaleDateString("en-US", options);
     return `${day} ${monthYear}`;
-  };
-
-  const handleSelectedTrack = (selectedTrack) => {
-    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
-    setPlayerTrack(selectedTrack);
   };
 
   return (
@@ -94,20 +78,14 @@ const AlbumDetailPage = () => {
       <div className="trackTabs-container">
         <div className="track-header">
           <span className="sharp">#</span>
-          <FontAwesomeIcon icon={faClock} className="time-icon"/>
+          <FontAwesomeIcon icon={faClock} className="time-icon" />
         </div>
         {trackData?.length > 0 ? (
           trackData?.map((track, index) => (
-            <div
-              className="track-row"
-              key={index}
-              onClick={() => handleSelectedTrack(track)}
-            >
-              <MusicTab data={track} />
-            </div>
+            <MusicTab className="track-row" key={index} data={track} />
           ))
         ) : (
-          <p>There are no tracks in this album.{/* 수정 */}</p> 
+          <p>There are no tracks in this album.{/* 수정 */}</p>
         )}
       </div>
     </div>

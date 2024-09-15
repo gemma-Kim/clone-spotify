@@ -6,8 +6,8 @@ import "./SearchPage.style.css";
 import { api } from "../../utils/api/api";
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MusicList from "../../common/MusicList/MusicList";
-import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import MusicTab from "../../common/MusicTab/MusicTab";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const useSearchQuery = (searchQuery) => {
   return useQuery({
@@ -35,12 +35,6 @@ const SearchPage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   const navigate = useNavigate();
 
-  const {
-    trackPlayerIsVisible,
-    setTrackPlayerIsVisible,
-    setTrack: setPlayerTrack,
-  } = useTrackPlayer();
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 992);
@@ -64,14 +58,6 @@ const SearchPage = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     refetch();
-  };
-
-  const handleTrackClick = (selectedTrack) => {
-    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
-    if (selectedTrack) {
-      setSelectedTrack(selectedTrack);
-      setPlayerTrack(selectedTrack);
-    }
   };
 
   const handleAlbumClick = (album) => {
@@ -117,9 +103,7 @@ const SearchPage = () => {
                 <>
                   <h2>Track</h2>
                   {searchResults.tracks?.items.map((item, idx) => (
-                    <div key={idx} onClick={() => handleTrackClick(item)}>
-                      <MusicTab data={item} />
-                    </div>
+                    <MusicTab key={idx} data={item} />
                   ))}
                 </>
               )}
@@ -136,7 +120,9 @@ const SearchPage = () => {
               )}
             </>
           ) : (
-            <p>No results found</p>
+            <div className="loading-spinner">
+              <ClipLoader color="green" size={50} />
+            </div>
           )}
         </div>
       </Container>
