@@ -64,7 +64,7 @@ const AppLayout = () => {
                 />
                 <Button
                   variant="outline-light"
-                  style={{ borderRadius: "50px" }}
+                  style={{ borderRadius: "50%" }}
                   type="submit"
                 >
                   <FaSearch />
@@ -74,10 +74,10 @@ const AppLayout = () => {
 
             <Nav className="ms-auto d-none d-lg-flex align-items-center">
               <Link to="/user" className="nav-link text-light">
-                <FaUser />
+                <FaUser className="fs-4 icon-hover" />
               </Link>
               <Link to="/" className="nav-link text-light">
-                <FaHome />
+                <FaHome className="fs-3 icon-hover" />
               </Link>
             </Nav>
 

@@ -58,7 +58,7 @@ const MusicTab = ({ data }) => {
           />
           <div className="artist-info">
             <h3>{data.name}</h3>
-            <p>아티스트</p>
+            <p>Artist</p>
           </div>
         </div>
       ) : data.type === "track" ? (

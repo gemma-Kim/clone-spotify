@@ -6,6 +6,8 @@ import {
   faPause,
   faShuffle,
   faRotateRight,
+  faBackwardStep,
+  faForwardStep,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   convertMsToSeconds,
@@ -66,7 +68,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-previous-play"
           style={{ display: `${styleType === "fit" ? "none" : "block"}` }}
-          icon={faPlay}
+          icon={faBackwardStep}
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-main"
@@ -76,7 +78,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-next-play"
           style={{ display: `${styleType === "fit" ? "none" : "block"}` }}
-          icon={faPlay}
+          icon={faForwardStep}
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-rotate"
@@ -97,7 +99,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <ProgressBar
           className="track-player-progress-bar"
           style={{
-            height: "1.5px",
+            height: "2px",
             display: `${styleType === "fit" ? "none" : "block"}`,
           }}
           variant="secondary" // 색상 추가

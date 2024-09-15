@@ -3,17 +3,17 @@ import './Footer.style.css';
 
 function Footer() {
   const teamMembers = [
-    { name: '김민서', role: 'IDK' },
-    { name: '옥승원', role: 'SM' },
-    { name: '하지원', role: 'PO' },
-    { name: '전세현', role: 'IDK' },
-    { name: '이기진', role: 'IDK' },
+    { name: 'Jiwon Ha', role: 'PO' },
+    { name: 'Kijin Lee ', role: 'DEV' },
+    { name: 'Minseo Kim', role: 'DEV' },
+    { name: 'Seahyun Jun', role: 'DEV' },
+    { name: 'SeunWon Ock', role: 'SM' },
   ];
 
   const branchOffices = [
-    { location: 'UK Office', phone: '+44 20 1234 5678' },
+    { location: 'Australia Office', phone: '+44 20 1234 5678' },
     { location: 'Germany Office', phone: '+49 30 9876 5432' },
-    { location: 'Australia Office', phone: '+61 2 8765 4321' },
+    { location: 'UK Office', phone: '+61 2 8765 4321' },
   ];
 
   return (
