@@ -85,16 +85,31 @@ audio {
   margin-bottom: 20px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .search-form {
-  
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      padding: 0 15px;
-      margin-bottom: 20px;
+    max-width: 600px;
+    margin: 0 auto; 
   }
 }
+
+@media (max-width: 767px) {
+  .search-form {
+    width: 100%; 
+    padding: 0 10px; 
+  }
+
+  .search-input-container {
+    width: 100%; 
+  }
+
+  .search-input {
+    width: 100%; 
+  }
+
+  .search-icon {
+    left: 10px; 
+  }
+}  
 
 .search-input {
   border-radius: 50px !important;
