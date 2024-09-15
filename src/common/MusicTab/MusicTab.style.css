@@ -70,14 +70,11 @@
 .album-info h3,
 .artist-info h3,
 .track-info h3 {
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
   margin: 0;
   padding: 0;
   text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .album-info p,
@@ -87,12 +84,9 @@
   margin: 0;
   padding: 0;
   text-align: left;
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
 }
 
-.track-info p{
+.track-info p {
   display: inline-block;
   width: 200px;
 }
