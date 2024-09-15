@@ -2,19 +2,13 @@ import React from "react";
 import "./AlbumDetailPage.style.css";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlay,
-  faEllipsis,
-  faHeart,
-  faClock,
-} from "@fortawesome/free-solid-svg-icons";
-// import { faHeart } from "@fortawesome/free-solid-svg-icons";
-// import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faEllipsis, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
-// import { faClock } from "@fortawesome/free-regular-svg-icons";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
+import { useGetSeveralTracksQuery } from "../../hooks/useGetSeveralTracks";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -24,7 +18,11 @@ const AlbumDetailPage = () => {
     isError,
     error,
   } = useMusicAlbumQuery({ id });
-  console.log("albumData", albumData?.tracks?.items);
+
+  const trackIds = albumData?.tracks?.items?.map((track) => track.id) || [];
+  const trackIdsString = [...trackIds].join(",");
+  const { data: trackData } = useGetSeveralTracksQuery({ ids: trackIdsString });
+  console.log("trackData", trackData);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -33,8 +31,6 @@ const AlbumDetailPage = () => {
     return <Alert variant="danger">(error.message)</Alert>;
   }
 
-  // const { data: albumData } = useMusicAlbumQuery({ id });
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -42,8 +38,6 @@ const AlbumDetailPage = () => {
     const monthYear = date.toLocaleDateString("en-US", options);
     return `${day} ${monthYear}`;
   };
-
-  console.log("albumData", albumData?.tracks?.items);
 
   return (
     <div className="albumDetailPage">
@@ -84,20 +78,14 @@ const AlbumDetailPage = () => {
       <div className="trackTabs-container">
         <div className="track-header">
           <span className="sharp">#</span>
-          <div className="track-header-info">
-            <span>제목</span>
-            <FontAwesomeIcon icon={faClock} className="time-icon" />
-          </div>
+          <FontAwesomeIcon icon={faClock} className="time-icon" />
         </div>
-        {albumData?.tracks?.items.length > 0 ? (
-          albumData?.tracks?.items.map((track, index) => (
-            <div className="track-row" key={track.id}>
-              <span>{index + 1}</span>
-              <MusicTab data={track} />
-            </div>
+        {trackData?.length > 0 ? (
+          trackData?.map((track, index) => (
+            <MusicTab className="track-row" key={index} data={track} />
           ))
         ) : (
-          <p>이 앨범에 트랙이 없습니다</p>
+          <p>There are no tracks in this album.{/* 수정 */}</p>
         )}
       </div>
     </div>

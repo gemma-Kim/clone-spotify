@@ -16,6 +16,15 @@ import UserPage from "./pages/UserPage/UserPage";
 import { formToJSON } from "axios";
 
 function App() {
+  /* global player loading */
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      await loadSpotifyPlayer(dispatch);
+    };
+    fetchData();
+  }, [dispatch]);
+
   return (
     <TrackPlayerProvider>
       <Routes>

@@ -168,27 +168,20 @@
 .track-header {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 10px 10px;
+  margin: 10px 10px;
   border-bottom: 1px solid #ccc;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 1.25rem;
 }
 
 .track-header > .sharp {
-  width: 10%;
-  text-align: center;
   font-weight: bold;
 }
 
-.track-header-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-}
-
-.track-header-info > .time-icon {
+.track-header > .time-icon {
   margin-left: auto;
+  text-align: right;
   margin-right: 10px;
 }
 
@@ -199,15 +192,8 @@
   border-bottom: 1px solid #ddd;
 }
 
-.track-row span {
-  width: 10%;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.track-row .music-tab {
-  width: 90%;
+.track-row > .music-tab {
+  width: 100%;
 }
 
 @media (max-width: 768px){
