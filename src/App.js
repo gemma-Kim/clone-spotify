@@ -2,7 +2,8 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom"; // BrowserRouter 삭제
 import AppLayout from "./layout/AppLayout";
 import SearchPage from "./pages/SearchPage/SearchPage";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+// import NotFoundPage from "./pages/NotFoundPage-1/NotFoundPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage"
 import HomePage from "./pages/HomePage/HomePage";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,6 +13,7 @@ import { loadSpotifyPlayer } from "./utils/player/loadSpotifyPlayer";
 import { TrackPlayerProvider } from "./common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import AlbumDetailPage from "./pages/AlbumDetailPage/AlbumDetailPage";
 import UserPage from "./pages/UserPage/UserPage";
+import { formToJSON } from "axios";
 
 function App() {
   return (
