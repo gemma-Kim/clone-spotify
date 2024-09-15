@@ -13,6 +13,7 @@ import { TrackPlayerProvider } from "./common/Player/TrackPlayerProvider/TrackPl
 import AlbumDetailPage from "./pages/AlbumDetailPage/AlbumDetailPage";
 import UserPage from "./pages/UserPage/UserPage";
 
+
 function App() {
   /* global player loading */
   const dispatch = useDispatch();
