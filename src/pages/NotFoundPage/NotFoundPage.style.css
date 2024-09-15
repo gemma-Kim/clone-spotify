@@ -9,12 +9,6 @@
   text-align: center;
 }
 
-/* Styles for large screens */
-.logo {
-  width: 80px;
-  margin-bottom: 3rem;  
-}
-
 .not-found-title {
   font-size: 36px;
   font-weight: bold;
@@ -66,9 +60,6 @@
       font-size: 14px; /* Smaller help text */
   }
 
-  .logo {
-      width: 60px; /* Smaller logo */
-  }
 }
 
 @media (max-width: 480px) {
@@ -85,9 +76,6 @@
       font-size: 14px; /* Further reduced button font */
   }
 
-  .logo {
-      width: 50px; /* Smaller logo for very small screens */
-  }
 }
 
 
