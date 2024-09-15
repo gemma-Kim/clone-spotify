@@ -65,7 +65,7 @@
 .track-player-bottom-cotroller-rotate:hover,
 .track-player-bottom-cotroller-main:hover {
   color: var(--color-green);
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 .track-player-progress-bar {
@@ -76,16 +76,16 @@
 }
 
 .track-player-progress-bar:hover {
-  background-color: var(--color-green) !important; 
+  background-color: var(--color-green) !important;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   .track-player-progress-bar-container {
-    width: 60%;
+    width: 55%;
   }
 
   .track-player-bottom-cotroller-shuffle {
-    font-size: 15px;
+    font-size: 12px;
     padding: 0 20px;
   }
 
@@ -95,22 +95,22 @@
     height: 25px;
     padding: 0;
   }
-  
+
   .track-player-bottom-cotroller-previous-play {
-    font-size: 20px;
+    font-size: 14px;
   }
-  
+
   .track-player-bottom-cotroller-next-play {
-    font-size: 20px;
+    font-size: 14px;
   }
-  
+
   .track-player-bottom-cotroller-rotate {
-    font-size: 15px;
+    font-size: 12px;
     padding: 0 20px;
   }
-  
+
   .track-player-bottom-cotroller-main {
-    font-size: 20px;
+    font-size: 16px;
     padding: 0 20px;
   }
 
@@ -120,7 +120,7 @@
 
   .track-player-progress-bar-time {
     padding: 0 5px;
-    font-size: 12px;
+    font-size: 9px;
   }
 
   .track-player-progress-bar {

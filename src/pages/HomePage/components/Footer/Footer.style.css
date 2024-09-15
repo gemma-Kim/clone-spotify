@@ -44,26 +44,27 @@ ul {
   margin: 0;
 }
 
-.team-member,
-.branch-office {
+.team-member .branch-office {
   margin: 5px 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-size: 16px;
   font-weight: 500;
 }
 
 .member-name,
 .office-location {
+  width: 80%;
   margin-right: 40px;
+  text-align: left;
 }
 
-.member-role,
-.office-phone {
+.member-role .office-phone {
+  width: 10%;
   font-size: 15px;
   color: #ccc;
-  text-align: right;
+  text-align: left;
   min-width: 50px;
 }
 

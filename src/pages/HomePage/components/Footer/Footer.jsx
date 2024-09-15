@@ -39,7 +39,7 @@ function Footer() {
             {teamMembers.map((member, index) => (
               <li key={index} className="team-member">
                 <span className="member-name">{member.name}</span>
-                <span className="member-role">{member.role}</span>
+                {/* <span className="member-role">{member.role}</span> */}
                 <a className="github-addresss" href={member.github}>
                   <FontAwesomeIcon icon={faGithub} />
                 </a>
