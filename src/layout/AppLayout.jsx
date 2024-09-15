@@ -38,8 +38,8 @@ const AppLayout = () => {
         <Container fluid>
           <Navbar.Brand onClick={handleLogoClick} className="text-light">
             <img
-              width={50}
-              src="https://postfiles.pstatic.net/MjAyNDA5MTFfMTky/MDAxNzI1OTk1NjYxNjky.UJp5MT2LcR8VBXsss3yoM3vMJE_Bc9RqG8hBTtz2MQAg.LVisv2WONna-GSnM_gEms38xKPEHEq70CGr0t8am7OQg.JPEG/IMG_8438.JPG?type=w966"
+              width={60}
+              src="https://postfiles.pstatic.net/MjAyNDA5MTVfMTYz/MDAxNzI2Mzg3MzE5MTM4.TWa060mUISh5Q-HREpKS2YWAqnev9tZmx5mnvp7Yyswg.29lCeCQinFJWvxTwsqia1w4ZLqdd94FYHrEPz4-G4u4g.JPEG/IMG_8573.jpg?type=w966"
             />
           </Navbar.Brand>
 
