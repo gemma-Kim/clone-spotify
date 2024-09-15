@@ -28,6 +28,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
     pauseTrack,
     positionMs,
     setPositionMs,
+    setTrackPlayerIsVisible,
   } = useTrackPlayer();
   const durationMs = track?.duration_ms || 0;
   const deviceId = useSelector((state) => state.player.deviceId);
@@ -50,6 +51,10 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
     }
     return () => clearInterval(interval); // 컴포넌트가 언마운트되거나 재생이 멈추면 clearInterval
   }, [isPlaying, deviceId, track?.duration_ms, positionMs]);
+
+  const handleShowing = () => {
+    setTrackPlayerIsVisible(false);
+  };
 
   return (
     <div
@@ -83,6 +88,7 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-rotate"
           style={{ display: `${styleType === "fit" ? "none" : "block"}` }}
+          onClick={() => handleShowing()}
           icon={faRotateRight}
         />
       </div>

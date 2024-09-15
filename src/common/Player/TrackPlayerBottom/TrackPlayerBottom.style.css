@@ -19,6 +19,7 @@
   width: 30%;
   height: 100%;
   padding: 0;
+  margin-left: 20px;
   align-items: center;
   justify-content: flex-start;
 }
@@ -83,7 +84,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .track-player-bottom-container {
     height: 10%;
   }
