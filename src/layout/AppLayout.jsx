@@ -37,10 +37,12 @@ const AppLayout = () => {
       >
         <Container fluid>
           <Navbar.Brand onClick={handleLogoClick} className="text-light">
-            <img
-              width={60}
-              src="https://postfiles.pstatic.net/MjAyNDA5MTVfMTYz/MDAxNzI2Mzg3MzE5MTM4.TWa060mUISh5Q-HREpKS2YWAqnev9tZmx5mnvp7Yyswg.29lCeCQinFJWvxTwsqia1w4ZLqdd94FYHrEPz4-G4u4g.JPEG/IMG_8573.jpg?type=w966"
-            />
+          <img
+            width={60}
+            src="/navlogo.jpg" // public 폴더에 저장된 이미지 경로
+            alt="Logo"
+          />
+
           </Navbar.Brand>
 
           <div className="d-lg-none d-flex align-items-center">
