@@ -39,4 +39,14 @@
       margin-right: 1rem;
     }
   }
+
+.navbar-brand img {
+  transition: transform 0.2s ease; 
+}
+
+.navbar-brand img:hover {
+  cursor: pointer; 
+  transform: scale(1.1); 
+}
+
   
