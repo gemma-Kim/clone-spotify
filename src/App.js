@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom"; // BrowserRouter 삭제
+import { Route, Routes } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
@@ -13,9 +13,7 @@ import { TrackPlayerProvider } from "./common/Player/TrackPlayerProvider/TrackPl
 import AlbumDetailPage from "./pages/AlbumDetailPage/AlbumDetailPage";
 import UserPage from "./pages/UserPage/UserPage";
 
-
 function App() {
-  /* global player loading */
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
