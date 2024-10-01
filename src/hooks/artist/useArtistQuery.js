@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../utils/api/api"; // API 설정 가져오기
+import { api } from "../../utils/api/api"; // API 설정 가져오기
 
 const fetchArtists = (artistIds) => {
   const ids = artistIds.join(",");
