@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faEllipsis, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { useMusicAlbumQuery } from "../../hooks/useMusicAlbumQuery";
+import { useMusicAlbumQuery } from "../../hooks/album/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
-import { useGetSeveralTracksQuery } from "../../hooks/useGetSeveralTracks";
+import { useGetSeveralTracksQuery } from "../../hooks/track/useGetSeveralTracks";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();

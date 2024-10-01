@@ -6,7 +6,7 @@ const fetchSearchTrack = ({ trackId }) => {
   return api().get(`v1/tracks/${trackId}`);
 };
 
-export const useTrackQuery = (trackId) => {
+export const useGetTrackQuery = (trackId) => {
   return useQuery({
     queryKey: ["search-track", trackId],
     queryFn: () => fetchSearchTrack({ trackId }),

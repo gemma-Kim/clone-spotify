@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../utils/api/api";
+import { api } from "../../utils/api/api";
 
 const fetchMusicAlbumDetail = ({ id }) => {
   return api().get(`v1/albums/${id}`);
@@ -7,7 +7,7 @@ const fetchMusicAlbumDetail = ({ id }) => {
 
 export const useMusicAlbumQuery = ({ id }) => {
   return useQuery({
-    queryKey: ["music-detail",  id ],
+    queryKey: ["music-detail", id],
     queryFn: () => fetchMusicAlbumDetail({ id }),
     select: (res) => res.data,
   });

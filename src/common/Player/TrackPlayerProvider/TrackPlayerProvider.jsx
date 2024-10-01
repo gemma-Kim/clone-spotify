@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useSelector } from "react-redux";
-import { usePlayTrackMutation } from "../../../hooks/player/usePlayTrackMutation";
-import { usePauseMutation } from "../../../hooks/player/usePauseMutation";
+import { usePlayTrackMutation } from "../../../hooks/player/mutation/usePlayTrackMutation";
+import { usePauseMutation } from "../../../hooks/player/mutation/usePauseMutation";
 
 const TrackPlayerContext = createContext();
 

@@ -1,19 +1,16 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
-import { useMusicPlaylistQuery } from "../../../../hooks/useMusicPlaylistQuery";
+import { useMusicPlaylistQuery } from "../../../../hooks/player/query/useMusicPlaylistQuery";
 import { musicSliderResponsive } from "../../../../constants/musicSliderResponsive";
-import { useMusicTrackQuery } from "../../../../hooks/useMusicTrackQuery";
+import { useMusicTrackQuery } from "../../../../hooks/track/useMusicTrackQuery";
 import TopAlbumSlider from "../../../../common/Sliders/TopAlbumSlider/TopAlbumSlider";
 
 const TopAlbumSlides = () => {
-  const {
-    data: playlistData,
-    isLoading,
-    isError,
-    error,
-  } = useMusicPlaylistQuery();
+  const { data: playlistData, isLoading, isError } = useMusicPlaylistQuery();
   const selectedPlaylistId = playlistData?.[5].id;
-  const { data: trackData } = useMusicTrackQuery(selectedPlaylistId);
+  const { data: trackData } = useMusicTrackQuery({
+    playlistId: selectedPlaylistId,
+  });
 
   if (isLoading) {
     return <h1>loading</h1>;

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "../../utils/api/api";
+import { api } from "../../../utils/api/api";
 
 // 트랙 재생 API 호출 함수
 const fetchSeekToPosition = ({ deviceId, trackId, positionMs }) => {
@@ -10,7 +10,7 @@ const fetchSeekToPosition = ({ deviceId, trackId, positionMs }) => {
     // offset: {
     //   position: 5, // 특정 트랙 위치
     // },
-    position_ms: positionMs ?? 0, // 트랙 시작 위치
+    position_ms: positionMs ?? 0, // 트랙 시작 위치s
   });
 };
 

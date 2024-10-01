@@ -1,31 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import "./SearchPage.style.css";
-import { api } from "../../utils/api/api";
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MusicList from "../../common/MusicList/MusicList";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import ClipLoader from "react-spinners/ClipLoader";
-
-const useSearchQuery = (searchQuery) => {
-  return useQuery({
-    queryKey: ["searchResults", searchQuery],
-    queryFn: async () => {
-      const spotifyApi = api();
-      const response = await spotifyApi.get("/v1/search", {
-        params: {
-          q: searchQuery,
-          type: "track,artist,album",
-          limit: 10,
-        },
-      });
-      return response.data;
-    },
-    enabled: !!searchQuery,
-  });
-};
+import { useSearchQuery } from "../../hooks/common/useSearchQuery";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,7 +34,10 @@ const SearchPage = () => {
     }
   }, [location]);
 
-  const { data: searchResults, refetch } = useSearchQuery(searchQuery);
+  const { data: searchResults, refetch } = useSearchQuery({
+    q: searchQuery,
+    type: "track,artist,album",
+  });
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
