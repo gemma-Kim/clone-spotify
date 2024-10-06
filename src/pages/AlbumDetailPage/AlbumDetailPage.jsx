@@ -2,13 +2,19 @@ import React from "react";
 import "./AlbumDetailPage.style.css";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faEllipsis, faHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlay,
+  faEllipsis,
+  faHeart,
+  faPause,
+} from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { useMusicAlbumQuery } from "../../hooks/album/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import { useGetSeveralTracksQuery } from "../../hooks/track/useGetSeveralTracks";
+import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -19,10 +25,17 @@ const AlbumDetailPage = () => {
     error,
   } = useMusicAlbumQuery({ id });
 
+  const {
+    isPlaying,
+    playAlbum,
+    album,
+    trackPlayerIsVisible,
+    setTrackPlayerIsVisible,
+  } = useTrackPlayer();
+
   const trackIds = albumData?.tracks?.items?.map((track) => track.id) || [];
   const trackIdsString = [...trackIds].join(",");
   const { data: trackData } = useGetSeveralTracksQuery({ ids: trackIdsString });
-  console.log("trackData", trackData);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -30,6 +43,13 @@ const AlbumDetailPage = () => {
   if (isError) {
     return <Alert variant="danger">(error.message)</Alert>;
   }
+
+  const handlePlayAlbum = () => {
+    playAlbum({ albumData });
+    if (!trackPlayerIsVisible) {
+      setTrackPlayerIsVisible(true);
+    }
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -66,7 +86,10 @@ const AlbumDetailPage = () => {
       </div>
       <div className="albumDetail-btnBar">
         <button className="albumDetail-btnBar-play">
-          <FontAwesomeIcon icon={faPlay} />
+          <FontAwesomeIcon
+            icon={isPlaying && id === album?.id ? faPause : faPlay}
+            onClick={() => handlePlayAlbum()}
+          />
         </button>
         <button className="albumDetail-btnBar-heart">
           <FontAwesomeIcon icon={faHeart} />

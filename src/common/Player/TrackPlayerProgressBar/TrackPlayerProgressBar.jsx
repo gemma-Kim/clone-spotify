@@ -28,9 +28,10 @@ const TrackPlayerProgressBar = ({ track, styleType = "default" }) => {
     pauseTrack,
     positionMs,
     setPositionMs,
+    durationMs,
     setTrackPlayerIsVisible,
   } = useTrackPlayer();
-  const durationMs = track?.duration_ms || 0;
+  // const durationMs = track?.duration_ms || 0;
   const deviceId = useSelector((state) => state.player.deviceId);
 
   useEffect(() => {
