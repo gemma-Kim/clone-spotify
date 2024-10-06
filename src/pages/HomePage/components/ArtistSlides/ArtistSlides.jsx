@@ -16,9 +16,6 @@ const ArtistSlides = () => {
   const { data: trackData } = useMusicTrackQuery({
     playlistId: selectedPlaylistId,
   });
-  console.log("Top Playlists", playlistData);
-  console.log("This Playlist", selectedPlaylistId);
-  console.log("This Tracks", trackData);
 
   if (isLoading) {
     return <h1>loading</h1>;

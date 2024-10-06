@@ -8,7 +8,7 @@ import LoadingSpinner from "../../../../common/LoadingSpinner/LoadingSpinner";
 
 const NewReleaseSlides = () => {
   const { data, isLoading, isError, error } = useNewReleasesQuery();
-  console.log("New release>>>", data);
+
   if (isLoading) {
     return <LoadingSpinner />;
   }

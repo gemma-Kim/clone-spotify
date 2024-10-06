@@ -2,9 +2,26 @@ import React from "react";
 import "./TrackPlayerBottom.style.css";
 import TrackPlayerProgressBar from "../TrackPlayerProgressBar/TrackPlayerProgressBar";
 import { useTrackPlayer } from "../TrackPlayerProvider/TrackPlayerProvider";
+import { getPlayer } from "../../../utils/player/loadSpotifyPlayer";
 
 const TrackPlayerBottom = () => {
-  const { track } = useTrackPlayer();
+  const { track, album, setTrack, setPositionMs, setDurationMs } =
+    useTrackPlayer();
+
+  const player = getPlayer();
+
+  player?.addListener("player_state_changed", (params) => {
+    const currentTrack = params?.track_window?.current_track;
+    if (currentTrack) {
+      if (track && track !== currentTrack) {
+        const position = params?.position;
+        const duration = params?.duration;
+        setTrack(currentTrack);
+        setPositionMs(position);
+        setDurationMs(duration);
+      }
+    }
+  });
 
   return (
     <div className="track-player-bottom-container">
@@ -13,7 +30,9 @@ const TrackPlayerBottom = () => {
         <div
           className="track-player-bottom-album-img"
           style={{
-            backgroundImage: `url(${track?.album?.images[0].url})`,
+            backgroundImage: `url(${
+              track?.album?.images[0].url ?? album?.images[0].url
+            })`,
           }}
         ></div>
 
