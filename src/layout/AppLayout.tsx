@@ -93,7 +93,7 @@ const AppLayout = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {trackPlayerIsVisible && <TrackPlayerBottom track={null} />}
+      {trackPlayerIsVisible && <TrackPlayerBottom />}
       <Outlet />
     </div>
   );

@@ -5,8 +5,9 @@ import { useTrackPlayer } from "../TrackPlayerProvider/TrackPlayerProvider";
 import { useDispatch } from "react-redux";
 import { getPlayer } from "../../../utils/player/loadSpotifyPlayer";
 
-const TrackPlayerBottom = ({ track }: any) => {
-  const { album, setTrack, setPositionMs, setDurationMs } = useTrackPlayer();
+const TrackPlayerBottom = () => {
+  const { track, album, setTrack, setPositionMs, setDurationMs } =
+    useTrackPlayer();
 
   const dispatch = useDispatch();
   const player = getPlayer(dispatch);
