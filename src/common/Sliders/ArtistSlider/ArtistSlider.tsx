@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import MusicArtistCard from "../../SliderCards/MusicArtistCard/MusicArtistCard";
 
 const ArtistSlider = ({ title, tracks, responsive }: any) => {
-  if (!Array.isArray(tracks)) {
+  if (!Array.isArray(tracks.items)) {
     return <div>Error: Tracks data is not an array</div>;
   }
 
@@ -20,10 +20,10 @@ const ArtistSlider = ({ title, tracks, responsive }: any) => {
           itemClass="carousel-item-padding-10-px"
           containerClass="carousel-container"
         >
-          {tracks.length === 0 ? (
+          {tracks.items.length === 0 ? (
             <div>No tracks available</div>
           ) : (
-            tracks.map((track, key) => (
+            tracks?.items?.map((track: any, key: number) => (
               <MusicArtistCard track={track} key={key} />
             ))
           )}

@@ -1,22 +1,28 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
-import { useMusicPlaylistQuery } from "../../../../hooks/player/query/useMusicPlaylistQuery";
 import { musicSliderResponsive } from "../../../../constants/musicSliderResponsive";
-import { useMusicTrackQuery } from "../../../../hooks/track/useMusicTrackQuery";
 import TopAlbumSlider from "../../../../common/Sliders/TopAlbumSlider/TopAlbumSlider";
+import LoadingSpinner from "../../../../common/LoadingSpinner/LoadingSpinner";
+import { useSearchQuery } from "../../../../hooks/common/useSearchQuery";
 
 const TopAlbumSlides = () => {
-  const { data: playlistData, isLoading, isError } = useMusicPlaylistQuery();
-  const selectedPlaylistId = playlistData?.[5].id;
-  const { data: trackData } = useMusicTrackQuery({
-    playlistId: selectedPlaylistId,
+  const {
+    data: albumData,
+    isLoading,
+    isError,
+    error,
+  } = useSearchQuery({
+    q: "top albums",
+    type: "album",
+    limit: 20,
   });
 
   if (isLoading) {
-    return <h1>loading</h1>;
+    return <LoadingSpinner />;
   }
+
   if (isError) {
-    return <Alert variant="danger">(error.message)</Alert>;
+    return <Alert variant="danger">(${error.message})</Alert>;
   }
 
   return (
@@ -24,7 +30,7 @@ const TopAlbumSlides = () => {
       <div className="newRelease-music-container">
         <TopAlbumSlider
           title="Top Albums"
-          albums={trackData}
+          albums={albumData?.albums}
           responsive={musicSliderResponsive}
         />
       </div>

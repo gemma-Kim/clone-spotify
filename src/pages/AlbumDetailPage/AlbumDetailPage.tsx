@@ -36,8 +36,6 @@ const AlbumDetailPage = () => {
 
   const trackIds =
     albumData?.tracks?.items?.map((track: Track) => track.id) || [];
-  console.log("albumData", albumData);
-  console.log("trackIds", trackIds);
   const { data: trackData } = useGetTracksQuery(trackIds);
 
   if (isLoading) {

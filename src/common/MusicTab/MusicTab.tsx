@@ -42,8 +42,6 @@ const MusicTab: React.FC<MusicTabProps> = ({ data }: { data: any }) => {
   const handleSelectedTrack = (selectedTrack: Track) => {
     if (selectedTrack) {
       if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
-      console.log("+++++++++++++++");
-      console.log("+++++++++++++++selectedTrack", selectedTrack);
       playNewTrack(selectedTrack); // 트랙 재생
     }
   };
