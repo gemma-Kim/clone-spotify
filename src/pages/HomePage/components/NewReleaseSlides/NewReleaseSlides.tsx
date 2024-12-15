@@ -13,7 +13,7 @@ const NewReleaseSlides = () => {
     return <LoadingSpinner />;
   }
   if (isError) {
-    return <Alert variant="danger">(error.message)</Alert>;
+    return <Alert variant="danger">${error.message}</Alert>;
   }
 
   return (

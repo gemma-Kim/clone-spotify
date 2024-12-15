@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 const TopAlbumCard = ({ album }: any) => {
   const navigate = useNavigate();
   const goToMusicDetailPage = () => {
-    navigate(`albums/${album?.track?.album?.id}`);
+    navigate(`albums/${album?.track?.album?.id || album?.id}`);
   };
 
   return (
     <div className="musicCard-container" onClick={goToMusicDetailPage}>
       <img
-        src={album?.track?.album?.images[0]?.url}
+        src={album?.track?.album?.images[0]?.url || album?.images[0]?.url}
         alt=""
         className="musicCard-img"
       />

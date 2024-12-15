@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import TopAlbumCard from "../../SliderCards/TopAlbumCard/TopAlbumCard";
 
 const TopAlbumSlider = ({ title, albums, responsive }: any) => {
-  if (!Array.isArray(albums)) {
+  if (!Array.isArray(albums.items)) {
     return <div>Error: Tracks data is not an array</div>;
   }
 
@@ -20,7 +20,7 @@ const TopAlbumSlider = ({ title, albums, responsive }: any) => {
           itemClass="carousel-item-padding-10-px"
           containerClass="carousel-container"
         >
-          {albums.map((album, key) => (
+          {albums.items.map((album: any, key: number) => (
             <TopAlbumCard album={album} key={key} />
           ))}
         </Carousel>
