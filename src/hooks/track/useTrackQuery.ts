@@ -9,7 +9,7 @@ const fetchGetTracks = (ids: string | string[]) => {
   });
 };
 
-export const useGetTracksQuery = (ids: string | string[]) => {
+export const useTrackQuery = (ids: string | string[]) => {
   return useQuery({
     queryKey: ["get-several-tracks", ids],
     queryFn: () => fetchGetTracks(ids),

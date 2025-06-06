@@ -7,8 +7,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { FaHome, FaUser, FaSearch } from "react-icons/fa";
 import "./AppLayout.style.css";
-import { useTrackPlayer } from "../common/Player/TrackPlayerProvider/TrackPlayerProvider";
-import TrackPlayerBottom from "../common/Player/TrackPlayerBottom/TrackPlayerBottom";
+import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
+import TrackPlayerBottom from "../../common/Player/TrackPlayerBottom/TrackPlayerBottom";
 
 const AppLayout = () => {
   const [navSearchQuery, setNavSearchQuery] = useState("");

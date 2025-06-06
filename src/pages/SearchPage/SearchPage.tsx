@@ -35,7 +35,7 @@ const SearchPage = () => {
 
   const { data: searchResults, refetch } = useSearchQuery({
     q: searchQuery,
-    type: "track,artist,album",
+    type: ["track", "artist", "album"],
   });
 
   const handleFormSubmit = (event: Event) => {
@@ -82,29 +82,23 @@ const SearchPage = () => {
         >
           {searchResults ? (
             <>
-              {tab === "tracks" &&
-                searchResults.data.tracks?.items.length > 0 && (
-                  <>
-                    <h2>Track</h2>
-                    {searchResults.data.tracks?.items.map(
-                      (item: any, idx: number) => (
-                        <MusicTab key={idx} data={item} />
-                      )
-                    )}
-                  </>
-                )}
+              {tab === "tracks" && searchResults.tracks?.items.length > 0 && (
+                <>
+                  <h2>Track</h2>
+                  {searchResults.tracks?.items.map((item: any, idx: number) => (
+                    <MusicTab key={idx} data={item} />
+                  ))}
+                </>
+              )}
 
-              {tab === "albums" &&
-                searchResults.data.albums?.items.length > 0 && (
-                  <>
-                    <h2>Albums</h2>
-                    {searchResults.data.albums?.items.map(
-                      (item: any, idx: number) => (
-                        <MusicTab key={idx} data={item} />
-                      )
-                    )}
-                  </>
-                )}
+              {tab === "albums" && searchResults.albums?.items.length > 0 && (
+                <>
+                  <h2>Albums</h2>
+                  {searchResults.albums?.items.map((item: any, idx: number) => (
+                    <MusicTab key={idx} data={item} />
+                  ))}
+                </>
+              )}
             </>
           ) : (
             <div className="loading-spinner">

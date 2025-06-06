@@ -2,16 +2,25 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../../utils/api/api";
 
 interface SearchQueryParams {
-  q: string;
-  type: string;
+  q: string[] | string;
+  type: SearchType[];
   limit?: number;
 }
+
+export type SearchType =
+  | "track"
+  | "artist"
+  | "album"
+  | "playlist"
+  | "show"
+  | "episode"
+  | "audiobook";
 
 const fetchSearch = ({ q, type, limit = 10 }: SearchQueryParams) => {
   return api().get(`v1/search`, {
     params: {
-      q,
-      type,
+      q: Array.isArray(q) ? q.join(",") : q,
+      type: type.join(","),
       limit,
     },
   });

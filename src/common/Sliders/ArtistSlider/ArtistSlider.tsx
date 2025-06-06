@@ -2,30 +2,53 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MusicArtistCard from "../../SliderCards/MusicArtistCard/MusicArtistCard";
+import { Track } from "../../../types/Track";
+import { ArtistDetail } from "../../../types/Artist";
+import { useArtistsQuery } from "../../../hooks/artist/useArtistQuery";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
+import { musicSliderResponsive } from "../../../constants/musicSliderResponsive";
 
-const ArtistSlider = ({ title, tracks, responsive }: any) => {
-  if (!Array.isArray(tracks.items)) {
-    return <div>Error: Tracks data is not an array</div>;
-  }
+const ArtistSlider = ({ tracks }: { tracks: Track[] }) => {
+  const artists = tracks?.map((t) => t.artists[0]);
+  const artistIds = artists.map((a) => a.id);
+
+  const {
+    data: artistDetails,
+    isLoading,
+    isError,
+  } = useArtistsQuery(artistIds);
+
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <div>Error!</div>;
 
   return (
     <div>
       <div className="music-slider-container">
-        <h3>{title}</h3>
         <Carousel
           infinite={true}
           swipeable={true}
           draggable={true}
-          responsive={responsive}
+          responsive={musicSliderResponsive}
           itemClass="carousel-item-padding-10-px"
           containerClass="carousel-container"
         >
-          {tracks.items.length === 0 ? (
+          {tracks.length === 0 ? (
             <div>No tracks available</div>
           ) : (
-            tracks?.items?.map((track: any, key: number) => (
-              <MusicArtistCard track={track} key={key} />
-            ))
+            tracks?.map((track: Track, key: number) => {
+              const matchedArtists: ArtistDetail[] = track.artists
+                .map((artist) =>
+                  artistDetails.find((ad: ArtistDetail) => ad.id === artist.id)
+                )
+                .filter(Boolean) as ArtistDetail[];
+              return (
+                <MusicArtistCard
+                  track={track}
+                  artists={matchedArtists}
+                  key={key}
+                />
+              );
+            })
           )}
         </Carousel>
       </div>
