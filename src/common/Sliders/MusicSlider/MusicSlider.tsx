@@ -3,18 +3,19 @@ import "./MusicSlider.style.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MusicAlbumCard from "../../SliderCards/MusicAlbumCard/MusicAlbumCard";
+import { Album } from "../../../types/Album";
+import { musicSliderResponsive } from "../../../constants/musicSliderResponsive";
 
-const MusicSlider = ({ title, albums, responsive }: any) => {
+const MusicSlider = ({ albums }: { albums: Album[] }) => {
   return (
     <div>
       <div className="music-slider-container">
-        <h3>{title}</h3>
         <Carousel
           infinite={true}
           swipeable={true}
           draggable={true}
-          responsive={responsive}
-          itemClass="carousel-item-padding-10-px"
+          responsive={musicSliderResponsive}
+          itemClass="carousel-item-padding-5-px"
           containerClass="carousel-container"
         >
           {albums.map((album: any, key: number) => (

@@ -13,7 +13,7 @@ import { useMusicAlbumQuery } from "../../hooks/album/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
-import { useGetTracksQuery } from "../../hooks/track/useGetTracks";
+import { useTrackQuery } from "../../hooks/track/useTrackQuery";
 import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import { Track } from "../../hooks/player/mutation/usePlayTrackMutation";
 
@@ -36,7 +36,7 @@ const AlbumDetailPage = () => {
 
   const trackIds =
     albumData?.tracks?.items?.map((track: Track) => track.id) || [];
-  const { data: trackData } = useGetTracksQuery(trackIds);
+  const { data: trackData } = useTrackQuery(trackIds);
 
   if (isLoading) {
     return <LoadingSpinner />;

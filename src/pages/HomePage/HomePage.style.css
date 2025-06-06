@@ -1,0 +1,38 @@
+.slider-container {
+  margin: 50px 20px 10px 20px;
+  margin-bottom: 1px; /* 슬라이드 간의 간격을 더 줄임 */
+}
+
+/* .newRelease-music-containerr h3 {
+  background-color: transparent;
+} */
+
+/* .carousel-container{
+    overflow: hidden;
+    height: 450px;
+} */
+
+.slider-container h3 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-green);
+  padding-top: 15px;
+}
+
+.slider-container h3::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20;
+  padding: 0;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 10px;
+  opacity: 0.5;
+  background-color: var(--color-green);
+  margin-left: 25px;
+}

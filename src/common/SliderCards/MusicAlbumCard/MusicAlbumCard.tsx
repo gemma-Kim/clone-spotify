@@ -1,20 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./MusicAlbumCard.style.css";
+import { Album } from "../../../types/Album";
+import { formatDate } from "../../../utils/data/formatData";
 
-const MusicAlbumCard = ({ album }: any) => {
+const MusicAlbumCard = ({ album }: { album: Album }) => {
   const navigate = useNavigate();
   const goToMusicDetailPage = () => {
     navigate(`albums/${album.id}`);
-  };
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const monthYear = date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-    });
-    return `${day} ${monthYear}`;
   };
 
   return (

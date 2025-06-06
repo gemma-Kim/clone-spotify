@@ -9,7 +9,7 @@ import {
 import TrackPlayerProgressBar from "../../common/Player/TrackPlayerProgressBar/TrackPlayerProgressBar";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetTracksQuery } from "../../hooks/track/useGetTracks";
+import { useTrackQuery } from "../../hooks/track/useTrackQuery";
 
 export const TrackPlayerPage = () => {
   const { id: trackId } = useParams();
@@ -17,7 +17,7 @@ export const TrackPlayerPage = () => {
   const [positionMs, setPositionMs] = useState(0);
   const {
     data: [track],
-  } = useGetTracksQuery(trackId as string);
+  } = useTrackQuery(trackId as string);
 
   const deviceId = useSelector((state: any) => state.player.deviceId);
 
