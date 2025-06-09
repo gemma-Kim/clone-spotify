@@ -1,21 +1,5 @@
-.slider-wrapper {
-  width: 100%;
-  border: 4px;
-  overflow-x: visible; /* ✅ 슬라이딩 위해 반드시 필요 */
-}
-
 .slider-container {
-  max-width: 1440px; /* 👈 카드가 너무 넓게 퍼지지 않게 제한 */
-  margin: 0 auto; /* 👈 가운데 정렬*/
-  padding: 0 0; /* 👈 여백 없이 꽉 차게 */
-  overflow: visible; /* ✅ 이거 누락되면 ::after 도 잘리고, 슬라이딩 깨짐 */
-}
-
-.slider-container h3 {
-  font-size: 1.7rem;
-  font-weight: 800;
-  color: var(--color-green);
-  margin-left: 15px;
+  overflow: visible;
 }
 
 .carousel-container {
@@ -50,20 +34,20 @@
   left: calc(1% + 1px);
 }
 
-.carousel-item-padding-5-px {
-  padding: 0 8px;
+.carousel-item-padding-3-px {
+  padding: 0 3px;
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  .music-slider-container h3 {
+@media (max-width: 900px) {
+  .slider-container h3 {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 700;
     padding-top: 10px;
   }
 
-  .music-slider-container h3::before {
+  .slider-container h3::before {
     width: 40px;
     height: 6px;
     margin-left: 20px;
@@ -73,11 +57,7 @@
     margin-top: 15px;
   }
 
-  .music-slider {
-    margin: 0 10px;
-  }
-
-  .carousel-item-padding-5-px {
+  .carousel-item-padding-3-px {
     width: 150px;
     height: 250px;
     margin: 0 10px;
@@ -88,4 +68,3 @@
     padding: 0;
   }
 }
-/*진짜*/

@@ -106,6 +106,17 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "baseUrl": ".", // 프로젝트 루트 기준
+    "paths": {
+      // "@*": ["src"],
+      // "@src/*": ["src/*"],
+      "@types": ["src/types"],
+      "@types/*": ["src/types/*"],
+      "@features/*": ["src/features/*"],
+      "@features": ["src/features"],
+      "@hooks": ["src/hooks"],
+      "@hooks/*": ["src/hooks/*"]
+    }
   }
 }

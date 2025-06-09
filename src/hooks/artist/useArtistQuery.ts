@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../utils/api/api"; // API 설정 가져오기
 
-const fetchArtists = (artistIds: string[]) => {
-  const ids = artistIds.join(",");
+const fetchArtists = (artistIds: string | string[]) => {
+  const ids = Array.isArray(artistIds) ? artistIds.join(",") : artistIds;
   return api().get(`v1/artists`, {
     params: {
       ids,
@@ -10,7 +10,7 @@ const fetchArtists = (artistIds: string[]) => {
   });
 };
 
-export const useArtistsQuery = (artistIds: string[]) => {
+export const useArtistsQuery = (artistIds: string | string[]) => {
   return useQuery({
     queryKey: ["artists", artistIds],
     queryFn: () => fetchArtists(artistIds),
