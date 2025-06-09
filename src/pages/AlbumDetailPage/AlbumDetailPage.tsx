@@ -9,13 +9,13 @@ import {
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { useMusicAlbumQuery } from "../../hooks/album/useMusicAlbumQuery";
 import Alert from "react-bootstrap/Alert";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import { useTrackQuery } from "../../hooks/track/useTrackQuery";
 import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import { Track } from "../../hooks/player/mutation/usePlayTrackMutation";
+import { useAlbumQuery } from "src/hooks/album/useAlbumQuery";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -24,7 +24,7 @@ const AlbumDetailPage = () => {
     isLoading,
     isError,
     error,
-  } = useMusicAlbumQuery(id ?? "");
+  } = useAlbumQuery(id ?? "");
 
   const {
     isPlaying,

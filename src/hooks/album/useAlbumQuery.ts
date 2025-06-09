@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../utils/api/api";
 
-const fetchMusicAlbumDetail = (id: string) => {
+const fetchAlbum = (id: string) => {
   return api().get(`v1/albums/${id}`);
 };
 
-export const useMusicAlbumQuery = (id: string) => {
+export const useAlbumQuery = (id: string) => {
   return useQuery({
     queryKey: ["music-detail", id],
-    queryFn: () => fetchMusicAlbumDetail(id),
+    queryFn: () => fetchAlbum(id),
     select: (res) => res.data,
   });
 };
