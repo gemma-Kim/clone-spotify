@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import AppLayout from "./components/layout/AppLayout";
+import AppLayout from "./common/Layout/AppLayout";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch } from "react-redux";

@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchPage.style.css";
-import SearchForm from "./SearchForm/SearchForm";
-import ClipLoader from "react-spinners/ClipLoader";
 import { useSearchQuery } from "../../hooks/common/useSearchQuery";
-import MusicTab from "../../common/MusicTab/MusicTab";
+import Card from "src/components/Card/Card";
+import { Album, ArtistDetail, ContentTypes, Playlist } from "@types";
+import TrackList from "@features/track/TrackList";
+import Button from "src/components/Button/Button";
+import List from "src/components/List/List";
 
 const SearchPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTrack, setSelectedTrack] = useState(null);
-  const [tab, setTab] = useState("tracks");
-  const location = useLocation();
+  const [tab, setTab] = useState<ContentTypes | null>("all");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const query = params.get("query");
+    if (query) {
+      setSearchQuery(query);
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,89 +34,197 @@ const SearchPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const query = params.get("query");
-    if (query) {
-      setSearchQuery(query);
-    }
-  }, [location]);
-
-  const { data: searchResults, refetch } = useSearchQuery({
+  const { data: searchResults } = useSearchQuery({
     q: searchQuery,
-    type: ["track", "artist", "album"],
+    type: ["track", "artist", "album", "playlist"],
   });
 
-  const handleFormSubmit = (event: Event) => {
-    event.preventDefault();
-    refetch();
+  console.log("searchResults", searchResults);
+  const handleFormSubmit = (searchValue: string) => {
+    if (!searchValue) return;
+    navigate(`/search?query=${encodeURIComponent(searchValue)}`);
   };
 
-  const handleAlbumClick = (album: any) => {
-    navigate(`/albums/${album.id}`);
-  };
+  const tabOptions = [
+    { label: "All", value: "all" },
+    { label: "Tracks", value: "track" },
+    { label: "Artists", value: "artist" },
+    { label: "Albums", value: "album" },
+    { label: "Playlists", value: "playlist" },
+  ] as const;
 
   return (
-    <>
-      <Container className="search-page">
-        {isMobile && (
-          <SearchForm
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            handleFormSubmit={handleFormSubmit}
+    <div className="search-page-container">
+      {/* {isMobile && (
+        <SearchForm defaultQuery={searchQuery} onSubmit={handleFormSubmit} />
+      )} */}
+
+      <div className="tabs-container">
+        {tabOptions.map(({ label, value }) => (
+          <Button
+            key={value}
+            content={label}
+            isActive={tab === value}
+            onClickHandler={() => setTab(value)}
           />
-        )}
+        ))}
+      </div>
 
-        <div className="header-container">
-          <h1>Results</h1>
-
-          <div className="tabs-container">
-            <button
-              className={`tab-button ${tab === "tracks" ? "active" : ""}`}
-              onClick={() => setTab("tracks")}
-            >
-              Tracks
-            </button>
-            <button
-              className={`tab-button ${tab === "albums" ? "active" : ""}`}
-              onClick={() => setTab("albums")}
-            >
-              Albums
-            </button>
-          </div>
-        </div>
-        <div
-          className="music-library"
-          style={{ paddingBottom: selectedTrack ? "100px" : "0" }}
-        >
-          {searchResults ? (
-            <>
-              {tab === "tracks" && searchResults.tracks?.items.length > 0 && (
-                <>
-                  <h2>Track</h2>
-                  {searchResults.tracks?.items.map((item: any, idx: number) => (
-                    <MusicTab key={idx} data={item} />
-                  ))}
-                </>
-              )}
-
-              {tab === "albums" && searchResults.albums?.items.length > 0 && (
-                <>
-                  <h2>Albums</h2>
-                  {searchResults.albums?.items.map((item: any, idx: number) => (
-                    <MusicTab key={idx} data={item} />
-                  ))}
-                </>
-              )}
-            </>
-          ) : (
-            <div className="loading-spinner">
-              <ClipLoader color="green" size={50} />
-            </div>
-          )}
-        </div>
-      </Container>
-    </>
+      <div className="library-container">
+        {searchResults ? (
+          <>
+            {tab === "all" && searchResults?.tracks?.items.length > 0 ? (
+              <>
+                <h2>Track</h2>
+                {
+                  <TrackList
+                    showHeader={false}
+                    showTrackNumber={false}
+                    showAlbumName={false}
+                    tracks={searchResults.tracks.items}
+                  />
+                }
+                <h2>Artist</h2>
+                {
+                  <List
+                    layout={"horizontal"}
+                    items={searchResults.artists.items.map(
+                      (artist: ArtistDetail, idx: number) => (
+                        <Card
+                          key={idx}
+                          title={artist.name}
+                          subtitles="Artist"
+                          imgUrl={artist.images[0].url}
+                          onClickHandler={() => {}}
+                          roundImg={true}
+                        />
+                      )
+                    )}
+                  />
+                }
+                <h2>Album</h2>
+                {
+                  <List
+                    layout={"horizontal"}
+                    gap={0.01}
+                    items={searchResults.albums.items.map(
+                      (album: Album, idx: number) => (
+                        <Card
+                          key={idx}
+                          title={album.name}
+                          subtitles={`${album.release_date.split("-")[0]} · ${
+                            album.artists[0].name
+                          }`}
+                          imgUrl={album.images[0].url}
+                          onClickHandler={() => {}}
+                        />
+                      )
+                    )}
+                  />
+                }
+                <h2>Playlist</h2>
+                {
+                  <List
+                    layout={"horizontal"}
+                    items={searchResults?.playlists?.items
+                      .filter((p: Playlist) => p?.name && p?.owner)
+                      .map((playlist: Playlist, idx: number) => (
+                        <Card
+                          key={idx}
+                          title={playlist?.name}
+                          subtitles={
+                            playlist?.owner?.display_name
+                              ? `Maker · ${playlist?.owner?.display_name}`
+                              : ""
+                          }
+                          imgUrl={playlist?.images[0].url}
+                          onClickHandler={() => {}}
+                        />
+                      ))}
+                  />
+                }
+              </>
+            ) : tab === "track" && searchResults.tracks?.items.length > 0 ? (
+              <>
+                {
+                  <TrackList
+                    showHeader={true}
+                    showTrackNumber={true}
+                    tracks={searchResults.tracks.items}
+                  />
+                }
+              </>
+            ) : tab === "album" && searchResults.albums?.items.length > 0 ? (
+              <>
+                {
+                  <List
+                    layout={"horizontal"}
+                    gap={0.01}
+                    items={searchResults.albums.items.map(
+                      (album: Album, idx: number) => (
+                        <Card
+                          key={idx}
+                          title={album.name}
+                          subtitles={`${album.release_date.split("-")[0]} · ${
+                            album.artists[0].name
+                          }`}
+                          imgUrl={album.images[0].url}
+                          onClickHandler={() => {}}
+                        />
+                      )
+                    )}
+                  />
+                }
+              </>
+            ) : tab === "artist" && searchResults.artists.items.length > 0 ? (
+              <>
+                {
+                  <List
+                    layout={"horizontal"}
+                    items={searchResults.artists.items.map(
+                      (artist: ArtistDetail, idx: number) => (
+                        <Card
+                          key={idx}
+                          title={artist.name}
+                          subtitles="Artist"
+                          imgUrl={artist.images[0].url}
+                          onClickHandler={() => {}}
+                          roundImg={true}
+                        />
+                      )
+                    )}
+                  />
+                }
+              </>
+            ) : tab === "playlist" &&
+              searchResults.playlists.items.length > 0 ? (
+              <>
+                {
+                  <List
+                    layout={"horizontal"}
+                    items={searchResults?.playlists?.items
+                      .filter((p: Playlist) => p?.name && p?.owner)
+                      .map((playlist: Playlist, idx: number) => (
+                        <Card
+                          key={idx}
+                          title={playlist?.name}
+                          subtitles={
+                            playlist?.owner?.display_name
+                              ? `Maker · ${playlist?.owner?.display_name}`
+                              : ""
+                          }
+                          imgUrl={playlist?.images[0].url}
+                          onClickHandler={() => {}}
+                        />
+                      ))}
+                  />
+                }
+              </>
+            ) : null}
+          </>
+        ) : null}
+      </div>
+    </div>
   );
 };
 

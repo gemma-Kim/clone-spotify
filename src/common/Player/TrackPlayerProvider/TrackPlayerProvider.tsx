@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  Track,
-  usePlayTrackMutation,
-} from "../../../hooks/player/mutation/usePlayTrackMutation";
+import { usePlayTrackMutation } from "../../../hooks/player/mutation/usePlayTrackMutation";
 import { usePauseMutation } from "../../../hooks/player/mutation/usePauseMutation";
 import { usePlayAlbumMutation } from "../../../hooks/player/mutation/usePlayAlbumMutation";
+import { Track } from "@types";
 interface CurrentUserContextType {
   trackPlayerIsVisible: boolean;
   setTrackPlayerIsVisible: any;

@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel, { ResponsiveType } from "react-multi-carousel";
-import Card, { CardProps } from "./Card";
+import Card, { CardProps } from "../Card/Card";
 import { BasiceSliderResponsive } from "src/constants/sliderResponsive";
 import "./Slider.style.css";
 import "react-multi-carousel/lib/styles.css";

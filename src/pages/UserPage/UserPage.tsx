@@ -82,7 +82,7 @@ const UserPage = () => {
         <div className="music-list">
           {myLibrary && myLibrary.length > 0
             ? myLibrary.map((data, index) => (
-                <MusicTab data={data} key={index} />
+                <MusicTab item={data} key={index} />
               ))
             : "You haven't added any albums yet."}
         </div>

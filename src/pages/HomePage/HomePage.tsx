@@ -1,11 +1,11 @@
 import React from "react";
 import "./HomePage.style.css";
-import Footer from "../../features/homepage/Footer/Footer";
+import Footer from "../../common/Footer/Footer";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import { Alert } from "react-bootstrap";
 import { useSearchQuery } from "../../hooks/common/useSearchQuery";
 import { useNewReleaseAlbumQuery } from "@hooks/album";
-import Slider from "@features/homepage/Slider";
+import Slider from "src/components/Slider/Slider";
 import { Album, Artist, ArtistDetail, Track } from "@types";
 import { useNavigate } from "react-router-dom";
 import { useArtistsQuery } from "@hooks";

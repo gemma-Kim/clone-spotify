@@ -29,8 +29,8 @@ const Card = ({
         />
       )}
       <div className={`card-info align-${align}`}>
-        <h2 className="card-title text-truncate">{title}</h2>
-        <p className="card-subtitle text-truncate">
+        <h2 className={`card-title align-${align} text-truncate`}>{title}</h2>
+        <p className={`card-subtitle align-${align} text-truncate`}>
           {Array.isArray(subtitles) ? subtitles.join(",") : subtitles}
         </p>
         {buttonTitle && <button className="card-btn">{buttonTitle}</button>}
