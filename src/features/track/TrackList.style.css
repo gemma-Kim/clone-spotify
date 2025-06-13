@@ -1,0 +1,29 @@
+.track-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.column-index {
+  flex: 0.05;
+  text-align: center;
+}
+
+.column-thumbnail {
+  flex: 0.05;
+}
+
+.column-title {
+  flex: 0.75;
+  text-align: left;
+}
+
+.column-album {
+  flex: 0.3;
+  text-align: left;
+}
+
+.column-duration {
+  flex: 0.1;
+  text-align: center;
+}

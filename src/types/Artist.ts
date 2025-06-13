@@ -1,7 +1,9 @@
+import { ItemTypes } from "@spotify/web-api-ts-sdk";
+
 export interface Artist {
   id: string;
   name: string;
-  type: string; //artist
+  type: ItemTypes;
   uri: string;
   href: string;
   followers: { href: string; total: number };

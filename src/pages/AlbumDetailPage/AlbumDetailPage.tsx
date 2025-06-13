@@ -14,8 +14,8 @@ import MusicTab from "../../common/MusicTab/MusicTab";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import { useTrackQuery } from "../../hooks/track/useTrackQuery";
 import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
-import { Track } from "../../hooks/player/mutation/usePlayTrackMutation";
 import { useAlbumQuery } from "src/hooks/album/useAlbumQuery";
+import { Track } from "@types";
 
 const AlbumDetailPage = () => {
   const { id } = useParams();
@@ -108,7 +108,7 @@ const AlbumDetailPage = () => {
         </div>
         {trackData?.length > 0 ? (
           trackData?.map((track: Track, index: number) => (
-            <MusicTab className="track-row" key={index} data={track} />
+            <MusicTab key={index} item={track} />
           ))
         ) : (
           <p>There are no tracks in this album.{/* 수정 */}</p>

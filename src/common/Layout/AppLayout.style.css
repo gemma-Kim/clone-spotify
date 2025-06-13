@@ -1,18 +1,31 @@
+.navbar-custom {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--color-black) !important;
+  height: 80px;
+}
 
 .navbar-brand img {
-  transition: transform 0.2s ease; 
+  transition: transform 0.2s ease;
 }
 
 .navbar-brand img:hover {
-  cursor: pointer; 
-  transform: scale(1.1); 
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .icon-hover:hover {
   color: var(--color-green);
 }
 
-@media (max-width: 992px) {
+.outlet-container {
+  padding-top: 10vh;
+}
+
+@media (max-width: 1200px) {
   .navbar-collapse-custom {
     display: flex;
     justify-content: center;
@@ -52,5 +65,14 @@
   .navbar-custom .text-light {
     margin-right: 1rem;
   }
+
+  .outlet-container {
+    padding-top: 10vh;
+  }
 }
-  
+
+@media (max-width: 768px) {
+  .outlet-container {
+    padding-top: 8vh;
+  }
+}

@@ -1,13 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../../utils/api/api";
-
-export interface Track {
-  id: string;
-  duration_ms?: number;
-  album: any;
-  name: string;
-  artists: any[];
-}
+import { Track } from "@types";
 
 export interface PlayTrackMutationParams {
   deviceId: string;

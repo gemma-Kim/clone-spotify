@@ -1,2 +1,1 @@
-export * from "./homepage/Card";
-// export * from "./player";
+export * from "./track";

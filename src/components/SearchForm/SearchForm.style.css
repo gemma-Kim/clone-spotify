@@ -1,17 +1,17 @@
 .search-form {
-  width: 100%; 
+  width: 100%;
   margin-bottom: 20px;
 }
 
 .search-input-container {
   display: flex;
-  width: 100%; 
-  padding: 0 15px; 
+  width: 100%;
+  padding: 0 15px;
 }
 
 .search-input {
-  width: 100%; 
-  padding-left: 45px; 
+  width: 100%;
+  padding-left: 45px;
   border-radius: 50px !important;
   border: 1px solid #ced4da !important;
   background-color: white;
@@ -21,35 +21,28 @@
 
 .search-icon {
   position: absolute;
-  left: 15px; 
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: black;
   font-size: 18px;
 }
 
-@media (min-width: 768px) {
-  .search-form {
-    max-width: 600px; 
-    margin: 0 auto; 
-  }
-}
-
 @media (max-width: 767px) {
   .search-form {
-    width: 100%; 
-    padding: 0 10px; 
+    width: 100%;
+    padding: 0 10px;
   }
 
   .search-input-container {
-    width: 100%; 
+    width: 100%;
   }
 
   .search-input {
-    width: 100%; 
+    width: 100%;
   }
 
   .search-icon {
-    left: 10px; 
+    left: 10px;
   }
 }

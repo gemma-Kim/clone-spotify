@@ -1,127 +1,119 @@
 import React, { useState } from "react";
-import "./MusicTab.style.css";
+// import "./MusicTab.style.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useTrackPlayer } from "../Player/TrackPlayerProvider/TrackPlayerProvider";
-import { Track } from "../../hooks/player/mutation/usePlayTrackMutation";
-
-// 재생 시간 포맷팅 함수
-const formatDuration = (durationMs: number) => {
-  const minutes = Math.floor(durationMs / 60000);
-  const seconds = Math.floor((durationMs % 60000) / 1000);
-  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-};
-
-interface D {
-  type: "album" | "track" | "artist";
-  name: string;
-  album: any;
-  images: any[];
-  track_number: any;
-}
+import { formatDuration } from "src/utils/player/formatDuration";
+import { Album, ArtistDetail, Track } from "@types";
 
 interface MusicTabProps {
-  className?: string;
-  data: Track;
+  item: Track | Album | ArtistDetail;
 }
 
-const MusicTab: React.FC<MusicTabProps> = ({ data }: { data: any }) => {
-  const [isHovered, setIsHovered] = useState(false); // hover 상태 관리
+const MusicTab = ({ item }: MusicTabProps) => {
+  const [isHovered, setIsHovered] = useState(false);
   const {
     setTrack,
     trackPlayerIsVisible,
     setTrackPlayerIsVisible,
-    playNewTrack, // 트랙 플레이 함수
+    playNewTrack,
   } = useTrackPlayer();
-
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 트랙이 선택되었을 때 처리
-  const handleSelectedTrack = (selectedTrack: Track) => {
-    if (selectedTrack) {
-      if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
-      playNewTrack(selectedTrack); // 트랙 재생
-    }
+  const showPlayer = (track: Track) => {
+    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
+    playNewTrack(track);
   };
 
-  const handleShowingPlayer = () => {
-    if (!trackPlayerIsVisible) {
-      setTrackPlayerIsVisible(true);
-      setTrack(data);
-    }
-  };
+  if (item.type === "album") {
+    const album = item as Album;
+    return (
+      <div
+        className="album-tab"
+        onClick={() => navigate(`/albums/${album.id}`)}
+      >
+        <img
+          className="album-image"
+          src={album.images[0]?.url}
+          alt={album.name}
+        />
+        <div className="album-info">
+          <h3>{album.name}</h3>
+          <p>{album.artists.map((a) => a.name).join(", ")}</p>
+        </div>
+      </div>
+    );
+  }
 
-  // 컴포넌트 렌더링
-  return (
-    <div className="music-tab">
-      {data.type === "album" ? (
-        <div
-          className="album-tab"
-          onClick={() => navigate(`/albums/${data.id}`)} // 앨범 클릭 시 상세 페이지로 이동
-        >
-          <img
-            className="album-image"
-            src={data.images[0].url}
-            alt={data.name}
-          />
-          <div className="album-info">
-            <h3>{data.name}</h3>
-            <p>{data.artists[0].name}</p>
-          </div>
+  if (item.type === "artist") {
+    const artist = item as ArtistDetail;
+    return (
+      <div
+        className="artist-tab"
+        onClick={() => navigate(`/artists/${artist.id}`)}
+      >
+        <img
+          className="artist-image"
+          src={artist.images[0]?.url}
+          alt={artist.name}
+        />
+        <div className="artist-info">
+          <h3>{artist.name}</h3>
+          <p>Artist</p>
         </div>
-      ) : data.type === "artist" ? (
-        <div className="artist-tab">
-          <img
-            className="artist-image"
-            src={data.images[0].url}
-            alt={data.name}
-          />
-          <div className="artist-info">
-            <h3>{data.name}</h3>
-            <p>Artist</p>
-          </div>
-        </div>
-      ) : data.type === "track" ? (
-        <div
-          className="track-tab"
-          onClick={() => handleShowingPlayer()}
-          onMouseEnter={() => setIsHovered(true)} // hover 시작
-          onMouseLeave={() => setIsHovered(false)} // hover 종료
-        >
-          <div className="track-number-or-icon">
-            {isHovered ? (
-              <FontAwesomeIcon
-                icon={faPlay}
-                onClick={() => handleSelectedTrack(data)} // 아이콘 클릭 시 트랙 재생
-                className="play-icon"
-              />
-            ) : location.pathname.includes("album") ? (
-              <span>{data.track_number}</span>
-            ) : (
-              <div className="default-text"></div>
-            )}
-          </div>
+      </div>
+    );
+  }
 
-          <img
-            className="track-image"
-            src={data.album.images[0].url}
-            alt={data.name}
-          />
-          <div className="track-info">
-            <h3>{data.name}</h3>
-            <p>{data.artists.map((artist: any) => artist.name).join(",")}</p>
-          </div>
-          <div className="track-duration">
-            {!location.pathname.includes("search") && (
-              <span>{formatDuration(data.duration_ms)}</span>
-            )}
-          </div>
+  if (item.type === "track") {
+    const track = item as Track;
+    return (
+      <div
+        className="track-tab"
+        onClick={() => showPlayer(track)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="track-number-or-icon">
+          {isHovered ? (
+            <FontAwesomeIcon
+              icon={faPlay}
+              className="play-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                showPlayer(track);
+              }}
+            />
+          ) : location.pathname.includes("album") ? (
+            <span>{track.track_number}</span>
+          ) : (
+            <span className="default-text" />
+          )}
         </div>
-      ) : null}
-    </div>
-  );
+
+        <img
+          className="track-image"
+          src={track.album.images[0]?.url}
+          alt={track.name}
+        />
+        <div className="track-info">
+          <h3>{track.name}</h3>
+          <p>{track.artists.map((a) => a.name).join(", ")}</p>
+        </div>
+        <div className="track-duration">
+          {!location.pathname.includes("search") && (
+            <span>
+              {track.duration_ms && formatDuration(track.duration_ms)}
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default MusicTab;

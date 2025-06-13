@@ -1,0 +1,82 @@
+.track-tab {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: background 0.2s ease-in-out;
+  cursor: pointer;
+  padding: 0.5vh 0;
+  border: none !important;
+  margin-top: 0 !important;
+}
+
+.track-tab:hover {
+  background: linear-gradient(
+    146deg,
+    rgba(31, 93, 55, 1) 0%,
+    rgba(47, 47, 47, 1) 47%
+  );
+  z-index: 999;
+}
+
+.track-tab:hover .play-btn {
+  opacity: 1;
+}
+
+.track-thumbnail {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 0 1%;
+}
+
+.track-thumbnail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.track-tab:hover .track-thumbnail::after {
+  opacity: 1;
+}
+
+.track-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: white;
+  opacity: 0;
+}
+
+.track-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.track-name {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.artists-name {
+  font-size: 0.72rem;
+  margin: 0;
+}

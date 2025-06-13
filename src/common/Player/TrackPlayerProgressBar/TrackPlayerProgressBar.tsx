@@ -18,7 +18,7 @@ import {
 import { useSelector } from "react-redux";
 import { ProgressBar } from "react-bootstrap";
 import { useTrackPlayer } from "../TrackPlayerProvider/TrackPlayerProvider";
-import { Track } from "../../../hooks/player/mutation/usePlayTrackMutation";
+import { Track } from "@types";
 
 // styleType 이 fit 인 경우 >> 재생 버튼만 노출
 const TrackPlayerProgressBar = ({
