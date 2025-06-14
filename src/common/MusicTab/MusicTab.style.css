@@ -18,11 +18,7 @@
 .album-tab:hover,
 .artist-tab:hover,
 .track-tab:hover {
-  background: linear-gradient(
-    146deg,
-    rgba(31, 93, 55, 1) 0%,
-    rgba(47, 47, 47, 1) 47%
-  );
+  background: linear-gradient(#1c1c1c);
 }
 
 .album-tab:last-child,

@@ -9,7 +9,6 @@ export interface Artist {
   followers: { href: string; total: number };
   popularity: number;
   genres: any[];
-  // external_urls:
 }
 
 export interface ArtistDetail extends Artist {
