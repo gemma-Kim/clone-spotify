@@ -22,7 +22,11 @@ const List = ({
     <div>
       {showHeader && !isHorizontal && (
         <div className={`header`}>
-          {showIndex && <div className="column-index">#</div>}
+          {showIndex && (
+            <div className={`${showIndex ? "column-index" : "hide-index"}`}>
+              #
+            </div>
+          )}
           <div className="column-title">title</div>
           <div className="column-thumbnail" />
           <div className="column-album">album</div>

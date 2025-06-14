@@ -50,15 +50,12 @@ const TrackItem = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="column-index">
-        {showTrackNumber ? (
-          <div className="column-index">
-            <span>{index}</span>
-          </div>
-        ) : (
-          <span className="default-text" />
-        )}
-      </div>
+      {showTrackNumber && (
+        <div className={`${showTrackNumber ? "column-index" : "hide-index"}`}>
+          <span>{index}</span>
+        </div>
+      )}
+
       <div className="column-thumbnail">
         <div
           className="track-thumbnail"
