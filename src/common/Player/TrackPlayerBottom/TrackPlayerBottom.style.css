@@ -6,7 +6,7 @@
   width: 100%;
   margin: auto;
   background: rgb(12, 44, 23);
-  background: linear-gradient(0deg, rgb(12, 44, 23) 0%, rgb(21, 21, 21) 50%);
+  background: linear-gradient(#1c1c1c);
   cursor: pointer;
   position: fixed;
   left: 0;

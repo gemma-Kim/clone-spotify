@@ -7,6 +7,7 @@ import { Album, ArtistDetail, ContentTypes, Playlist } from "@types";
 import TrackList from "@features/track/TrackList";
 import Button from "src/components/Button/Button";
 import List from "src/components/List/List";
+import MediaHighlight from "src/components/MediaHighlight/MediaHighlight";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -75,15 +76,39 @@ const SearchPage = () => {
           <>
             {tab === "all" && searchResults?.tracks?.items.length > 0 ? (
               <>
-                <h2>Track</h2>
-                {
-                  <TrackList
-                    showHeader={false}
-                    showTrackNumber={false}
-                    showAlbumName={false}
-                    tracks={searchResults.tracks.items}
-                  />
-                }
+                <div>
+                  <div className={"highlighted-search-result"}>
+                    <div className={"mediahighlight-container"}>
+                      <h2 className="highlight-title">Highlight</h2>
+                      {
+                        <MediaHighlight
+                          content={
+                            searchResults?.tracks?.items.length > 0 ? (
+                              searchResults?.tracks?.items[0]
+                            ) : searchResults?.artists?.items.length > 0 ? (
+                              searchResults?.artists?.items[0]
+                            ) : searchResults?.albums?.items.length > 0 ? (
+                              searchResults?.artists[0]
+                            ) : (
+                              <></>
+                            )
+                          }
+                        />
+                      }
+                    </div>
+                    <div className={"track-list-container"}>
+                      <h2>Track</h2>
+                      {
+                        <TrackList
+                          showHeader={false}
+                          showTrackNumber={false}
+                          showAlbumName={false}
+                          tracks={searchResults.tracks.items}
+                        />
+                      }
+                    </div>
+                  </div>
+                </div>
                 <h2>Artist</h2>
                 {
                   <List

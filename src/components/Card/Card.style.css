@@ -1,13 +1,15 @@
 .card-container {
-  width: 100%;
-  max-width: 220px;
-  aspect-ratio: 1 / 1;
+  max-width: 1000px;
   padding: 10px;
   border-radius: 10px;
+  background-color: bisque;
   background-color: transparent;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-grid {
@@ -19,42 +21,49 @@
 }
 
 .card-container:hover {
-  background: rgb(31, 93, 55);
-  background: linear-gradient(
-    146deg,
-    rgba(31, 93, 55, 1) 0%,
-    rgba(47, 47, 47, 1) 47%
-  );
+  background: linear-gradient(#1c1c1c);
 }
 
-/* .card-container::after {
-  content: "";
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40%;
-  height: 5px;
-  background-color: var(--color-green);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-} */
+.card-container.horizontal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: unset;
+  padding: 15px;
+}
+
+.card-container.horizontal .card-info {
+  margin-top: 0;
+  flex: 1;
+}
 
 .card-container:hover::after {
   opacity: 1;
 }
 
 .card-img {
-  /* width: 200px; */
-  width: 95%;
   aspect-ratio: 1 / 1;
-  /* height: 200px; */
   object-fit: cover;
   border-radius: 10px;
   display: block;
   margin: 0 auto;
-  box-shadow: -10px -10px 30px 4px rgba(0, 0, 0, 0.1),
-    10px 10px 30px 4px rgba(45, 255, 146, 0.15);
+}
+
+.card-img.align-left {
+  margin-left: 0;
+  /* margin-top: 0; */
+  margin-right: auto;
+}
+
+.card-img.align-center {
+  margin: 0 auto;
+}
+
+.card-img.align-right {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .card-img.round {
@@ -86,18 +95,14 @@
 
 .card-title {
   color: var(--color-white);
-  font-size: 0.85rem !important;
   font-weight: 700;
   width: 90%;
   margin-left: 3% !important;
-  /* background-color: rebeccapurple; */
 }
 
 .card-subtitle {
   color: var(--color-white);
-  font-size: 0.65rem !important;
   font-weight: 500;
-
   width: 90%;
   margin-left: 3% !important;
 }
