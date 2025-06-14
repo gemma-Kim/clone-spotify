@@ -25,18 +25,27 @@
   text-align: center;
 }
 
+.hide-index {
+  display: none;
+}
+
 .column-thumbnail {
   flex: 0.05;
+  margin-left: 2vw;
 }
 
 .column-title {
   flex: 0.75;
   text-align: left;
-  /* margin-left: 2vw; */
+  margin-left: 1.5vw;
+}
+
+.column-album {
+  flex: 0.4;
 }
 
 .column-duration {
-  flex: 0.1;
+  flex: 0.15;
   text-align: center;
 }
 
