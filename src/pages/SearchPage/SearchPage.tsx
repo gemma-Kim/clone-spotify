@@ -117,6 +117,7 @@ const SearchPage = () => {
                       (artist: ArtistDetail, idx: number) => (
                         <Card
                           key={idx}
+                          content={artist}
                           title={artist.name}
                           subtitles="Artist"
                           imgUrl={artist.images[0].url}
@@ -136,6 +137,7 @@ const SearchPage = () => {
                       (album: Album, idx: number) => (
                         <Card
                           key={idx}
+                          content={album}
                           title={album.name}
                           subtitles={`${album.release_date.split("-")[0]} · ${
                             album.artists[0].name
@@ -156,6 +158,7 @@ const SearchPage = () => {
                       .map((playlist: Playlist, idx: number) => (
                         <Card
                           key={idx}
+                          content={playlist}
                           title={playlist?.name}
                           subtitles={
                             playlist?.owner?.display_name
@@ -189,6 +192,7 @@ const SearchPage = () => {
                       (album: Album, idx: number) => (
                         <Card
                           key={idx}
+                          content={album}
                           title={album.name}
                           subtitles={`${album.release_date.split("-")[0]} · ${
                             album.artists[0].name
@@ -210,6 +214,7 @@ const SearchPage = () => {
                       (artist: ArtistDetail, idx: number) => (
                         <Card
                           key={idx}
+                          content={artist}
                           title={artist.name}
                           subtitles="Artist"
                           imgUrl={artist.images[0].url}
@@ -232,6 +237,7 @@ const SearchPage = () => {
                       .map((playlist: Playlist, idx: number) => (
                         <Card
                           key={idx}
+                          content={playlist}
                           title={playlist?.name}
                           subtitles={
                             playlist?.owner?.display_name
