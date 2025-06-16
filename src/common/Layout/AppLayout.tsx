@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { FaHome, FaUser, FaSearch } from "react-icons/fa";
 import "./AppLayout.style.css";
 import { useTrackPlayer } from "../Player/TrackPlayerProvider/TrackPlayerProvider";
-import TrackPlayerBottom from "../Player/TrackPlayerBottom/TrackPlayerBottom";
+import PlayerBottom from "@features/player/PlayerBottom/PlayerBottom";
 
 const AppLayout = () => {
   const [navSearchQuery, setNavSearchQuery] = useState("");
@@ -29,12 +28,7 @@ const AppLayout = () => {
 
   return (
     <div>
-      <Navbar
-        expand="lg"
-        // style={{ backgroundColor: "#000000" }}
-        variant="dark"
-        className="navbar-custom"
-      >
+      <Navbar expand="lg" variant="dark" className="navbar-custom">
         <Navbar.Brand onClick={handleLogoClick} className="text-light">
           <img width={60} src="/navlogo.jpg" alt="Logo" />
         </Navbar.Brand>
@@ -87,7 +81,7 @@ const AppLayout = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {trackPlayerIsVisible && <TrackPlayerBottom />}
+      {trackPlayerIsVisible && <PlayerBottom />}
       <div className="outlet-container">
         <Outlet />
       </div>

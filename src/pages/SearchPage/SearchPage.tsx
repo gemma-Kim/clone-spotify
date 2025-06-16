@@ -13,7 +13,6 @@ const SearchPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTrack, setSelectedTrack] = useState(null);
   const [tab, setTab] = useState<ContentTypes | null>("all");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
 
@@ -40,11 +39,10 @@ const SearchPage = () => {
     type: ["track", "artist", "album", "playlist"],
   });
 
-  console.log("searchResults", searchResults);
-  const handleFormSubmit = (searchValue: string) => {
-    if (!searchValue) return;
-    navigate(`/search?query=${encodeURIComponent(searchValue)}`);
-  };
+  // const handleFormSubmit = (searchValue: string) => {
+  //   if (!searchValue) return;
+  //   navigate(`/search?query=${encodeURIComponent(searchValue)}`);
+  // };
 
   const tabOptions = [
     { label: "All", value: "all" },
@@ -120,7 +118,7 @@ const SearchPage = () => {
                           content={artist}
                           title={artist.name}
                           subtitles="Artist"
-                          imgUrl={artist.images[0].url}
+                          imgUrl={artist.images[0]?.url}
                           onClickHandler={() => {}}
                           roundImg={true}
                         />
@@ -142,7 +140,7 @@ const SearchPage = () => {
                           subtitles={`${album.release_date.split("-")[0]} · ${
                             album.artists[0].name
                           }`}
-                          imgUrl={album.images[0].url}
+                          imgUrl={album.images[0]?.url}
                           onClickHandler={() => {}}
                         />
                       )
@@ -165,7 +163,7 @@ const SearchPage = () => {
                               ? `Maker · ${playlist?.owner?.display_name}`
                               : ""
                           }
-                          imgUrl={playlist?.images[0].url}
+                          imgUrl={playlist?.images[0]?.url}
                           onClickHandler={() => {}}
                         />
                       ))}
@@ -197,7 +195,7 @@ const SearchPage = () => {
                           subtitles={`${album.release_date.split("-")[0]} · ${
                             album.artists[0].name
                           }`}
-                          imgUrl={album.images[0].url}
+                          imgUrl={album.images[0]?.url}
                           onClickHandler={() => {}}
                         />
                       )
@@ -217,7 +215,7 @@ const SearchPage = () => {
                           content={artist}
                           title={artist.name}
                           subtitles="Artist"
-                          imgUrl={artist.images[0].url}
+                          imgUrl={artist.images[0]?.url}
                           onClickHandler={() => {}}
                           roundImg={true}
                         />
@@ -244,7 +242,7 @@ const SearchPage = () => {
                               ? `Maker · ${playlist?.owner?.display_name}`
                               : ""
                           }
-                          imgUrl={playlist?.images[0].url}
+                          imgUrl={playlist?.images[0]?.url}
                           onClickHandler={() => {}}
                         />
                       ))}

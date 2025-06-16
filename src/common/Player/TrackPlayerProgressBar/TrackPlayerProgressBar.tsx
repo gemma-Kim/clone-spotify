@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./TrackPlayerProgressBar.style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faPlay,
-  faPause,
   faShuffle,
   faRotateRight,
   faBackwardStep,
@@ -15,49 +13,17 @@ import {
   convertTotalTimeString,
 } from "../../../utils/player/timeCalculator";
 
-import { useSelector } from "react-redux";
 import { ProgressBar } from "react-bootstrap";
 import { useTrackPlayer } from "../TrackPlayerProvider/TrackPlayerProvider";
 import { Track } from "@types";
+import PlayButton from "@features/player/PlayButton/PlayButton";
 
-// styleType 이 fit 인 경우 >> 재생 버튼만 노출
-const TrackPlayerProgressBar = ({
-  track,
-}: {
-  track: Track | null;
-  className?: string;
-}) => {
-  const {
-    isPlaying,
-    setIsPlaying,
-    playTrack,
-    pauseTrack,
-    positionMs,
-    setPositionMs,
-    durationMs,
-    setTrackPlayerIsVisible,
-  } = useTrackPlayer();
+interface TrackPlayerProgressBarProps {
+  track: Track;
+}
 
-  const deviceId = useSelector((state: any) => state.player.deviceId);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
-    if (durationMs > positionMs) {
-      if (isPlaying && deviceId) {
-        interval = setInterval(() => {
-          setPositionMs((prevTime: number) => prevTime + 1000); // 1초마다 1초 증가
-        }, 1000);
-      } else {
-        // 조건이 만족되지 않으면 바로 interval을 정리해줌
-        clearInterval(interval);
-      }
-    } else {
-      setIsPlaying(false);
-      setPositionMs(0);
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval); // 컴포넌트가 언마운트되거나 재생이 멈추면 clearInterval
-  }, [isPlaying, deviceId, track?.duration_ms, positionMs]);
+const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
+  const { positionMs, durationMs, setTrackPlayerIsVisible } = useTrackPlayer();
 
   const handleShowing = () => {
     setTrackPlayerIsVisible(false);
@@ -74,18 +40,18 @@ const TrackPlayerProgressBar = ({
       <div className="track-player-bottom-cotroller-container">
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-shuffle"
-          // style={{ display: "block" }}
           icon={faShuffle}
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-previous-play"
-          // style={{ display: "block" }}
           icon={faBackwardStep}
         />
-        <FontAwesomeIcon
-          className="track-player-bottom-cotroller-main"
-          icon={isPlaying ? faPause : faPlay}
-          onClick={isPlaying ? pauseTrack : playTrack}
+        <PlayButton
+          content={track!}
+          showBackground={false}
+          btnWidth={"1.8rem"}
+          btnHeight={"1.8rem"}
+          buttonColor={"var(--color-white)"}
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-next-play"
@@ -112,9 +78,10 @@ const TrackPlayerProgressBar = ({
           style={{
             height: "2px",
             display: "block",
+            width: "40vw",
           }}
           variant="secondary" // 색상 추가
-          now={(positionMs / durationMs) * 100} /*percentage}*/
+          now={(positionMs / durationMs) * 100}
         />
         <div
           style={{ display: "block" }}
