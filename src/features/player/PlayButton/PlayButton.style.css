@@ -1,0 +1,16 @@
+.play-btn-contatiner {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 1;
+}
+
+.play-btn-contatiner svg {
+  color: var(--color-black);
+  font-size: 24px;
+}

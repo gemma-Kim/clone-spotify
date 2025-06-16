@@ -59,23 +59,12 @@
   object-fit: cover;
 }
 
-.track-player-progress-bar {
-  transition: width 0.5s ease;
-  border-radius: 10px;
-  height: 5px;
-  width: 100%;
-}
-
 .track-player-progress-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.track-player-bottom-controller {
-  width: 33%;
 }
 
 .track-player-bottom-empty {
@@ -115,7 +104,9 @@
   }
 
   .track-player-bottom-controller {
-    width: 50%;
+    width: 400px;
+
+    background-color: rebeccapurple;
   }
 
   .track-player-bottom-empty {

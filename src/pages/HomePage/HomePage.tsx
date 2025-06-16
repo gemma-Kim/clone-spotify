@@ -62,6 +62,7 @@ const HomePage = () => {
         <Slider
           items={releasedAlbums}
           getItemProps={(album: Album) => ({
+            content: album,
             title: album.name,
             subtitles: album.artists
               .slice(0, 2)
@@ -83,6 +84,7 @@ const HomePage = () => {
               )
               .filter(Boolean) as ArtistDetail[];
             return {
+              content: track,
               title: matchedArtists.map((ma) => ma.name).join(","),
               onClickHandler: () => navigate(`albums/${track.album.id}`),
               subtitles: "",
@@ -99,6 +101,7 @@ const HomePage = () => {
         <Slider
           items={albums}
           getItemProps={(album: Album) => ({
+            content: album,
             title: album.name,
             subtitles: album.artists
               .slice(0, 2)

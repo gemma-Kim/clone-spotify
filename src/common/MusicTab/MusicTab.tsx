@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "./MusicTab.style.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
@@ -13,12 +12,8 @@ interface MusicTabProps {
 
 const MusicTab = ({ item }: MusicTabProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const {
-    setTrack,
-    trackPlayerIsVisible,
-    setTrackPlayerIsVisible,
-    playNewTrack,
-  } = useTrackPlayer();
+  const { trackPlayerIsVisible, setTrackPlayerIsVisible, playNewTrack } =
+    useTrackPlayer();
   const navigate = useNavigate();
   const location = useLocation();
 

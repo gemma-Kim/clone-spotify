@@ -1,7 +1,10 @@
 import React from "react";
 import "./Card.style.css";
+import PlayButton from "@features/player/PlayButton/PlayButton";
+import { Album, ArtistDetail, Playlist, Track } from "@types";
 
 export interface CardProps {
+  content: Track | Album | ArtistDetail | Playlist;
   title: string;
   titleFontSize?: number;
   subtitles: string[] | string;
@@ -11,7 +14,6 @@ export interface CardProps {
   imgAlign?: "center" | "left" | "right";
   onClickHandler: () => void;
   roundImg?: boolean;
-  buttonTitle?: string;
   align?: "left" | "center" | "right";
   layout?: "vertical" | "horizontal";
   width?: number | string;
@@ -19,6 +21,7 @@ export interface CardProps {
 }
 
 const Card = ({
+  content,
   title,
   titleFontSize = 0.88,
   subtitles,
@@ -27,7 +30,6 @@ const Card = ({
   imgSize = 95,
   imgAlign = "center",
   onClickHandler,
-  buttonTitle,
   roundImg = false,
   align = "left",
   layout = "vertical",
@@ -61,9 +63,13 @@ const Card = ({
           style={{ fontSize: `${subtitleFontSize}rem` }}
           className="card-subtitle text-truncate"
         >
-          {Array.isArray(subtitles) ? subtitles.join(", ") : subtitles}
+          {Array.isArray(subtitles)
+            ? subtitles.slice(0, 2).join(", ")
+            : subtitles}
         </p>
-        {buttonTitle && <button className="card-btn">{buttonTitle}</button>}
+      </div>
+      <div className="btn-contatiner">
+        <PlayButton content={content} />
       </div>
     </div>
   );

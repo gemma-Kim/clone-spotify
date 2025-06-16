@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import "./TrackItem.style.css";
 import "./TrackList.style.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import { formatDuration } from "src/utils/player/formatDuration";
 import { Album, Track } from "@types";
+import PlayButton from "@features/player/PlayButton/PlayButton";
 
 interface TrackItemProps {
   track: Track;
@@ -29,24 +28,14 @@ const TrackItem = ({
 }: TrackItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const {
-    setTrack,
-    trackPlayerIsVisible,
-    setTrackPlayerIsVisible,
-    playNewTrack,
-  } = useTrackPlayer();
+  const { setTrackPlayerIsVisible } = useTrackPlayer();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const showPlayer = (track: Track) => {
-    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
-    playNewTrack(track);
-  };
 
   return (
     <div
       className="track-row track-tab"
-      onClick={() => showPlayer(track)}
+      onClick={() => setTrackPlayerIsVisible(true)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -67,14 +56,14 @@ const TrackItem = ({
             src={track.album.images[0]?.url}
             alt={track.name}
           />
-          <FontAwesomeIcon
-            icon={faPlay}
-            className="play-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              showPlayer(track);
-            }}
-          />
+          <div className="play-btn">
+            <PlayButton
+              // wrapperWidth={"0.001rem"}
+              content={track}
+              showBackground={false}
+              buttonColor={"var(--color-white)"}
+            />
+          </div>
         </div>
       </div>
       <div className="column-title track-info">
