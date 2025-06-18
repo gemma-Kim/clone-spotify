@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  padding: 2vh 0;
+  padding: 1vh 0;
   color: #bbb;
   font-size: 1rem;
   font-weight: bold;
@@ -30,18 +30,39 @@
 }
 
 .column-thumbnail {
-  flex: 0.05;
+  flex: 0.01;
+  flex-direction: column;
+}
+
+.column-thumbnail-margin-left {
   margin-left: 2vw;
 }
 
+.column-thumbnail-no-margin {
+  margin-left: 0;
+}
+
+.column-info {
+  display: flex;
+  flex: 0.5;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  flex-direction: row;
+  justify-content: right;
+  align-items: space-evenly;
+}
+
 .column-title {
-  flex: 0.75;
+  flex: 0.7;
   text-align: left;
-  margin-left: 1.5vw;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
 }
 
 .column-album {
-  flex: 0.4;
+  flex: 0.8;
+  text-align: left;
 }
 
 .column-duration {

@@ -1,10 +1,13 @@
 import React from "react";
 import "./LIst.style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 interface ListProps {
   layout?: "vertical" | "horizontal";
   showHeader?: boolean;
   showIndex?: boolean;
+  showAlbumHeader?: boolean;
   gap?: number;
   items: React.ReactNode[];
 }
@@ -13,6 +16,7 @@ const List = ({
   layout = "vertical",
   showHeader = true,
   showIndex = true,
+  showAlbumHeader = true,
   gap = 3,
   items,
 }: ListProps) => {
@@ -27,10 +31,22 @@ const List = ({
               #
             </div>
           )}
+
           <div className="column-title">title</div>
-          <div className="column-thumbnail" />
-          <div className="column-album">album</div>
-          <div className="column-duration">duration</div>
+
+          <div className="column-info">
+            {showAlbumHeader && (
+              <div
+                className={`${showAlbumHeader ? "column-album" : "hide-index"}`}
+              >
+                album
+              </div>
+            )}
+
+            <div className="column-duration">
+              <FontAwesomeIcon icon={faClock} />
+            </div>
+          </div>
         </div>
       )}
       <div className={`${layout} header`} style={style}>
