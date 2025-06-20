@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { FaHome, FaUser, FaSearch } from "react-icons/fa";
 import "./AppLayout.style.css";
 import { useTrackPlayer } from "../Player/TrackPlayerProvider/TrackPlayerProvider";
 import PlayerBottom from "@features/player/PlayerBottom/PlayerBottom";
+import { faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AppLayout = () => {
   const [navSearchQuery, setNavSearchQuery] = useState("");
@@ -35,7 +36,7 @@ const AppLayout = () => {
 
         <div className="d-lg-none d-flex align-items-center">
           <Link to="/user" className="text-light me-2">
-            <FaUser />
+            <FontAwesomeIcon icon={faUser} />
           </Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
         </div>
@@ -57,17 +58,17 @@ const AppLayout = () => {
                 style={{ borderRadius: "50%" }}
                 type="submit"
               >
-                <FaSearch />
+                <FontAwesomeIcon icon={faSearch} />
               </Button>
             </Form>
           </Nav>
 
           <Nav className="ms-auto d-none d-lg-flex align-items-center">
             <Link to="/user" className="nav-link text-light">
-              <FaUser className="fs-4 icon-hover" />
+              <FontAwesomeIcon icon={faUser} />
             </Link>
             <Link to="/" className="nav-link text-light">
-              <FaHome className="fs-3 icon-hover" />
+              <FontAwesomeIcon icon={faHome} />
             </Link>
           </Nav>
 
