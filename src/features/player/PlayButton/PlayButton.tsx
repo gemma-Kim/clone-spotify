@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
 import "./PlayButton.style.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { Album, ArtistDetail, Playlist, Track } from "@types";
 import { useTrackPlayer } from "src/common/Player/TrackPlayerProvider/TrackPlayerProvider";
-import { useSelector } from "react-redux";
 
 interface PlayButtonProps {
   content: Track | Album | ArtistDetail | Playlist;
@@ -15,10 +12,12 @@ interface PlayButtonProps {
   btnHeight?: number | string;
   showBackground?: boolean;
   buttonColor?: string;
+  position?: "relative" | "absolute";
 }
 
 const PlayButton = ({
   content,
+  position,
   wrapperWidth = "3.2rem",
   wrapperHeight = "3.2rem",
   btnWidth = "1.3rem",
@@ -47,6 +46,7 @@ const PlayButton = ({
         width: wrapperWidth,
         height: wrapperHeight,
         backgroundColor: !showBackground ? "transparent" : undefined,
+        position,
       }}
       className="play-btn-contatiner"
     >
@@ -59,7 +59,6 @@ const PlayButton = ({
         }}
         icon={isPlaying && track?.id === content?.id ? faPause : faPlay}
         onClick={handleClick}
-        // onClick={isPlaying ? pauseTrack : playTrack}
       />
     </div>
   );

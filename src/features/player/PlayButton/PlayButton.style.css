@@ -1,7 +1,7 @@
 .play-btn-contatiner {
   position: absolute;
   border-radius: 50%;
-  background-color: var(--color-green);
+  background-color: var(--color-bright-green);
   display: flex;
   justify-content: center;
   align-items: center;
