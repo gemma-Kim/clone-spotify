@@ -1,272 +1,104 @@
-.albumDetailPage {
-  margin: 0 100px;
-  padding-bottom: 130px;
+.album-detail-page {
+  min-height: 100vh;
+  width: 100vw;
   overflow-x: hidden;
-  overscroll-behavior: contain;
+  padding-bottom: 5vh;
 }
 
-.albumDetail-section {
+.album-detail-section {
   position: relative;
-  overflow: hidden;
-  height: 40vh;
+  height: 45vh;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.album-detail-container {
   display: flex;
   align-items: center;
 }
 
-.albumDetail-section::before {
-  content: "";
-  background: rgb(0, 0, 0, 0.5);
-  position: absolute;
-  left: 0;
-  height: 40vh;
-  width: 100%;
-}
-
-.albumDetail-container {
-  display: flex;
-  z-index: 1;
-  margin: 50px 90px;
-}
-
-.albumDetail-container img {
+.album-detail-container img {
+  width: 20vw;
   border-radius: 10px;
-  height: 200px;
-  width: 200px;
-  box-shadow: 5px 5px rgba(0, 98, 90, 0.4), 10px 10px rgba(0, 98, 90, 0.3),
-    15px 15px rgba(0, 98, 90, 0.2), 20px 20px rgba(0, 98, 90, 0.1),
-    25px 25px rgba(0, 98, 90, 0.05);
-  outline: 5px solid rgb(108, 216, 108);
 }
 
-.albumDetail-info {
-  color: white;
-  margin: 0 25px;
+.album-detail-info {
+  margin-left: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.albumDetail-info h3 {
+.album-detail-info h3 {
+  font-size: 1rem;
   margin: 0;
-  font-size: 1.3em;
-  font-weight: 600;
-  color: rgb(108, 216, 108);
-}
-
-.albumDetail-info h1 {
-  position: relative;
-  font-size: 3em;
-  margin: 0;
-  font-weight: 800;
-  padding-bottom: 10px;
-}
-
-.albumDetail-info h1::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(#1c1c1c);
   opacity: 0.8;
 }
 
-.albumDetail-info::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-green);
-  opacity: 0.5;
+.album-detail-info h1 {
+  font-size: 4em;
+  margin: 0;
+  font-weight: 900;
 }
 
-.albumDetail-info-detail {
-  display: flex;
-  flex-direction: column;
-  font-size: 1em;
-  font-weight: 600;
-  margin-top: 30px;
-}
-
-.albumDetail-tracks {
-  background-color: var(--color-green);
-  width: 100px;
-  padding: 3px 3px;
-  margin-top: 5px;
-  border-radius: 5px;
-  text-align: center;
+.album-detail-info-detail > div {
+  margin-top: 10px;
   font-size: 1em;
 }
 
-.albumDetail-btnBar {
+.album-detail-content-wrapper {
+  background: rgba(0, 0, 0, 0.2); /* 반투명 검정 */
+  backdrop-filter: blur(8px); /* 약간의 흐림 효과 (옵션) */
+  border-top: 1px solid rgba(255, 255, 255, 0.08); /* 위쪽 얇은 구분선 (있으면 Spotify 느낌 더 강함) */
+}
+
+.album-detail-btn-section {
   display: flex;
   justify-content: flex-start;
-  gap: 10px;
-  padding: 15px 20px;
-  position: relative;
-  z-index: 1;
-  background-color: rgb(20, 20, 20);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  align-items: center;
+  gap: 2rem;
+  padding: 30px 0;
+  margin: 0 2rem;
+  color: #9ea3a7;
+  transition: color 0.8s ease;
 }
 
-/* .albumDetail-btnBar::after{
-  content: '';
-  position: absolute;
-  bottom: 0; 
-  left: 50%;
-  transform: translateX(-50%); 
-  width: 100%; 
-  height: 1px; 
-  background-color: var(--color-green); 
-  opacity: 0.5; 
-} */
-
-.albumDetail-btnBar button {
+.album-detail-basic-btn {
+  font-size: 2.2rem;
   cursor: pointer;
-}
-
-.albumDetail-btnBar-play {
-  background-color: var(--color-green);
-  border: none;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  text-align: center;
-  color: black;
-}
-
-.albumDetail-btnBar-play:hover {
-  color: var(--color-white);
-}
-
-.albumDetail-btnBar-heart {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 30px;
-  padding: 0px 30px;
-  margin: 0px 10px;
+  background-color: none;
+  border-radius: 50%;
   cursor: pointer;
-}
-
-.albumDetail-btnBar-heart:hover {
-  color: var(--color-green);
-}
-
-.albumDetail-btnBar-ellipsis {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 25px;
-}
-
-.trackTabs-container {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.track-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-  margin: 10px 10px;
-  border-bottom: 1px solid #2c2c2c;
-  font-weight: bold;
-  font-size: 1.25rem;
-  width: 100%;
-}
-
-.track-header > .sharp {
-  font-weight: bold;
-}
-
-.track-header > .time-icon {
-  margin-left: auto;
-  text-align: right;
-  margin-right: 10px;
-}
-
-.track-row {
   display: flex;
   align-items: center;
-  margin-top: 10px;
-  border-bottom: 1px solid #ddd;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.track-row > .music-tab {
-  width: 100%;
+.album-detail-basic-btn.active {
+  background-color: var(--color-bright-green);
+  font-size: 1.5rem;
+  color: #cbd0d3;
 }
 
-@media (max-width: 768px) {
-  .albumDetailPage {
-    margin: 0;
-    padding-bottom: 100px;
-  }
+.album-detail-play-btn {
+  width: 70px;
+  height: 70px;
+  font-size: 2.2rem;
+  cursor: pointer;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-  .albumDetail-section {
-    height: 30vh;
-  }
-
-  .albumDetail-container {
-    display: flex;
-    z-index: 1;
-    margin: 40px;
-  }
-
-  .albumDetail-container img {
-    border-radius: 10px;
-    height: 150px;
-    width: 150px;
-    box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.38);
-    outline: 5px solid rgb(108, 216, 108);
-  }
-
-  .albumDetail-info {
-    margin: 0 23px;
-  }
-
-  .albumDetail-info::after {
-    height: 1px;
-  }
-
-  .albumDetail-info h3 {
-    font-size: 0.7em;
-  }
-
-  .albumDetail-info h1 {
-    font-size: 1.3em;
-    padding-bottom: 7px;
-  }
-
-  .albumDetail-info-detail {
-    font-size: 0.7em;
-    font-weight: 600;
-    margin-top: 10px;
-  }
-
-  .albumDetail-tracks {
-    background-color: var(--color-green);
-    width: 70px;
-    padding: 2px;
-    margin-top: 3px;
-    font-size: 1em;
-  }
-
-  .albumDetail-btnBar-play {
-    width: 35px;
-    height: 35px;
-    font-size: 17px;
-  }
-
-  .albumDetail-btnBar-heart {
-    font-size: 27px;
-    padding: 0px 10px;
-  }
+.album-detail-basic-btn:hover {
+  color: #cbd0d3;
 }
