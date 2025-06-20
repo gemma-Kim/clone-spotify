@@ -11,7 +11,7 @@
 }
 
 .track-tab:hover {
-  background: linear-gradient(#1c1c1c);
+  background: rgba(69, 66, 66, 0.3);
   z-index: 999;
 }
 
@@ -76,8 +76,8 @@
 }
 
 .track-name {
+  font-size: 0.9rem;
   margin: 0;
-  font-size: 1rem;
 }
 
 .artists-name {
