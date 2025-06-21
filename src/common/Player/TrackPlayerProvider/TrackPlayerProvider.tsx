@@ -46,7 +46,6 @@ interface PlayAlbumParams {
 export const TrackPlayerProvider = ({ children }: any) => {
   const [trackPlayerIsVisible, setTrackPlayerIsVisible] = useState(false);
   const [track, setTrack] = useState<any>(null); // 현재 재생 중인 트랙
-  const [tracks, setTracks] = useState<any[]>([]); // 현재 재생 중인 트랙
   const [album, setAlbum] = useState<any>(null); // 현재 재생 중인 앨범
   const [albumTrackPosition, setAlbumTrackPosition] = useState<number>(0); // 현재 재생 중인 앨범
   const [isPlaying, setIsPlaying] = useState<boolean>(false); // 재생 상태
