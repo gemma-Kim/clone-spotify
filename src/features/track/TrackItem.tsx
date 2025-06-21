@@ -5,6 +5,7 @@ import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPla
 import { formatDuration } from "src/utils/player/formatDuration";
 import { Album, Track } from "@types";
 import PlayButton from "@features/player/PlayButton/PlayButton";
+import { ItemTypes } from "@spotify/web-api-ts-sdk";
 
 interface TrackItemProps {
   track: Track;
@@ -15,6 +16,7 @@ interface TrackItemProps {
   showTrackNumber?: boolean;
   showAlbumImg?: boolean;
   showAlbumName?: boolean;
+  origin: ItemTypes;
 }
 
 const TrackItem = ({
@@ -24,15 +26,16 @@ const TrackItem = ({
   showTrackNumber,
   showAlbumImg,
   showAlbumName,
+  origin,
 }: TrackItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { setTrackPlayerIsVisible } = useTrackPlayer();
   const navigate = useNavigate();
+
+  const { track: playingTrack, isPlaying } = useTrackPlayer();
 
   return (
     <div
-      className="header track-row track-tab"
-      onClick={() => setTrackPlayerIsVisible(true)}
+      className={`header track-row track-tab`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -49,6 +52,7 @@ const TrackItem = ({
                 btnWidth="1rem"
                 btnHeight="1rem"
                 position="relative"
+                origin={origin}
               />
             </div>
           ) : (
@@ -83,6 +87,7 @@ const TrackItem = ({
                     showBackground={false}
                     buttonColor="var(--color-white)"
                     position="relative"
+                    origin={origin}
                   />
                 </div>
               )}
@@ -93,7 +98,15 @@ const TrackItem = ({
         <div
           className={`track-info ${showAlbumImg ? "margin-left" : "no-margin"}`}
         >
-          <h3 className="track-name">{track.name}</h3>
+          <h3
+            className={`track-name ${
+              origin === "album" && track.id === playingTrack?.id
+                ? "is-playing"
+                : ""
+            }`}
+          >
+            {track.name}
+          </h3>
           <p className="artists-name">
             {track.artists.map((a) => a.name).join(", ")}
           </p>

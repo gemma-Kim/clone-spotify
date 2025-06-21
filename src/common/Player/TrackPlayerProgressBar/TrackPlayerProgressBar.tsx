@@ -23,11 +23,11 @@ interface TrackPlayerProgressBarProps {
 }
 
 const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
-  const { positionMs, durationMs, setTrackPlayerIsVisible } = useTrackPlayer();
+  const { positionMs, durationMs } = useTrackPlayer();
 
-  const handleShowing = () => {
-    setTrackPlayerIsVisible(false);
-  };
+  // const handleShowing = () => {
+  //   setTrackPlayerIsVisible(false);
+  // };
 
   return (
     <div
@@ -48,6 +48,7 @@ const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
         />
         <PlayButton
           content={track!}
+          origin={"track"}
           showBackground={false}
           btnWidth={"1.8rem"}
           btnHeight={"1.8rem"}
@@ -59,7 +60,7 @@ const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
         />
         <FontAwesomeIcon
           className="track-player-bottom-cotroller-rotate"
-          onClick={() => handleShowing()}
+          // onClick={() => handleShowing()}
           icon={faRotateRight}
         />
       </div>

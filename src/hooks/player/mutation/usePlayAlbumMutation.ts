@@ -1,15 +1,22 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../../utils/api/api";
-import { PlayTrackMutationParams } from "./usePlayTrackMutation";
+import { Album } from "@types";
+
+export interface PlayAlbumMutationParams {
+  deviceId: string;
+  album: Album;
+  positionMs?: number;
+  position?: number;
+}
 
 const fetchPlayAlbum = ({
   deviceId,
-  tracks,
+  album,
   positionMs = 0,
   position = 0,
-}: PlayTrackMutationParams) => {
+}: PlayAlbumMutationParams) => {
   return api().put(`v1/me/player/play?device_id=${deviceId}`, {
-    uris: tracks.map((track) => `spotify:track:${track.id}`),
+    context_uri: `spotify:album:${album.id}`,
     offset: {
       position,
     },
@@ -21,10 +28,11 @@ export const usePlayAlbumMutation = () => {
   return useMutation({
     mutationFn: ({
       deviceId,
-      tracks,
+
+      album,
       positionMs,
       position,
-    }: PlayTrackMutationParams) =>
-      fetchPlayAlbum({ deviceId, tracks, positionMs, position }),
+    }: PlayAlbumMutationParams) =>
+      fetchPlayAlbum({ deviceId, album, positionMs, position }),
   });
 };

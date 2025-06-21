@@ -6,6 +6,7 @@ module.exports = {
       "@features": path.resolve(__dirname, "src/features"),
       "@types": path.resolve(__dirname, "src/types"),
       "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@components": path.resolve(__dirname, "src/components"),
     },
   },
 };

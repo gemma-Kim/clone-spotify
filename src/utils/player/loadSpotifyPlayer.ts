@@ -32,15 +32,6 @@ export const loadSpotifyPlayer = async (dispatch: Dispatch): Promise<void> => {
         dispatch(setDeviceId(device_id));
       });
 
-      newPlayer.addListener(
-        "player_state_changed",
-        (params: Spotify.PlaybackState | null) => {
-          console.log("Currently Playing", params?.track_window?.current_track);
-          console.log("Position in Song", params?.position);
-          console.log("Duration of Song", params?.duration);
-        }
-      );
-
       newPlayer.addListener("autoplay_failed", () => {
         console.log("Autoplay is not allowed by the browser autoplay rules");
       });

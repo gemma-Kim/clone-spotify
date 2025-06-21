@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Projects */
@@ -116,7 +116,9 @@
       "@features/*": ["src/features/*"],
       "@features": ["src/features"],
       "@hooks": ["src/hooks"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@components": ["src/components"],
+      "@components/*": ["src/components/*"]
     }
   }
 }
