@@ -69,7 +69,7 @@ const Card = ({
         </p>
       </div>
       <div className="btn-contatiner">
-        <PlayButton content={content} />
+        <PlayButton content={content} origin={content.type} />
       </div>
     </div>
   );

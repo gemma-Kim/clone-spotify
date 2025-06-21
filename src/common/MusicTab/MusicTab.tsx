@@ -12,13 +12,12 @@ interface MusicTabProps {
 
 const MusicTab = ({ item }: MusicTabProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { trackPlayerIsVisible, setTrackPlayerIsVisible, playNewTrack } =
-    useTrackPlayer();
+  const { trackPlayerIsVisible, playNewTrack } = useTrackPlayer();
   const navigate = useNavigate();
   const location = useLocation();
 
   const showPlayer = (track: Track) => {
-    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
+    // if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
     playNewTrack(track);
   };
 

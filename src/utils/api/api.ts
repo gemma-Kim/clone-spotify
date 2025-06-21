@@ -22,7 +22,6 @@ export const api = () => {
 
       if (status === 401) {
         // 토큰 만료 등 401일 때 redirect로 토큰 재발급
-        console.log("응답이 401이라고 한다!");
         refreshAccessToken();
       }
 

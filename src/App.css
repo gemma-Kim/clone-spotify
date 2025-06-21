@@ -8,8 +8,9 @@
 
   /* Colour */
   --color-white: #ffffff;
-  --color-black: #000000;
+  --color-black: #1c1c1c /*rgb(28, 27, 27);*/
   --color-green: #74d36f;
+  --color-bright-green: #1db954;
   --color-gray: #bdbdbd;
 }
 

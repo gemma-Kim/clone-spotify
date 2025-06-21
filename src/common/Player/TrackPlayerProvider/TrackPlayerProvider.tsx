@@ -5,26 +5,22 @@ import { usePauseMutation } from "../../../hooks/player/mutation/usePauseMutatio
 import { usePlayAlbumMutation } from "../../../hooks/player/mutation/usePlayAlbumMutation";
 import { Album, Track } from "@types";
 import { getPlayer } from "src/utils/player/loadSpotifyPlayer";
+import { findTrackIndexInAlbum } from "src/utils/player/findTrackIndexInAlbum";
 
 const noop = () => {};
 
 interface TrackPlayerContextType {
   trackPlayerIsVisible: boolean;
-  setTrackPlayerIsVisible: any;
   track: Track | null;
-  album: any | null;
-  setTrack: any;
-  setAlbum: any;
+  album: Album | null;
+  albumTrackPosition: number;
   durationMs: number;
-  setDurationMs: any;
-  isPlaying: boolean;
-  playTrack: any;
-  playNewTrack: any;
-  pauseTrack: any;
-  playAlbum: any;
   positionMs: number;
-  setPositionMs: any;
-  setIsPlaying: any;
+  isPlaying: boolean;
+  playTrack: () => void;
+  playNewTrack: (val: Track) => void;
+  pauseTrack: () => void;
+  playAlbum: (val: PlayAlbumParams) => void;
 }
 
 const TrackPlayerContext = createContext<TrackPlayerContextType>({
@@ -34,21 +30,17 @@ const TrackPlayerContext = createContext<TrackPlayerContextType>({
   isPlaying: false,
   durationMs: 0,
   positionMs: 0,
-  setTrackPlayerIsVisible: (val: boolean) => {},
-  setTrack: (val: Track) => {},
-  setAlbum: (val: Album) => {},
-  setDurationMs: (val: number) => {},
+  albumTrackPosition: 0,
   playTrack: noop,
   playNewTrack: (val: Track) => {},
   pauseTrack: noop,
-  playAlbum: (val: any) => {},
-  setPositionMs: (val: number) => {},
-  setIsPlaying: (val: boolean) => {},
+  playAlbum: (val: PlayAlbumParams) => {},
 });
 
 interface PlayAlbumParams {
-  album: any;
+  album: Album;
   position?: number;
+  positionMs?: number;
 }
 
 export const TrackPlayerProvider = ({ children }: any) => {
@@ -56,6 +48,7 @@ export const TrackPlayerProvider = ({ children }: any) => {
   const [track, setTrack] = useState<any>(null); // 현재 재생 중인 트랙
   const [tracks, setTracks] = useState<any[]>([]); // 현재 재생 중인 트랙
   const [album, setAlbum] = useState<any>(null); // 현재 재생 중인 앨범
+  const [albumTrackPosition, setAlbumTrackPosition] = useState<number>(0); // 현재 재생 중인 앨범
   const [isPlaying, setIsPlaying] = useState<boolean>(false); // 재생 상태
   const [positionMs, setPositionMs] = useState<number>(0); // 현재 재생 위치
   const [durationMs, setDurationMs] = useState<number>(0); // 현재 재생 트랙
@@ -82,34 +75,42 @@ export const TrackPlayerProvider = ({ children }: any) => {
       clearInterval(interval);
     }
     return () => clearInterval(interval); // 컴포넌트가 언마운트되거나 재생이 멈추면 clearInterval
-  }, [track, isPlaying, deviceId, track?.duration_ms, positionMs]);
+  }, [track, isPlaying, deviceId, track?.duration_ms]);
 
-  player?.addListener("player_state_changed", (params: any) => {
-    const currentTrack = params?.track_window?.current_track;
-    const position = params?.position;
-    const duration = params?.duration;
-    const isPaused = params?.paused;
+  player?.addListener(
+    "player_state_changed",
+    (params: Spotify.PlaybackState) => {
+      const currentTrack = params?.track_window?.current_track;
+      const position = params?.position;
+      const duration = params?.duration;
+      const isPaused = params?.paused;
 
-    if (currentTrack) {
-      // track.id 비교로, 같은 트랙이면 setTrack 안 함
-      if (!track) {
-        console.log("여기로 온거죠??1 ");
-        setTrack(currentTrack);
-        setPositionMs(position);
-        setDurationMs(duration);
-      } else if (track.id !== currentTrack.id) {
-        console.log("여기로 온거죠??2 ");
-        setTrack(currentTrack);
-        setPositionMs(position);
-        setDurationMs(duration);
+      if (currentTrack) {
+        // track.id 비교로, 같은 트랙이면 setTrack 안 함
+        if (!track) {
+          setTrack(currentTrack);
+          setPositionMs(position);
+          setDurationMs(duration);
+        } else if (track.id !== currentTrack.id) {
+          setTrack(currentTrack);
+          setPositionMs(position);
+          setDurationMs(duration);
+        }
+
+        if (album?.tracks?.items?.length) {
+          const index = findTrackIndexInAlbum(album, currentTrack.id as string);
+          if (index !== albumTrackPosition) {
+            setAlbumTrackPosition(index);
+          }
+        }
+      } else {
+        setTrack(null);
       }
-    } else {
-      console.log("여기로 온거죠??3 ");
-    }
 
-    // 이건 track 변화와 무관하게 항상 실행
-    setIsPlaying(!isPaused);
-  });
+      setIsPlaying(!isPaused);
+      setTrackPlayerIsVisible(!!currentTrack);
+    }
+  );
 
   const { mutate: playTrackM } = usePlayTrackMutation();
   const { mutate: playAlbumM } = usePlayAlbumMutation();
@@ -122,19 +123,14 @@ export const TrackPlayerProvider = ({ children }: any) => {
     }
   };
 
-  const playAlbum = ({ album, position = 0 }: PlayAlbumParams) => {
-    if (deviceId && album) {
-      const track = album?.tracks?.items[position];
+  const playAlbum = ({ album, positionMs, position = 0 }: PlayAlbumParams) => {
+    if (deviceId) {
       setAlbum(album);
-      setPositionMs(position);
-      setTrack(track);
-      setDurationMs(track.duration_ms);
-      setIsPlaying(true);
       playAlbumM({
+        album,
         deviceId,
         positionMs,
         position,
-        tracks: album.tracks.items,
       });
     }
   };
@@ -164,16 +160,11 @@ export const TrackPlayerProvider = ({ children }: any) => {
           album,
           durationMs,
           positionMs,
-          setTrackPlayerIsVisible,
-          setTrack,
-          setAlbum,
-          setDurationMs,
+          albumTrackPosition,
           playTrack,
           playNewTrack,
           pauseTrack,
           playAlbum,
-          setPositionMs,
-          setIsPlaying,
         }
       }
     >
