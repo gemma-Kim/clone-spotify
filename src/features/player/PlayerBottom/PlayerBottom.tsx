@@ -1,10 +1,10 @@
 import React from "react";
 import "./PlayerBottom.style.css";
-import TrackPlayerProgressBar from "../../../common/Player/TrackPlayerProgressBar/TrackPlayerProgressBar";
-import { useTrackPlayer } from "../../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
+import { usePlayer } from "@context";
+import PlayerProgressBar from "../PlayerProgressBar/PlayerProgressBar";
 
 const PlayerBottom = () => {
-  const { track, album } = useTrackPlayer();
+  const { track, album } = usePlayer();
 
   return (
     <div className="track-player-bottom-container">
@@ -33,7 +33,7 @@ const PlayerBottom = () => {
 
       {/* 하단 재생 바 */}
       <div className="track-player-bottom-controller">
-        <TrackPlayerProgressBar track={track!} />
+        <PlayerProgressBar track={track!} />
       </div>
       <div className="track-player-bottom-empty">.</div>
     </div>

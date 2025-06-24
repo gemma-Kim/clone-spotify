@@ -1,4 +1,4 @@
-.track-player-progress-bar-container {
+.player-progress-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,7 +7,7 @@
   width: 40vw;
 }
 
-.track-player-bottom-cotroller-container {
+.player-bottom-cotroller-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -15,7 +15,7 @@
   margin-bottom: 10px;
 }
 
-.track-player-progress-bar-time-container {
+.player-progress-bar-time-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -23,107 +23,107 @@
   font-size: 12px;
 }
 
-.track-player-progress-bar-time {
+.player-progress-bar-time {
   padding: 0 6px;
 }
 
-.track-player-bottom-cotroller-shuffle {
+.player-bottom-cotroller-shuffle {
   font-size: 20px;
   color: var(--color-text-vibrant);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.track-player-bottom-cotroller-previous-play {
+.player-bottom-cotroller-previous-play {
   font-size: 25px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.track-player-bottom-cotroller-next-play {
+.player-bottom-cotroller-next-play {
   font-size: 25px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.track-player-bottom-cotroller-rotate {
+.player-bottom-cotroller-rotate {
   font-size: 20px;
   color: var(--color-text-vibrant);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.track-player-bottom-cotroller-main {
+.player-bottom-cotroller-main {
   font-size: 30px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.track-player-bottom-cotroller-shuffle:hover,
-.track-player-bottom-cotroller-previous-play:hover,
-.track-player-bottom-cotroller-next-play:hover,
-.track-player-bottom-cotroller-rotate:hover,
-.track-player-bottom-cotroller-main:hover {
+.player-bottom-cotroller-shuffle:hover,
+.player-bottom-cotroller-previous-play:hover,
+.player-bottom-cotroller-next-play:hover,
+.player-bottom-cotroller-rotate:hover,
+.player-bottom-cotroller-main:hover {
   color: var(--color-green);
   transform: scale(1.1);
 }
 
-.track-player-progress-bar {
+.player-progress-bar {
   width: 75%;
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
-.track-player-progress-bar:hover {
+.player-progress-bar:hover {
   background-color: var(--color-green) !important;
 }
 
 @media screen and (max-width: 768px) {
-  .track-player-progress-bar-container {
+  .player-progress-bar-container {
     width: 55%;
   }
 
-  .track-player-bottom-cotroller-shuffle {
+  .player-bottom-cotroller-shuffle {
     font-size: 12px;
     padding: 0 20px;
   }
 
-  .track-player-bottom-cotroller-container {
+  .player-bottom-cotroller-container {
     width: 100%;
     margin-bottom: 3px;
     height: 25px;
     padding: 0;
   }
 
-  .track-player-bottom-cotroller-previous-play {
+  .player-bottom-cotroller-previous-play {
     font-size: 14px;
   }
 
-  .track-player-bottom-cotroller-next-play {
+  .player-bottom-cotroller-next-play {
     font-size: 14px;
   }
 
-  .track-player-bottom-cotroller-rotate {
+  .player-bottom-cotroller-rotate {
     font-size: 12px;
     padding: 0 20px;
   }
 
-  .track-player-bottom-cotroller-main {
+  .player-bottom-cotroller-main {
     font-size: 16px;
     padding: 0 20px;
   }
 
-  .track-player-bottom-cotroller-container {
+  .player-bottom-cotroller-container {
     justify-content: center;
   }
 
-  .track-player-progress-bar-time {
+  .player-progress-bar-time {
     padding: 0 5px;
     font-size: 9px;
   }
 
-  .track-player-progress-bar {
+  .player-progress-bar {
     width: 100%;
   }
 }

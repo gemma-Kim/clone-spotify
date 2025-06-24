@@ -5,10 +5,10 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./AppLayout.style.css";
-import { useTrackPlayer } from "../Player/TrackPlayerProvider/TrackPlayerProvider";
 import PlayerBottom from "@features/player/PlayerBottom/PlayerBottom";
 import { faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { usePlayer } from "@context";
 
 const AppLayout = () => {
   const [navSearchQuery, setNavSearchQuery] = useState("");
@@ -25,7 +25,7 @@ const AppLayout = () => {
     navigate("/");
   };
 
-  const { trackPlayerIsVisible } = useTrackPlayer();
+  const { trackPlayerIsVisible } = usePlayer();
 
   return (
     <div>
