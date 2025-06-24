@@ -3,17 +3,13 @@ import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEllipsis,
-  faCirclePlus,
   faShuffle,
-  faPlus,
   faCheck,
   faPlusCircle,
-  faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import { useTrackQuery } from "../../hooks/track/useTrackQuery";
-import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import { useAlbumQuery } from "src/hooks/album/useAlbumQuery";
 import TrackList from "@features/track/TrackList";
 import PlayButton from "@features/player/PlayButton/PlayButton";
@@ -101,7 +97,7 @@ const AlbumDetailPage = () => {
             </div>
 
             {/* 트랙 리스트 */}
-            <div className="track-tabs-container">
+            <div className="album-detail-track-container">
               {trackData?.length > 0 && (
                 <TrackList
                   tracks={trackData}

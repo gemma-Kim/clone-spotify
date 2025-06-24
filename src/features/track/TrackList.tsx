@@ -36,7 +36,7 @@ const TrackList = ({
       items={tracks.map((track: Track, idx: number) => (
         <TrackItem
           key={idx}
-          track={track}
+          tracks={track}
           origin={origin}
           showDuration={showDuration}
           showTrackNumber={showTrackNumber}

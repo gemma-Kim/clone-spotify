@@ -8,7 +8,7 @@ import PlayButton from "@features/player/PlayButton/PlayButton";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
 
 interface TrackItemProps {
-  track: Track;
+  tracks: Track | Track[];
   index: number;
   album?: Album;
   showHeader?: boolean;
@@ -20,7 +20,7 @@ interface TrackItemProps {
 }
 
 const TrackItem = ({
-  track,
+  tracks,
   index,
   showDuration,
   showTrackNumber,
@@ -31,7 +31,8 @@ const TrackItem = ({
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
-  const { track: playingTrack, isPlaying } = useTrackPlayer();
+  const { track: playingTrack } = useTrackPlayer();
+  const [track] = Array.isArray(tracks) ? tracks : [tracks];
 
   return (
     <div
@@ -44,7 +45,7 @@ const TrackItem = ({
           {isHovered && !showAlbumImg ? (
             <div className="hover-play-btn">
               <PlayButton
-                content={track}
+                content={Array.isArray(tracks) ? tracks : [tracks]}
                 showBackground={false}
                 wrapperWidth="0"
                 wrapperHeight="0"
@@ -83,7 +84,7 @@ const TrackItem = ({
               {isHovered && (
                 <div className="play-btn">
                   <PlayButton
-                    content={track}
+                    content={Array.isArray(tracks) ? tracks : [tracks]}
                     showBackground={false}
                     buttonColor="var(--color-white)"
                     position="relative"

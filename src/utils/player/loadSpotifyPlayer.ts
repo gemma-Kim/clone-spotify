@@ -27,8 +27,7 @@ export const loadSpotifyPlayer = async (dispatch: Dispatch): Promise<void> => {
       });
 
       newPlayer.addListener("ready", ({ device_id }: { device_id: string }) => {
-        console.log("Device ID:", device_id);
-        console.log("player", newPlayer);
+        console.log("Player is ready");
         dispatch(setDeviceId(device_id));
       });
 

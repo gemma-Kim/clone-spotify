@@ -3,11 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { Album, ArtistDetail, Playlist, Track } from "@types";
 import { useTrackPlayer } from "src/common/Player/TrackPlayerProvider/TrackPlayerProvider";
+import {
+  findTrackIndexInAlbum,
+  ifTrackExistOrNot,
+} from "src/utils/player/findTrackIndexInAlbum";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
-import { findTrackIndexInAlbum } from "src/utils/player/findTrackIndexInAlbum";
 
 interface PlayButtonProps {
-  content: Track | Album | ArtistDetail | Playlist;
+  content: Track | Track[] | Album | ArtistDetail | Playlist;
+  origin: ItemTypes;
   wrapperWidth?: number | string;
   wrapperHeight?: number | string;
   btnWidth?: number | string;
@@ -15,11 +19,11 @@ interface PlayButtonProps {
   showBackground?: boolean;
   buttonColor?: string;
   position?: "relative" | "absolute";
-  origin: ItemTypes; // "track" | "album" | "artist" | "playlist";
 }
 
 const PlayButton = ({
   content,
+  origin,
   position,
   wrapperWidth = "3.2rem",
   wrapperHeight = "3.2rem",
@@ -27,7 +31,6 @@ const PlayButton = ({
   btnHeight = "1.3rem",
   showBackground = true,
   buttonColor = "var(--color-black)",
-  origin,
 }: PlayButtonProps) => {
   const {
     album,
@@ -36,6 +39,8 @@ const PlayButton = ({
     positionMs,
     isPlaying,
     playTrack,
+    playTracks,
+    playNewTracks,
     pauseTrack,
     playNewTrack,
     playAlbum,
@@ -43,13 +48,26 @@ const PlayButton = ({
 
   const handleClick = () => {
     switch (origin) {
-      case "track":
-        if (track?.id === content?.id) {
-          if (isPlaying) {
-            pauseTrack();
+      case "artist":
+        if (Array.isArray(content)) {
+          if (track?.id === content[0].id) {
+            if (isPlaying) pauseTrack();
+            else playTracks(content);
           } else {
-            playTrack();
+            playNewTracks(content);
           }
+        } else {
+          if (isPlaying) pauseTrack();
+          else {
+            if (track?.id === content.id) playTrack();
+            else playNewTrack(content as Track);
+          }
+        }
+        break;
+      case "track":
+        if (track?.id === (content as Track).id) {
+          if (isPlaying) pauseTrack();
+          else playTrack();
         } else {
           playNewTrack(content as Track);
         }
@@ -57,31 +75,33 @@ const PlayButton = ({
       case "album":
         // 현재 트랙이 현재 앨범에 속한 경우
         const contentAlbum =
-          content.type === "album" ? content : (content as Track).album;
+          !Array.isArray(content) && content.type === "album"
+            ? content
+            : (content as Track).album;
 
         if (album?.id === contentAlbum.id) {
           // 재생 중인 경우
           if (isPlaying) {
-            if (content.type === "track") {
+            if (!Array.isArray(content) && content.type === "track") {
               const index = findTrackIndexInAlbum(album, content.id);
               playAlbum({
                 album,
                 position: index,
               });
-            } else if (content.type === "album") {
+            } else if (!Array.isArray(content) && content.type === "album") {
               pauseTrack();
             }
           }
           // 재생 중이지 않은 경우
           else {
             // 같은 앨범인 경우
-            if (content.type === "track") {
+            if (!Array.isArray(content) && content.type === "track") {
               const index = findTrackIndexInAlbum(album, content.id);
               playAlbum({
                 album: content as Album,
                 position: index,
               });
-            } else if (content.type === "album") {
+            } else if (!Array.isArray(content) && content.type === "album") {
               playAlbum({
                 album: content as Album,
                 positionMs,
@@ -94,7 +114,38 @@ const PlayButton = ({
           playAlbum({ album: contentAlbum as Album });
         }
         break;
+      case "playlist":
+        break;
     }
+  };
+
+  const handleIcon = () => {
+    const contentType = Array.isArray(content) ? "trackList" : content?.type;
+    switch (contentType) {
+      case "trackList":
+        if (Array.isArray(content) && ifTrackExistOrNot(content, track?.id)) {
+          return isPlaying ? faPause : faPlay;
+        }
+        return faPlay;
+      case "track":
+        if (!Array.isArray(content) && track?.id === content?.id) {
+          return isPlaying ? faPause : faPlay;
+        }
+        return faPlay;
+      case "album":
+        if (!Array.isArray(content) && album?.id === content?.id) {
+          return isPlaying ? faPause : faPlay;
+        }
+        return faPlay;
+      case "artist":
+        if (!Array.isArray(content) && album?.id === content?.id) {
+          return isPlaying ? faPause : faPlay;
+        }
+        return faPlay;
+      case "playlist":
+        break;
+    }
+    return faPlay;
   };
 
   return (
@@ -114,16 +165,7 @@ const PlayButton = ({
           backgroundColor: "transparent",
           color: buttonColor,
         }}
-        icon={
-          isPlaying &&
-          (content.type === "track"
-            ? track?.id === content?.id
-            : (content as Album).tracks?.items
-                ?.map((i) => i.id)
-                ?.find((i) => i === track!.id))
-            ? faPause
-            : faPlay
-        }
+        icon={handleIcon()}
         onClick={handleClick}
       />
     </div>

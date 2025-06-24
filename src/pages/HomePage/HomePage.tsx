@@ -79,8 +79,10 @@ const HomePage = () => {
           items={tracks}
           getItemProps={(track: Track) => {
             const matchedArtists: ArtistDetail[] = track.artists
-              .map((artist) =>
-                artistDetails.find((ad: ArtistDetail) => ad.id === artist.id)
+              .map(
+                (artist) =>
+                  artistDetails &&
+                  artistDetails.find((ad: ArtistDetail) => ad.id === artist.id)
               )
               .filter(Boolean) as ArtistDetail[];
             return {

@@ -120,8 +120,10 @@ const SearchPage = () => {
                           title={artist.name}
                           subtitles="Artist"
                           imgUrl={artist.images[0]?.url}
-                          onClickHandler={() => {}}
                           roundImg={true}
+                          onClickHandler={() => {
+                            navigate(`/artists/${artist.id}`);
+                          }}
                         />
                       )
                     )}
@@ -220,8 +222,10 @@ const SearchPage = () => {
                           title={artist.name}
                           subtitles="Artist"
                           imgUrl={artist.images[0]?.url}
-                          onClickHandler={() => {}}
                           roundImg={true}
+                          onClickHandler={() => {
+                            navigate(`/artists/${artist.id}`);
+                          }}
                         />
                       )
                     )}

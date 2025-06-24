@@ -18,7 +18,9 @@ interface TrackPlayerContextType {
   positionMs: number;
   isPlaying: boolean;
   playTrack: () => void;
+  playTracks: (val: Track[]) => void;
   playNewTrack: (val: Track) => void;
+  playNewTracks: (val: Track[]) => void;
   pauseTrack: () => void;
   playAlbum: (val: PlayAlbumParams) => void;
 }
@@ -32,7 +34,9 @@ const TrackPlayerContext = createContext<TrackPlayerContextType>({
   positionMs: 0,
   albumTrackPosition: 0,
   playTrack: noop,
+  playTracks: (val: Track[]) => {},
   playNewTrack: (val: Track) => {},
+  playNewTracks: (val: Track[]) => {},
   pauseTrack: noop,
   playAlbum: (val: PlayAlbumParams) => {},
 });
@@ -122,6 +126,12 @@ export const TrackPlayerProvider = ({ children }: any) => {
     }
   };
 
+  const playTracks = async (tracks: Track[]) => {
+    if (deviceId && tracks.length) {
+      playTrackM({ deviceId, positionMs, tracks });
+    }
+  };
+
   const playAlbum = ({ album, positionMs, position = 0 }: PlayAlbumParams) => {
     if (deviceId) {
       setAlbum(album);
@@ -138,6 +148,12 @@ export const TrackPlayerProvider = ({ children }: any) => {
   const playNewTrack = (newTrack: Track) => {
     if (deviceId && newTrack) {
       playTrackM({ deviceId, positionMs: 0, tracks: [newTrack] });
+    }
+  };
+
+  const playNewTracks = (newTracks: Track[]) => {
+    if (deviceId && newTracks.length) {
+      playTrackM({ deviceId, positionMs: 0, tracks: newTracks });
     }
   };
 
@@ -161,7 +177,9 @@ export const TrackPlayerProvider = ({ children }: any) => {
           positionMs,
           albumTrackPosition,
           playTrack,
+          playTracks,
           playNewTrack,
+          playNewTracks,
           pauseTrack,
           playAlbum,
         }
