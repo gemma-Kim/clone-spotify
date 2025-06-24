@@ -1,11 +1,11 @@
-.album-detail-page {
+.album-page {
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
   padding-bottom: 5vh;
 }
 
-.album-detail-section {
+.album-section {
   position: relative;
   height: 45vh;
   display: flex;
@@ -13,47 +13,47 @@
   padding: 0 2rem;
 }
 
-.album-detail-container {
+.album-container {
   display: flex;
   align-items: center;
 }
 
-.album-detail-container img {
+.album-container img {
   width: 20vw;
   border-radius: 10px;
 }
 
-.album-detail-info {
+.album-info {
   margin-left: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.album-detail-info h3 {
+.album-info h3 {
   font-size: 1rem;
   margin: 0;
   opacity: 0.8;
 }
 
-.album-detail-info h1 {
+.album-info h1 {
   font-size: 4em;
   margin: 0;
   font-weight: 900;
 }
 
-.album-detail-info-detail > div {
+.album-info > div {
   margin-top: 10px;
   font-size: 1em;
 }
 
-.album-detail-content-wrapper {
+.album-content-wrapper {
   background: rgba(0, 0, 0, 0.2); /* 반투명 검정 */
   backdrop-filter: blur(8px); /* 약간의 흐림 효과 (옵션) */
   border-top: 1px solid rgba(255, 255, 255, 0.08); /* 위쪽 얇은 구분선 (있으면 Spotify 느낌 더 강함) */
 }
 
-.album-detail-btn-section {
+.album-btn-section {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -64,7 +64,7 @@
   transition: color 0.8s ease;
 }
 
-.album-detail-basic-btn {
+.album-basic-btn {
   font-size: 2.2rem;
   cursor: pointer;
   width: 38px;
@@ -81,13 +81,13 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.album-detail-basic-btn.active {
+.album-basic-btn.active {
   background-color: var(--color-bright-green);
   font-size: 1.5rem;
   color: #cbd0d3;
 }
 
-.album-detail-play-btn {
+.album-play-btn {
   width: 70px;
   height: 70px;
   font-size: 2.2rem;
@@ -99,10 +99,10 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.album-detail-basic-btn:hover {
+.album-basic-btn:hover {
   color: #cbd0d3;
 }
 
-.album-detail-track-container {
+.album-track-container {
   width: 100%;
 }
