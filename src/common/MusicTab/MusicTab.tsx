@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { useTrackPlayer } from "../Player/TrackPlayerProvider/TrackPlayerProvider";
 import { formatDuration } from "src/utils/player/formatDuration";
 import { Album, ArtistDetail, Track } from "@types";
+import { usePlayer } from "@context";
 
 interface MusicTabProps {
   item: Track | Album | ArtistDetail;
@@ -12,12 +12,11 @@ interface MusicTabProps {
 
 const MusicTab = ({ item }: MusicTabProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { trackPlayerIsVisible, playNewTrack } = useTrackPlayer();
+  const { playNewTrack } = usePlayer();
   const navigate = useNavigate();
   const location = useLocation();
 
   const showPlayer = (track: Track) => {
-    // if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
     playNewTrack(track);
   };
 

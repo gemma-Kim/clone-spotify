@@ -1,11 +1,10 @@
 import { useState } from "react";
 import "./TrackItem.style.css";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import { formatDuration } from "src/utils/player/formatDuration";
 import { Album, Track } from "@types";
 import PlayButton from "@features/player/PlayButton/PlayButton";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
+import { usePlayer } from "@context";
 
 interface TrackItemProps {
   tracks: Track | Track[];
@@ -29,9 +28,8 @@ const TrackItem = ({
   origin,
 }: TrackItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const navigate = useNavigate();
 
-  const { track: playingTrack } = useTrackPlayer();
+  const { track: playingTrack } = usePlayer();
   const [track] = Array.isArray(tracks) ? tracks : [tracks];
 
   return (

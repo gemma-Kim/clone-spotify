@@ -7,12 +7,12 @@ import { useDispatch } from "react-redux";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import { loadSpotifyPlayer } from "./utils/player/loadSpotifyPlayer";
 import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
-import { TrackPlayerProvider } from "./common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import React, { useEffect } from "react";
 import HomePage from "./pages/HomePage/HomePage";
 import UserPage from "./pages/UserPage/UserPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
 import AlbumDetailPage from "./pages/AlbumDetailPage/AlbumDetailPage";
+import { PlayerProvider } from "@context";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <TrackPlayerProvider>
+    <PlayerProvider>
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
@@ -41,7 +41,7 @@ const App: React.FC = () => {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </TrackPlayerProvider>
+    </PlayerProvider>
   );
 };
 

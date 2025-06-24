@@ -2,12 +2,12 @@ import "./PlayButton.style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { Album, ArtistDetail, Playlist, Track } from "@types";
-import { useTrackPlayer } from "src/common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import {
   findTrackIndexInAlbum,
   ifTrackExistOrNot,
 } from "src/utils/player/findTrackIndexInAlbum";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
+import { usePlayer } from "@context";
 
 interface PlayButtonProps {
   content: Track | Track[] | Album | ArtistDetail | Playlist;
@@ -44,7 +44,7 @@ const PlayButton = ({
     pauseTrack,
     playNewTrack,
     playAlbum,
-  } = useTrackPlayer();
+  } = usePlayer();
 
   const handleClick = () => {
     switch (origin) {

@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { usePlayTrackMutation } from "../../../hooks/player/mutation/usePlayTrackMutation";
-import { usePauseMutation } from "../../../hooks/player/mutation/usePauseMutation";
-import { usePlayAlbumMutation } from "../../../hooks/player/mutation/usePlayAlbumMutation";
+import { usePlayTrackMutation } from "../../hooks/player/mutation/usePlayTrackMutation";
+import { usePauseMutation } from "../../hooks/player/mutation/usePauseMutation";
+import { usePlayAlbumMutation } from "../../hooks/player/mutation/usePlayAlbumMutation";
 import { Album, Track } from "@types";
 import { getPlayer } from "src/utils/player/loadSpotifyPlayer";
 import { findTrackIndexInAlbum } from "src/utils/player/findTrackIndexInAlbum";
 
 const noop = () => {};
 
-interface TrackPlayerContextType {
+interface PlayerContextType {
   trackPlayerIsVisible: boolean;
   track: Track | null;
   album: Album | null;
@@ -25,7 +25,7 @@ interface TrackPlayerContextType {
   playAlbum: (val: PlayAlbumParams) => void;
 }
 
-const TrackPlayerContext = createContext<TrackPlayerContextType>({
+const PlayerContext = createContext<PlayerContextType>({
   trackPlayerIsVisible: false,
   track: null,
   album: null,
@@ -47,7 +47,7 @@ interface PlayAlbumParams {
   positionMs?: number;
 }
 
-export const TrackPlayerProvider = ({ children }: any) => {
+export const PlayerProvider = ({ children }: any) => {
   const [trackPlayerIsVisible, setTrackPlayerIsVisible] = useState(false);
   const [track, setTrack] = useState<any>(null); // 현재 재생 중인 트랙
   const [album, setAlbum] = useState<any>(null); // 현재 재생 중인 앨범
@@ -165,7 +165,7 @@ export const TrackPlayerProvider = ({ children }: any) => {
   };
 
   return (
-    <TrackPlayerContext.Provider
+    <PlayerContext.Provider
       value={
         // TrackPlayerContext
         {
@@ -186,8 +186,8 @@ export const TrackPlayerProvider = ({ children }: any) => {
       }
     >
       {children}
-    </TrackPlayerContext.Provider>
+    </PlayerContext.Provider>
   );
 };
 
-export const useTrackPlayer = () => useContext(TrackPlayerContext);
+export const usePlayer = () => useContext(PlayerContext);

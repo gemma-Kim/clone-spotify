@@ -1,5 +1,5 @@
 import React from "react";
-import "./TrackPlayerProgressBar.style.css";
+import "./PlayerProgressBar.style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShuffle,
@@ -7,43 +7,38 @@ import {
   faBackwardStep,
   faForwardStep,
 } from "@fortawesome/free-solid-svg-icons";
+import { ProgressBar } from "react-bootstrap";
+import { Track } from "@types";
 import {
   convertMsToSeconds,
   convertSecondsToMinutesAndSeconds,
   convertTotalTimeString,
-} from "../../../utils/player/timeCalculator";
+} from "src/utils/player/timeCalculator";
+import PlayButton from "../PlayButton/PlayButton";
+import { usePlayer } from "@context";
 
-import { ProgressBar } from "react-bootstrap";
-import { useTrackPlayer } from "../TrackPlayerProvider/TrackPlayerProvider";
-import { Track } from "@types";
-import PlayButton from "@features/player/PlayButton/PlayButton";
-
-interface TrackPlayerProgressBarProps {
+interface PlayerProgressBarProps {
   track: Track;
 }
 
-const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
-  const { positionMs, durationMs } = useTrackPlayer();
-
-  // const handleShowing = () => {
-  //   setTrackPlayerIsVisible(false);
-  // };
+const PlayerProgressBar = ({ track }: PlayerProgressBarProps) => {
+  const { positionMs, durationMs } = usePlayer();
 
   return (
     <div
-      className="track-player-progress-bar-container"
+      className="player-progress-bar-container"
       style={{
         width: "flex",
         height: "flex",
       }}
     >
-      <div className="track-player-bottom-cotroller-container">
+      <div className="player-bottom-cotroller-container">
         <FontAwesomeIcon
-          className="track-player-bottom-cotroller-shuffle"
+          className="player-bottom-cotroller-shuffle"
           icon={faShuffle}
         />
         <FontAwesomeIcon
-          className="track-player-bottom-cotroller-previous-play"
+          className="player-bottom-cotroller-previous-play"
           icon={faBackwardStep}
         />
         <PlayButton
@@ -55,27 +50,24 @@ const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
           buttonColor={"var(--color-white)"}
         />
         <FontAwesomeIcon
-          className="track-player-bottom-cotroller-next-play"
+          className="player-bottom-cotroller-next-play"
           icon={faForwardStep}
         />
         <FontAwesomeIcon
-          className="track-player-bottom-cotroller-rotate"
+          className="player-bottom-cotroller-rotate"
           // onClick={() => handleShowing()}
           icon={faRotateRight}
         />
       </div>
 
-      <div className="track-player-progress-bar-time-container">
-        <div
-          style={{ display: "block" }}
-          className="track-player-progress-bar-time"
-        >
+      <div className="player-progress-bar-time-container">
+        <div style={{ display: "block" }} className="player-progress-bar-time">
           {convertTotalTimeString(
             convertSecondsToMinutesAndSeconds(convertMsToSeconds(positionMs))
           )}
         </div>
         <ProgressBar
-          className="track-player-progress-bar"
+          className="player-progress-bar"
           style={{
             height: "2px",
             display: "block",
@@ -84,10 +76,7 @@ const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
           variant="secondary" // 색상 추가
           now={(positionMs / durationMs) * 100}
         />
-        <div
-          style={{ display: "block" }}
-          className="track-player-progress-bar-time"
-        >
+        <div style={{ display: "block" }} className="player-progress-bar-time">
           {convertTotalTimeString(
             convertSecondsToMinutesAndSeconds(
               convertMsToSeconds(durationMs - positionMs)
@@ -99,4 +88,4 @@ const TrackPlayerProgressBar = ({ track }: TrackPlayerProgressBarProps) => {
   );
 };
 
-export default TrackPlayerProgressBar;
+export default PlayerProgressBar;

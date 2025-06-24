@@ -53,7 +53,7 @@ const ArtistPage = () => {
     }
   }, [followData]);
 
-  if (isLoading || isLoading2 || isError3) return <LoadingSpinner />;
+  if (isLoading || isLoading2 || isLoading3) return <LoadingSpinner />;
   if (isError || isError2 || isError3)
     return <Alert variant="danger">{error?.message}</Alert>;
 
