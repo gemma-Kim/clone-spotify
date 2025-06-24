@@ -8,7 +8,9 @@ export interface Album {
   type: ItemTypes;
   album_type: AlbumType;
   images: Image[];
-  track: Track;
+  tracks: {
+    items: Track[];
+  };
   name: string;
   artists: Artist[];
   release_date: string;

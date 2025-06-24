@@ -10,9 +10,14 @@
   margin-top: 0 !important;
 }
 
-.track-tab:hover {
+.track-tab.is-not-playing:hover {
   background: rgba(69, 66, 66, 0.3);
   z-index: 999;
+}
+
+.is-playing {
+  color: var(--color-bright-green);
+  z-index: 1000;
 }
 
 .track-tab:hover .play-btn {

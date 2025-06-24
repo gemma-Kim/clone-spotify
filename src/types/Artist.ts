@@ -1,4 +1,5 @@
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
+import { Track } from "./Track";
 
 export interface Artist {
   id: string;
@@ -14,3 +15,5 @@ export interface Artist {
 export interface ArtistDetail extends Artist {
   images: any[];
 }
+
+export type ArtistTrackList = Track[];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchPage.style.css";
 import { useSearchQuery } from "../../hooks/common/useSearchQuery";
@@ -102,6 +102,7 @@ const SearchPage = () => {
                           showTrackNumber={false}
                           showAlbumName={false}
                           tracks={searchResults.tracks.items}
+                          origin={"track"}
                         />
                       }
                     </div>
@@ -119,8 +120,10 @@ const SearchPage = () => {
                           title={artist.name}
                           subtitles="Artist"
                           imgUrl={artist.images[0]?.url}
-                          onClickHandler={() => {}}
                           roundImg={true}
+                          onClickHandler={() => {
+                            navigate(`/artists/${artist.id}`);
+                          }}
                         />
                       )
                     )}
@@ -141,7 +144,9 @@ const SearchPage = () => {
                             album.artists[0].name
                           }`}
                           imgUrl={album.images[0]?.url}
-                          onClickHandler={() => {}}
+                          onClickHandler={() => {
+                            navigate(`/albums/${album.id}`);
+                          }}
                         />
                       )
                     )}
@@ -177,6 +182,7 @@ const SearchPage = () => {
                     showHeader={true}
                     showTrackNumber={true}
                     tracks={searchResults.tracks.items}
+                    origin={"track"}
                   />
                 }
               </>
@@ -196,7 +202,7 @@ const SearchPage = () => {
                             album.artists[0].name
                           }`}
                           imgUrl={album.images[0]?.url}
-                          onClickHandler={() => {}}
+                          onClickHandler={() => navigate(`/albums/${album.id}`)}
                         />
                       )
                     )}
@@ -216,8 +222,10 @@ const SearchPage = () => {
                           title={artist.name}
                           subtitles="Artist"
                           imgUrl={artist.images[0]?.url}
-                          onClickHandler={() => {}}
                           roundImg={true}
+                          onClickHandler={() => {
+                            navigate(`/artists/${artist.id}`);
+                          }}
                         />
                       )
                     )}

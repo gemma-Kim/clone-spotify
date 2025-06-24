@@ -3,22 +3,18 @@ import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEllipsis,
-  faCirclePlus,
   faShuffle,
-  faPlus,
   faCheck,
   faPlusCircle,
-  faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import { useTrackQuery } from "../../hooks/track/useTrackQuery";
-import { useTrackPlayer } from "../../common/Player/TrackPlayerProvider/TrackPlayerProvider";
 import { useAlbumQuery } from "src/hooks/album/useAlbumQuery";
 import TrackList from "@features/track/TrackList";
 import PlayButton from "@features/player/PlayButton/PlayButton";
 import Color from "color-thief-react";
-import { Track } from "@types";
+import { Album, Track } from "@types";
 import { useState } from "react";
 
 const AlbumDetailPage = () => {
@@ -32,20 +28,12 @@ const AlbumDetailPage = () => {
 
   const [isActive, setIsActive] = useState(false);
 
-  const { playAlbum, album, trackPlayerIsVisible, setTrackPlayerIsVisible } =
-    useTrackPlayer();
-
   const trackIds =
     albumData?.tracks?.items?.map((track: Track) => track.id) || [];
   const { data: trackData } = useTrackQuery(trackIds);
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <Alert variant="danger">{error.message}</Alert>;
-
-  const handlePlayAlbum = () => {
-    playAlbum({ albumData });
-    if (!trackPlayerIsVisible) setTrackPlayerIsVisible(true);
-  };
 
   return (
     <Color src={albumData.images[0].url} format="hex" crossOrigin="anonymous">
@@ -89,8 +77,9 @@ const AlbumDetailPage = () => {
                   wrapperHeight="4rem"
                   btnWidth="1.3rem"
                   btnHeight="1.3rem"
-                  content={album}
+                  content={albumData as Album}
                   position={"relative"}
+                  origin={"album"}
                 />
               </div>
               <div className="album-detail-basic-btn">
@@ -108,13 +97,14 @@ const AlbumDetailPage = () => {
             </div>
 
             {/* 트랙 리스트 */}
-            <div className="track-tabs-container">
+            <div className="album-detail-track-container">
               {trackData?.length > 0 && (
                 <TrackList
                   tracks={trackData}
                   showTrackNumber={true}
                   showAlbumHeader={false}
                   showAlbumImg={false}
+                  origin={"album"}
                 />
               )}
             </div>
