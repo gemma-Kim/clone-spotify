@@ -1,18 +1,18 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./common/Layout/AppLayout";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch } from "react-redux";
-import SearchPage from "./pages/SearchPage/SearchPage";
 import { loadSpotifyPlayer } from "./utils/player/loadSpotifyPlayer";
-import AuthRedirectPage from "./pages/AuthRedirectPage/AuthRedirectPage";
 import React, { useEffect } from "react";
-import HomePage from "./pages/HomePage/HomePage";
-import UserPage from "./pages/UserPage/UserPage";
-import ArtistPage from "./pages/ArtistPage/ArtistPage";
-import AlbumDetailPage from "./pages/AlbumDetailPage/AlbumDetailPage";
 import { PlayerProvider } from "@context";
+import HomePage from "@pages/HomePage/HomePage";
+import SearchPage from "@pages/SearchPage/SearchPage";
+import AuthRedirectPage from "@pages/AuthRedirectPage/AuthRedirectPage";
+import UserPage from "@pages/UserPage/UserPage";
+import AlbumPage from "@pages/AlbumPage/AlbumPage";
+import ArtistPage from "@pages/ArtistPage/ArtistPage";
+import NotFoundPage from "@pages/NotFoundPage/NotFoundPage";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const App: React.FC = () => {
           <Route path="auth-redirect" element={<AuthRedirectPage />} />
           <Route path="user" element={<UserPage />} />
           <Route path="albums">
-            <Route path=":id" element={<AlbumDetailPage />} />
+            <Route path=":id" element={<AlbumPage />} />
           </Route>
           <Route path="artists">
             <Route path=":id" element={<ArtistPage />} />

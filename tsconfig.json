@@ -111,6 +111,8 @@
     "paths": {
       // "@*": ["src"],
       // "@src/*": ["src/*"],
+      "@pages": ["src/pages"],
+      "@pages/*": ["src/pages/*"],
       "@types": ["src/types"],
       "@types/*": ["src/types/*"],
       "@features/*": ["src/features/*"],
