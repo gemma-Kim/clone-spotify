@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../../utils/api/api";
+import { api } from "../../../utils/api/api";
 
 const fetchUserSavedTracks = () => {
   return api().get(`v1/me/tracks`);

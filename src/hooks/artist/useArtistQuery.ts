@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { api } from "../../utils/api/api";
 
 const fetchArtists = (artistIds: string | string[]) => {

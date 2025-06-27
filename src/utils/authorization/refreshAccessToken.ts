@@ -15,7 +15,7 @@ export const refreshAccessToken = () => {
   const redirect_uri = "http://localhost:3000/auth-redirect";
   const state = generateRandomString(16);
   const scope =
-    "user-read-private user-read-email user-library-modify user-read-playback-state user-modify-playback-state streaming user-library-read user-follow-read user-follow-modify";
+    "user-read-private user-read-email user-library-modify user-read-playback-state user-modify-playback-state streaming user-library-read user-follow-read user-follow-modify playlist-modify-public playlist-modify-private";
 
   localStorage.setItem("previous_url", window.location.href);
 

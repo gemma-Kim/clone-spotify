@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import MusicTab from "../../common/MusicTab/MusicTab";
 import "./UserPage.style.css";
-import { useUserSavedAlbums } from "../../hooks/user/useUserSavedAlbums";
-import { useUserFollowedArtistsQuery } from "../../hooks/user/useUserFollwedArtists";
-import { useUserSavedTracksQuery } from "../../hooks/user/useUserSavedTracks";
+import {
+  useUserFollowedArtistsQuery,
+  useUserSavedAlbumsQuery,
+  useUserSavedTracksQuery,
+} from "@hooks/user";
 
 const UserPage = () => {
-  const { data: albumData } = useUserSavedAlbums();
+  const { data: albumData } = useUserSavedAlbumsQuery();
   const { data: artistsData } = useUserFollowedArtistsQuery();
   const { data: trackData } = useUserSavedTracksQuery();
 
