@@ -1,4 +1,4 @@
-.track-player-bottom-container {
+.player-bottom-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,7 @@
   z-index: 10000000;
 }
 
-.track-player-bottom-info-container {
+.player-bottom-info-container {
   display: flex;
   width: 30%;
   height: 100%;
@@ -24,32 +24,29 @@
   justify-content: flex-start;
 }
 
-.track-player-bottom-track-info-container {
+.player-bottom-track-info-container {
   display: flex;
-  flex-direction: column; /* 트랙 이름과 아티스트 수직 배치 */
+  flex-direction: column;
   justify-content: center;
-  /* justify-content: space-around; */
-  /* align-items: flex-start; */
   padding-left: 5%;
   font-weight: bold;
-  /* width: 40%; */
 }
 
-.track-player-bottom-track-name-container {
+.player-bottom-track-name-container {
   font-size: 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.track-player-bottom-track-artist-container {
+.player-bottom-artist-container {
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.track-player-bottom-album-img {
+.player-bottom-album-img {
   width: 60px;
   height: 60px;
   background-position: center;
@@ -59,7 +56,7 @@
   object-fit: cover;
 }
 
-.track-player-progress-bar-container {
+.player-progress-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,49 +64,46 @@
   width: 100%;
 }
 
-.track-player-bottom-empty {
+.player-bottom-empty {
   width: 30%;
   height: 100%;
   color: black;
 }
 
 @media screen and (max-width: 768px) {
-  .track-player-bottom-container {
+  .player-bottom-container {
     height: 10%;
   }
 
-  .track-player-bottom-info-container {
+  .player-bottom-info-container {
     width: 40%;
   }
 
-  .track-player-bottom-album-img {
+  .player-bottom-album-img {
     width: 40px;
     height: 40px;
-    background-size: cover; /* 모바일에서도 정사각형으로 설정 */
+    background-size: cover;
   }
 
-  .track-player-bottom-track-info-container {
-    /* width: 100%; */
+  .player-bottom-track-info-container {
     align-items: center;
-    text-align: left;
+    text-align: left !important;
     margin-left: 0;
   }
 
-  .track-player-bottom-track-name-container {
+  .player-bottom-track-name-container {
     font-size: 12px;
   }
 
-  .track-player-bottom-track-artist-container {
+  .player-bottom-artist-container {
     font-size: 9px;
   }
 
-  .track-player-bottom-controller {
+  .player-bottom-controller {
     width: 400px;
-
-    background-color: rebeccapurple;
   }
 
-  .track-player-bottom-empty {
+  .player-bottom-empty {
     width: 5%;
   }
 }
