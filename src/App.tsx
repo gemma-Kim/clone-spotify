@@ -13,6 +13,7 @@ import UserPage from "@pages/UserPage/UserPage";
 import AlbumPage from "@pages/AlbumPage/AlbumPage";
 import ArtistPage from "@pages/ArtistPage/ArtistPage";
 import NotFoundPage from "@pages/NotFoundPage/NotFoundPage";
+import PlaylistPage from "@pages/PlaylistPage/PlaylistPage";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="artists">
             <Route path=":id" element={<ArtistPage />} />
+          </Route>
+          <Route path="playlists">
+            <Route path=":id" element={<PlaylistPage />} />
           </Route>
         </Route>
 

@@ -10,7 +10,7 @@ const revokeUnFollowArtist = (ids: string | string[]) => {
   });
 };
 
-export const UnFollowArtistMutation = () => {
+export const UseUnFollowArtistMutation = () => {
   return useMutation({
     mutationKey: ["unfollowArtist"],
     mutationFn: (ids: string | string[]) => revokeUnFollowArtist(ids),

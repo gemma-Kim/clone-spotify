@@ -8,7 +8,13 @@ export interface Playlist {
   type: ItemTypes;
   description: string;
   images: Image[];
-  tracks: Track[];
+  tracks: {
+    items: { track: Track };
+    total: number;
+    href: string;
+    limit: number;
+    offset: number;
+  };
   uri: string;
   snapshot_id: string;
   owner: Owner;

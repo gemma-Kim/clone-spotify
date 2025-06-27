@@ -111,6 +111,8 @@
     "paths": {
       // "@*": ["src"],
       // "@src/*": ["src/*"],
+      "@common": ["src/common"],
+      "@common/*": ["src/common/*"],
       "@pages": ["src/pages"],
       "@pages/*": ["src/pages/*"],
       "@types": ["src/types"],

@@ -1,12 +1,7 @@
 import "./ArtistPage.style.css";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEllipsis,
-  faShuffle,
-  faCheck,
-  faPlusCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faShuffle } from "@fortawesome/free-solid-svg-icons";
 import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import PlayButton from "@features/player/PlayButton/PlayButton";
@@ -15,15 +10,16 @@ import { useEffect, useState } from "react";
 import { useArtistTopTracksQuery } from "@hooks/artist/useArtistTopTracksQuery";
 import { useArtistsQuery } from "@hooks";
 import TrackItem from "@features/track/TrackItem";
-import { useCheckIfUserFollowsQuery } from "@hooks/user/useCheckIfUserFollowsQuery";
-
-import { UnFollowArtistMutation } from "@hooks/user/mutation/unFollowArtistMutation";
-import { UsefollowArtistMutation } from "@hooks/user/mutation/useFollowArtistMutation";
+import {
+  useCheckIfUserFollowsQuery,
+  UsefollowArtistMutation,
+  UseUnFollowArtistMutation,
+} from "@hooks/user";
 
 const ArtistPage = () => {
   const { id } = useParams();
   const { mutate: followArtist } = UsefollowArtistMutation();
-  const { mutate: unfollowArtist } = UnFollowArtistMutation();
+  const { mutate: unfollowArtist } = UseUnFollowArtistMutation();
   const [isFollow, setIsFollow] = useState(false);
 
   const {
