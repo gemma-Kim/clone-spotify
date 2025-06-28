@@ -11,7 +11,7 @@ import Alert from "react-bootstrap/Alert";
 import TrackList from "@features/track/TrackList";
 import PlayButton from "@features/player/PlayButton/PlayButton";
 import Color from "color-thief-react";
-import { Track } from "@types";
+import { Playlist, Track } from "@types";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "@common/LoadingSpinner/LoadingSpinner";
 import { useFindPlaylistQuery } from "@hooks/playlist";
@@ -78,15 +78,18 @@ const PlaylistPage = () => {
             <div className="playlist-container">
               <img
                 src={playlist.images[0]?.url || playlist.images[1]?.url}
-                alt="Album cover"
+                alt="Playlist cover"
               />
               <div className="playlist-info">
-                <h3>Album</h3>
+                <h3>
+                  {playlist && (playlist as Playlist).public
+                    ? "Public "
+                    : "Private "}
+                  Playlist
+                </h3>
                 <h1>{playlist?.name}</h1>
-                <div className="playlist-info">
-                  {`${playlist?.name} · ${new Date(
-                    playlist?.release_date
-                  ).getFullYear()} · ${playlist?.tracks?.items?.length} tracks`}
+                <div className="playlist-subinfo">
+                  {`${playlist?.owner?.display_name} · ${playlist?.followers?.total} followers · ${playlist?.tracks?.items?.length} tracks`}
                 </div>
               </div>
             </div>
@@ -101,7 +104,7 @@ const PlaylistPage = () => {
                   wrapperHeight="4rem"
                   btnWidth="1.3rem"
                   btnHeight="1.3rem"
-                  content={trackData as Track[]}
+                  content={playlist} /*trackData as Track[]}*/
                   position={"relative"}
                   origin={"playlist"}
                 />
@@ -122,13 +125,14 @@ const PlaylistPage = () => {
 
             {/* 트랙 리스트 */}
             <div className="playlist-track-container">
-              {trackData.length > 0 && (
-                <TrackList
-                  tracks={trackData}
-                  showTrackNumber={true}
-                  origin={"playlist"}
-                />
-              )}
+              {trackData.length > 0 &&
+                trackData.map((track: Track, idx: number) => (
+                  <TrackList
+                    tracks={trackData.slice(idx)}
+                    showTrackNumber={true}
+                    origin={"playlist"}
+                  />
+                ))}
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ export interface Playlist {
   description: string;
   images: Image[];
   tracks: {
-    items: { track: Track };
+    items: { track: Track }[];
     total: number;
     href: string;
     limit: number;
@@ -18,6 +18,7 @@ export interface Playlist {
   uri: string;
   snapshot_id: string;
   owner: Owner;
+  public: boolean;
 }
 
 export interface Owner {

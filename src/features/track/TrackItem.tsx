@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./TrackItem.style.css";
-import { formatDuration } from "src/utils/player/formatDuration";
+import { formatDuration } from "src/utils/data/formatDuration";
 import { Album, Track } from "@types";
 import PlayButton from "@features/player/PlayButton/PlayButton";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";

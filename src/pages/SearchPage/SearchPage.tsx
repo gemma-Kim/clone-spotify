@@ -253,7 +253,9 @@ const SearchPage = () => {
                               : ""
                           }
                           imgUrl={playlist?.images[0]?.url}
-                          onClickHandler={() => {}}
+                          onClickHandler={() => {
+                            navigate(`/playlists/${playlist.id}`);
+                          }}
                         />
                       ))}
                   />

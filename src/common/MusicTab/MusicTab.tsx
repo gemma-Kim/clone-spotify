@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { formatDuration } from "src/utils/player/formatDuration";
+import { formatDuration } from "src/utils/data/formatDuration";
 import { Album, ArtistDetail, Track } from "@types";
 import { usePlayer } from "@context";
 
