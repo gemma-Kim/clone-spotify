@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { usePlayTrackMutation } from "../../hooks/player/mutation/usePlayTrackMutation";
-// import { usePauseMutation } from "../../hooks/player/mutation/usePauseMutation";
-// import { usePlayAlbumMutation } from "../../hooks/player/mutation/usePlayAlbumMutation";
-import { Album, Track } from "@types";
+import { Album, Playlist, Track } from "@types";
 import { getPlayer } from "src/utils/player/loadSpotifyPlayer";
-import { findTrackIndexInAlbum } from "src/utils/player/findTrackIndexInAlbum";
-import { usePauseMutation } from "@hooks/player/mutation/usePauseMutation";
-import { usePlayAlbumMutation } from "@hooks/player/mutation/usePlayAlbumMutation";
-import { usePlayTrackMutation } from "@hooks/player/mutation/usePlayTrackMutation";
+import { findTrackIndexInContent } from "src/utils/player/findTrackIndexInContent";
+import {
+  usePauseMutation,
+  usePlayAlbumMutation,
+  usePlayPlaylistMutation,
+  usePlayTrackMutation,
+} from "@hooks/player";
 
 const noop = () => {};
 
@@ -16,7 +16,9 @@ interface PlayerContextType {
   trackPlayerIsVisible: boolean;
   track: Track | null;
   album: Album | null;
+  playlist: Playlist | null;
   albumTrackPosition: number;
+  playlistTrackPosition: number;
   durationMs: number;
   positionMs: number;
   isPlaying: boolean;
@@ -26,22 +28,26 @@ interface PlayerContextType {
   playNewTracks: (val: Track[]) => void;
   pauseTrack: () => void;
   playAlbum: (val: PlayAlbumParams) => void;
+  playPlaylist: (val: PlayPlaylistParams) => void;
 }
 
 const PlayerContext = createContext<PlayerContextType>({
   trackPlayerIsVisible: false,
   track: null,
   album: null,
+  playlist: null,
   isPlaying: false,
   durationMs: 0,
   positionMs: 0,
   albumTrackPosition: 0,
+  playlistTrackPosition: 0,
   playTrack: noop,
   playTracks: (val: Track[]) => {},
   playNewTrack: (val: Track) => {},
   playNewTracks: (val: Track[]) => {},
   pauseTrack: noop,
   playAlbum: (val: PlayAlbumParams) => {},
+  playPlaylist: (val: PlayPlaylistParams) => {},
 });
 
 interface PlayAlbumParams {
@@ -50,11 +56,19 @@ interface PlayAlbumParams {
   positionMs?: number;
 }
 
+interface PlayPlaylistParams {
+  playlist: Playlist;
+  position?: number;
+  positionMs?: number;
+}
+
 export const PlayerProvider = ({ children }: any) => {
   const [trackPlayerIsVisible, setTrackPlayerIsVisible] = useState(false);
   const [track, setTrack] = useState<any>(null); // 현재 재생 중인 트랙
   const [album, setAlbum] = useState<any>(null); // 현재 재생 중인 앨범
+  const [playlist, setPlaylist] = useState<any>(null); // 현재 재생 중인 앨범
   const [albumTrackPosition, setAlbumTrackPosition] = useState<number>(0); // 현재 재생 중인 앨범
+  const [playlistTrackPosition, setPlaylistTrackPosition] = useState<number>(0); // 현재 재생 중인 앨범
   const [isPlaying, setIsPlaying] = useState<boolean>(false); // 재생 상태
   const [positionMs, setPositionMs] = useState<number>(0); // 현재 재생 위치
   const [durationMs, setDurationMs] = useState<number>(0); // 현재 재생 트랙
@@ -104,9 +118,22 @@ export const PlayerProvider = ({ children }: any) => {
         }
 
         if (album?.tracks?.items?.length) {
-          const index = findTrackIndexInAlbum(album, currentTrack.id as string);
+          const index = findTrackIndexInContent(
+            album,
+            currentTrack.id as string
+          );
           if (index !== albumTrackPosition) {
             setAlbumTrackPosition(index);
+          }
+        }
+
+        if (playlist?.tracks?.items?.length) {
+          const index = findTrackIndexInContent(
+            playlist,
+            currentTrack.id as string
+          );
+          if (index !== playlistTrackPosition) {
+            setPlaylistTrackPosition(index);
           }
         }
       } else {
@@ -121,6 +148,7 @@ export const PlayerProvider = ({ children }: any) => {
   const { mutate: playTrackM } = usePlayTrackMutation();
   const { mutate: playAlbumM } = usePlayAlbumMutation();
   const { mutate: pausePlayM } = usePauseMutation();
+  const { mutate: playPlaylistM } = usePlayPlaylistMutation();
 
   // 재생 컨트롤
   const playTrack = async () => {
@@ -140,6 +168,22 @@ export const PlayerProvider = ({ children }: any) => {
       setAlbum(album);
       playAlbumM({
         album,
+        deviceId,
+        positionMs,
+        position,
+      });
+    }
+  };
+
+  const playPlaylist = ({
+    playlist,
+    positionMs,
+    position = 0,
+  }: PlayPlaylistParams) => {
+    if (deviceId) {
+      setPlaylist(playlist);
+      playPlaylistM({
+        playlist,
         deviceId,
         positionMs,
         position,
@@ -176,15 +220,18 @@ export const PlayerProvider = ({ children }: any) => {
           isPlaying,
           track,
           album,
+          playlist,
           durationMs,
           positionMs,
           albumTrackPosition,
+          playlistTrackPosition,
           playTrack,
           playTracks,
           playNewTrack,
           playNewTracks,
           pauseTrack,
           playAlbum,
+          playPlaylist,
         }
       }
     >

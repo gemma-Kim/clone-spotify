@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { Album, ArtistDetail, Playlist, Track } from "@types";
 import {
-  findTrackIndexInAlbum,
+  findTrackIndexInContent,
   ifTrackExistOrNot,
-} from "src/utils/player/findTrackIndexInAlbum";
+} from "src/utils/player/findTrackIndexInContent";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
 import { usePlayer } from "@context";
 
@@ -35,7 +35,9 @@ const PlayButton = ({
   const {
     album,
     track,
+    playlist,
     albumTrackPosition,
+    playlistTrackPosition,
     positionMs,
     isPlaying,
     playTrack,
@@ -44,6 +46,7 @@ const PlayButton = ({
     pauseTrack,
     playNewTrack,
     playAlbum,
+    playPlaylist,
   } = usePlayer();
 
   const handleClick = () => {
@@ -83,7 +86,7 @@ const PlayButton = ({
           // 재생 중인 경우
           if (isPlaying) {
             if (!Array.isArray(content) && content.type === "track") {
-              const index = findTrackIndexInAlbum(album, content.id);
+              const index = findTrackIndexInContent(album, content.id);
               playAlbum({
                 album,
                 position: index,
@@ -96,7 +99,7 @@ const PlayButton = ({
           else {
             // 같은 앨범인 경우
             if (!Array.isArray(content) && content.type === "track") {
-              const index = findTrackIndexInAlbum(album, content.id);
+              const index = findTrackIndexInContent(album, content.id);
               playAlbum({
                 album: content as Album,
                 position: index,
@@ -115,18 +118,33 @@ const PlayButton = ({
         }
         break;
       case "playlist":
+        if (Array.isArray(content)) {
+          if (track?.id === content[0].id) {
+            if (isPlaying) pauseTrack();
+            else playTracks(content);
+          } else {
+            playNewTracks(content);
+          }
+        } else {
+          if (playlist?.id === content?.id) {
+            if (isPlaying) pauseTrack();
+            else {
+              playPlaylist({
+                playlist: content as Playlist,
+                positionMs,
+                position: playlistTrackPosition,
+              });
+            }
+          } else {
+            playPlaylist({ playlist: content as Playlist });
+          }
+        }
         break;
     }
   };
 
   const handleIcon = () => {
-    const contentType = Array.isArray(content) ? "trackList" : content?.type;
-    switch (contentType) {
-      case "trackList":
-        if (Array.isArray(content) && ifTrackExistOrNot(content, track?.id)) {
-          return isPlaying ? faPause : faPlay;
-        }
-        return faPlay;
+    switch (origin) {
       case "track":
         if (!Array.isArray(content) && track?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
@@ -135,15 +153,28 @@ const PlayButton = ({
       case "album":
         if (!Array.isArray(content) && album?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
-        }
-        return faPlay;
+        } else if (Array.isArray(content)) return faPlay;
       case "artist":
-        if (!Array.isArray(content) && album?.id === content?.id) {
+        if (Array.isArray(content) && ifTrackExistOrNot(content, track?.id)) {
+          return isPlaying ? faPause : faPlay;
+        } else if (!Array.isArray(content)) {
+          return faPlay;
+        }
+      case "playlist":
+        if (!Array.isArray(content) && playlist?.id === content?.id) {
+          return isPlaying ? faPause : faPlay;
+        } else if (
+          Array.isArray(content) &&
+          ifTrackExistOrNot(content, track?.id)
+        ) {
           return isPlaying ? faPause : faPlay;
         }
+        // if (Array.isArray(content) && ifTrackExistOrNot(content, track?.id)) {
+        //   return isPlaying ? faPause : faPlay;
+        // } else if (!Array.isArray(content)) {
+        //   return faPlay;
+        // }
         return faPlay;
-      case "playlist":
-        break;
     }
     return faPlay;
   };
