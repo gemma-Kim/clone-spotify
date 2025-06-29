@@ -162,6 +162,12 @@ export const PlayerProvider = ({ children }: any) => {
   const { mutate: playPlaylistM } = usePlayPlaylistMutation();
   const { mutate: playArtistM } = usePlayArtistMutation();
 
+  const initializeContent = () => {
+    if (album) setAlbum(null);
+    if (artist) setArtist(null);
+    if (playlist) setPlaylist(null);
+  };
+
   // 재생 컨트롤
   const playTrack = async () => {
     if (deviceId && track) {
@@ -177,24 +183,26 @@ export const PlayerProvider = ({ children }: any) => {
 
   const playAlbum = ({ album, positionMs, position = 0 }: PlayAlbumParams) => {
     if (deviceId) {
-      setAlbum(album);
+      initializeContent();
       playAlbumM({
         album,
         deviceId,
         positionMs,
         position,
       });
+      setAlbum(album);
     }
   };
 
   const playArtist = ({ artist, positionMs }: PlayArtistParams) => {
     if (deviceId) {
-      setArtist(artist);
+      initializeContent();
       playArtistM({
         artist,
         deviceId,
         positionMs,
       });
+      setArtist(artist);
     }
   };
 
@@ -204,13 +212,14 @@ export const PlayerProvider = ({ children }: any) => {
     position = 0,
   }: PlayPlaylistParams) => {
     if (deviceId) {
-      setPlaylist(playlist);
+      initializeContent();
       playPlaylistM({
         playlist,
         deviceId,
         positionMs,
         position,
       });
+      setPlaylist(playlist);
     }
   };
 

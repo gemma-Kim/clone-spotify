@@ -155,17 +155,19 @@ const PlayButton = ({
         if (!Array.isArray(content) && track?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
         }
-        return faPlay;
+        break;
       case "album":
         if (!Array.isArray(content) && album?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
         } else if (Array.isArray(content)) return faPlay;
+        break;
       case "artist":
         if (Array.isArray(content) && ifTrackExistOrNot(content, track?.id)) {
           return isPlaying ? faPause : faPlay;
         } else if (!Array.isArray(content) && artist?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
         }
+        break;
       case "playlist":
         if (!Array.isArray(content) && playlist?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
@@ -175,7 +177,7 @@ const PlayButton = ({
         ) {
           return isPlaying ? faPause : faPlay;
         }
-        return faPlay;
+        break;
     }
     return faPlay;
   };
