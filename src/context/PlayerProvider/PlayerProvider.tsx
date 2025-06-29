@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Album, Playlist, Track } from "@types";
+import { Album, Artist, Playlist, Track } from "@types";
 import { getPlayer } from "src/utils/player/loadSpotifyPlayer";
 import { findTrackIndexInContent } from "src/utils/player/findTrackIndexInContent";
 import {
   usePauseMutation,
   usePlayAlbumMutation,
+  usePlayArtistMutation,
   usePlayPlaylistMutation,
   usePlayTrackMutation,
 } from "@hooks/player";
@@ -16,6 +17,7 @@ interface PlayerContextType {
   trackPlayerIsVisible: boolean;
   track: Track | null;
   album: Album | null;
+  artist: Artist | null;
   playlist: Playlist | null;
   albumTrackPosition: number;
   playlistTrackPosition: number;
@@ -28,6 +30,7 @@ interface PlayerContextType {
   playNewTracks: (val: Track[]) => void;
   pauseTrack: () => void;
   playAlbum: (val: PlayAlbumParams) => void;
+  playArtist: (val: PlayArtistParams) => void;
   playPlaylist: (val: PlayPlaylistParams) => void;
 }
 
@@ -35,6 +38,7 @@ const PlayerContext = createContext<PlayerContextType>({
   trackPlayerIsVisible: false,
   track: null,
   album: null,
+  artist: null,
   playlist: null,
   isPlaying: false,
   durationMs: 0,
@@ -47,6 +51,7 @@ const PlayerContext = createContext<PlayerContextType>({
   playNewTracks: (val: Track[]) => {},
   pauseTrack: noop,
   playAlbum: (val: PlayAlbumParams) => {},
+  playArtist: (val: PlayArtistParams) => {},
   playPlaylist: (val: PlayPlaylistParams) => {},
 });
 
@@ -62,11 +67,17 @@ interface PlayPlaylistParams {
   positionMs?: number;
 }
 
+interface PlayArtistParams {
+  artist: Artist;
+  positionMs?: number;
+}
+
 export const PlayerProvider = ({ children }: any) => {
   const [trackPlayerIsVisible, setTrackPlayerIsVisible] = useState(false);
   const [track, setTrack] = useState<any>(null); // 현재 재생 중인 트랙
   const [album, setAlbum] = useState<any>(null); // 현재 재생 중인 앨범
-  const [playlist, setPlaylist] = useState<any>(null); // 현재 재생 중인 앨범
+  const [artist, setArtist] = useState<any>(null); // 현재 재생 중인 아티스트
+  const [playlist, setPlaylist] = useState<any>(null); // 현재 재생 중인 플레이리스트
   const [albumTrackPosition, setAlbumTrackPosition] = useState<number>(0); // 현재 재생 중인 앨범
   const [playlistTrackPosition, setPlaylistTrackPosition] = useState<number>(0); // 현재 재생 중인 앨범
   const [isPlaying, setIsPlaying] = useState<boolean>(false); // 재생 상태
@@ -149,6 +160,13 @@ export const PlayerProvider = ({ children }: any) => {
   const { mutate: playAlbumM } = usePlayAlbumMutation();
   const { mutate: pausePlayM } = usePauseMutation();
   const { mutate: playPlaylistM } = usePlayPlaylistMutation();
+  const { mutate: playArtistM } = usePlayArtistMutation();
+
+  const initializeContent = () => {
+    if (album) setAlbum(null);
+    if (artist) setArtist(null);
+    if (playlist) setPlaylist(null);
+  };
 
   // 재생 컨트롤
   const playTrack = async () => {
@@ -165,13 +183,26 @@ export const PlayerProvider = ({ children }: any) => {
 
   const playAlbum = ({ album, positionMs, position = 0 }: PlayAlbumParams) => {
     if (deviceId) {
-      setAlbum(album);
+      initializeContent();
       playAlbumM({
         album,
         deviceId,
         positionMs,
         position,
       });
+      setAlbum(album);
+    }
+  };
+
+  const playArtist = ({ artist, positionMs }: PlayArtistParams) => {
+    if (deviceId) {
+      initializeContent();
+      playArtistM({
+        artist,
+        deviceId,
+        positionMs,
+      });
+      setArtist(artist);
     }
   };
 
@@ -181,13 +212,14 @@ export const PlayerProvider = ({ children }: any) => {
     position = 0,
   }: PlayPlaylistParams) => {
     if (deviceId) {
-      setPlaylist(playlist);
+      initializeContent();
       playPlaylistM({
         playlist,
         deviceId,
         positionMs,
         position,
       });
+      setPlaylist(playlist);
     }
   };
 
@@ -220,6 +252,7 @@ export const PlayerProvider = ({ children }: any) => {
           isPlaying,
           track,
           album,
+          artist,
           playlist,
           durationMs,
           positionMs,
@@ -231,6 +264,7 @@ export const PlayerProvider = ({ children }: any) => {
           playNewTracks,
           pauseTrack,
           playAlbum,
+          playArtist,
           playPlaylist,
         }
       }

@@ -5,6 +5,7 @@ import { Track } from "./Track";
 
 export interface Album {
   id: string;
+  uri: string;
   type: ItemTypes;
   album_type: AlbumType;
   images: Image[];

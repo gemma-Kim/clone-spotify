@@ -1,7 +1,7 @@
 import "./PlayButton.style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
-import { Album, ArtistDetail, Playlist, Track } from "@types";
+import { Album, Artist, ArtistDetail, Playlist, Track } from "@types";
 import {
   findTrackIndexInContent,
   ifTrackExistOrNot,
@@ -35,6 +35,7 @@ const PlayButton = ({
   const {
     album,
     track,
+    artist,
     playlist,
     albumTrackPosition,
     playlistTrackPosition,
@@ -46,10 +47,12 @@ const PlayButton = ({
     pauseTrack,
     playNewTrack,
     playAlbum,
+    playArtist,
     playPlaylist,
   } = usePlayer();
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     switch (origin) {
       case "artist":
         if (Array.isArray(content)) {
@@ -60,10 +63,13 @@ const PlayButton = ({
             playNewTracks(content);
           }
         } else {
-          if (isPlaying) pauseTrack();
-          else {
-            if (track?.id === content.id) playTrack();
-            else playNewTrack(content as Track);
+          if (artist?.id === content?.id) {
+            if (isPlaying) pauseTrack();
+            else {
+              playArtist({ artist: content as Artist, positionMs });
+            }
+          } else {
+            playArtist({ artist: content as Artist });
           }
         }
         break;
@@ -149,17 +155,19 @@ const PlayButton = ({
         if (!Array.isArray(content) && track?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
         }
-        return faPlay;
+        break;
       case "album":
         if (!Array.isArray(content) && album?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
         } else if (Array.isArray(content)) return faPlay;
+        break;
       case "artist":
         if (Array.isArray(content) && ifTrackExistOrNot(content, track?.id)) {
           return isPlaying ? faPause : faPlay;
-        } else if (!Array.isArray(content)) {
-          return faPlay;
+        } else if (!Array.isArray(content) && artist?.id === content?.id) {
+          return isPlaying ? faPause : faPlay;
         }
+        break;
       case "playlist":
         if (!Array.isArray(content) && playlist?.id === content?.id) {
           return isPlaying ? faPause : faPlay;
@@ -169,12 +177,7 @@ const PlayButton = ({
         ) {
           return isPlaying ? faPause : faPlay;
         }
-        // if (Array.isArray(content) && ifTrackExistOrNot(content, track?.id)) {
-        //   return isPlaying ? faPause : faPlay;
-        // } else if (!Array.isArray(content)) {
-        //   return faPlay;
-        // }
-        return faPlay;
+        break;
     }
     return faPlay;
   };
@@ -188,6 +191,7 @@ const PlayButton = ({
         position,
       }}
       className="play-btn-contatiner"
+      onClick={handleClick}
     >
       <FontAwesomeIcon
         style={{
@@ -197,7 +201,6 @@ const PlayButton = ({
           color: buttonColor,
         }}
         icon={handleIcon()}
-        onClick={handleClick}
       />
     </div>
   );
