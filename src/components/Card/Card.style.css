@@ -126,11 +126,13 @@
   align-items: center;
   cursor: pointer;
   z-index: 1000;
+  pointer-events: none;
 }
 
 .card-container:hover .btn-contatiner {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 @media (max-width: 900px) {
