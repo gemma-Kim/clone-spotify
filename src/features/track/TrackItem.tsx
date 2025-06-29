@@ -99,9 +99,7 @@ const TrackItem = ({
         >
           <h3
             className={`track-name ${
-              origin === "album" && track.id === playingTrack?.id
-                ? "is-playing"
-                : ""
+              track.id === playingTrack?.id ? "is-playing" : ""
             }`}
           >
             {track.name}
