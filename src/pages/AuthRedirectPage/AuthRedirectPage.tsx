@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { saveAccessToken } from "../../store/actions/authActons";
+import { saveAccessToken } from "../../stores/actions/authActons";
 import { useNavigate } from "react-router-dom";
 
 const AuthRedirectPage = () => {

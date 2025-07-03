@@ -4,7 +4,7 @@ import { formatDuration } from "src/utils/data/formatDuration";
 import { Album, Track } from "@types";
 import PlayButton from "@features/player/PlayButton/PlayButton";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
-import { usePlayer } from "@context";
+import { usePlayer } from "src/contexts";
 
 interface TrackItemProps {
   tracks: Track | Track[];

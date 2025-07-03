@@ -15,7 +15,7 @@ import {
   convertTotalTimeString,
 } from "src/utils/player/timeCalculator";
 import PlayButton from "../PlayButton/PlayButton";
-import { usePlayer } from "@context";
+import { usePlayer } from "src/contexts";
 
 interface PlayerProgressBarProps {
   track: Track;

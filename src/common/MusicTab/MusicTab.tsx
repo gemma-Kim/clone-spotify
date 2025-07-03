@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { formatDuration } from "src/utils/data/formatDuration";
 import { Album, ArtistDetail, Track } from "@types";
-import { usePlayer } from "@context";
+import { usePlayer } from "src/contexts";
 
 interface MusicTabProps {
   item: Track | Album | ArtistDetail;

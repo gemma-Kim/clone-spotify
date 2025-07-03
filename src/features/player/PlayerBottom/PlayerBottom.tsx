@@ -1,6 +1,6 @@
 import React from "react";
 import "./PlayerBottom.style.css";
-import { usePlayer } from "@context";
+import { usePlayer } from "src/contexts";
 import PlayerProgressBar from "../PlayerProgressBar/PlayerProgressBar";
 
 const PlayerBottom = () => {

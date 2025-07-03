@@ -123,8 +123,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@components": ["src/components"],
       "@components/*": ["src/components/*"],
-      "@context": ["src/context"],
-      "@context/*": ["src/context/*"]
+      "@context": ["src/contexts"],
+      "@context/*": ["src/contexts/*"]
     }
   }
 }

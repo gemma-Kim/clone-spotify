@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../../utils/api/api";
-import { Album, Playlist } from "@types";
+import { Playlist } from "@types";
 
 export interface PlayPlaylistMutationParams {
   deviceId: string;

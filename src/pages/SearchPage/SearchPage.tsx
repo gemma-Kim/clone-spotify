@@ -3,11 +3,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchPage.style.css";
 import { useSearchQuery } from "../../hooks/common/useSearchQuery";
 import Card from "src/components/Card/Card";
-import { Album, ArtistDetail, ContentTypes, Playlist } from "@types";
+// import {
+//   Album,
+//   ArtistDetail,
+//   ContentTypes,
+//   Playlist,
+// } from "@types/content/index";
 import TrackList from "@features/track/TrackList";
 import Button from "src/components/Button/Button";
 import List from "src/components/List/List";
 import MediaHighlight from "src/components/MediaHighlight/MediaHighlight";
+import { Album, ArtistDetail, ContentTypes, Playlist } from "@types";
 
 const SearchPage = () => {
   const location = useLocation();
