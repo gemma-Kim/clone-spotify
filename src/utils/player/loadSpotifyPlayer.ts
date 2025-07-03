@@ -1,5 +1,5 @@
 import { getAccessToken } from "../authorization/getAccessToken";
-import { setDeviceId } from "../../store/actions/playerActions";
+import { setDeviceId } from "../../stores/actions/playerActions";
 import { Dispatch } from "redux";
 
 let player: Spotify.Player | undefined;

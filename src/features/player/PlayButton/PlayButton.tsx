@@ -7,7 +7,7 @@ import {
   ifTrackExistOrNot,
 } from "src/utils/player/findTrackIndexInContent";
 import { ItemTypes } from "@spotify/web-api-ts-sdk";
-import { usePlayer } from "@context";
+import { usePlayer } from "src/contexts";
 
 interface PlayButtonProps {
   content: Track | Track[] | Album | ArtistDetail | Playlist;

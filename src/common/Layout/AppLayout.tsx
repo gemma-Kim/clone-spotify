@@ -8,7 +8,7 @@ import "./AppLayout.style.css";
 import PlayerBottom from "@features/player/PlayerBottom/PlayerBottom";
 import { faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { usePlayer } from "@context";
+import { usePlayer } from "src/contexts";
 
 const AppLayout = () => {
   const [navSearchQuery, setNavSearchQuery] = useState("");

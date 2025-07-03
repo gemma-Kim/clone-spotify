@@ -5,7 +5,7 @@ import AppLayout from "./common/Layout/AppLayout";
 import { useDispatch } from "react-redux";
 import { loadSpotifyPlayer } from "./utils/player/loadSpotifyPlayer";
 import React, { useEffect } from "react";
-import { PlayerProvider } from "@context";
+import { PlayerProvider } from "src/contexts";
 import HomePage from "@pages/HomePage/HomePage";
 import SearchPage from "@pages/SearchPage/SearchPage";
 import AuthRedirectPage from "@pages/AuthRedirectPage/AuthRedirectPage";

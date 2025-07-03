@@ -1,4 +1,4 @@
-import { store } from "../../store/store";
+import { store } from "../../stores/store";
 import { refreshAccessToken } from "./refreshAccessToken";
 
 export const getAccessToken = () => {
